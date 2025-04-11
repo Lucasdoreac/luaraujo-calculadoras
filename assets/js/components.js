@@ -5,38 +5,45 @@
 function loadComponents() {
     // Carregar Navbar
     document.getElementById('navbar-container').innerHTML = `
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Luciana Araujo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <a class="navbar-brand" href="index.html">
+                    <i class="fas fa-chart-line me-2"></i>Luciana Araujo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="calculadoras/calc-1.html">Planejamento Financeiro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="calculadoras/calc-2.html">PGBL vs CDB</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="calculadoras/calc-3.html">Investimentos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contato.html">Contato</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" target="_blank">
-                                <i class="fab fa-linkedin"></i>
+                            <a class="nav-link" href="calculadoras/calc-1.html">
+                                <i class="fas fa-calculator me-1"></i>Planejamento Financeiro
                             </a>
                         </li>
-                        <!-- WhatsApp CTA Button -->
                         <li class="nav-item">
-                            <a class="btn btn-success btn-sm" href="https://wa.me/5561983426774?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta." target="_blank">
-                                <i class="fab fa-whatsapp"></i> Agende sua consulta
+                            <a class="nav-link" href="calculadoras/calc-2.html">
+                                <i class="fas fa-piggy-bank me-1"></i>PGBL vs CDB
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="calculadoras/calc-3.html">
+                                <i class="fas fa-coins me-1"></i>Investimentos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contato.html">
+                                <i class="fas fa-envelope me-1"></i>Contato
                             </a>
                         </li>
                     </ul>
+                    <div class="d-flex align-items-center">
+                        <a href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" class="social-link me-3" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://wa.me/5561983426774?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta." class="btn btn-success btn-sm" target="_blank">
+                            <i class="fab fa-whatsapp me-1"></i> Agendar Consulta
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -92,7 +99,7 @@ function adjustRelativePaths() {
     
     if (isSubdirectory) {
         // Ajustar links no navbar
-        document.querySelectorAll('#navbar-container .nav-link, #navbar-container .navbar-brand').forEach(link => {
+        document.querySelectorAll('#navbar-container .nav-link, #navbar-container .navbar-brand, #navbar-container .social-link, #navbar-container .btn').forEach(link => {
             if (link.getAttribute('href') && !link.getAttribute('href').startsWith('http') && !link.getAttribute('href').startsWith('#')) {
                 // Adicionar ../ para subir um nível
                 if (!link.getAttribute('href').startsWith('../')) {

@@ -36,11 +36,11 @@ Calculadoras e simuladores financeiros com interface de alto contraste.
      │   └── integrated-styles.css
      └── 📁 js/
          ├── components.js      # Componentes reutilizáveis (navbar, footer)
-         ├── main.js
+         ├── main.js           # Inicialização e funções globais
          └── 📁 modules/
-             ├── calculadora.js
-             ├── calculo-investimentos.js
-             └── validation.js
+             ├── calculadora.js # Funções de cálculo financeiro
+             ├── calculo-investimentos.js # Simulações específicas
+             └── validation.js # Validação de formulários
 ```
 
 ## 📋 Esquema Visual
@@ -62,6 +62,18 @@ Calculadoras e simuladores financeiros com interface de alto contraste.
 ## 📦 Implementação
 
 Este projeto é uma versão estática das calculadoras financeiras, adaptada para funcionar com GitHub Pages.
+
+### Configuração do GitHub Pages
+
+Para configurar o projeto para ser hospedado no GitHub Pages:
+
+1. Acesse as configurações do repositório (Settings)
+2. Na seção "Pages" em "Code and automation"
+3. Em "Source", selecione "Deploy from a branch"
+4. Selecione a branch "main" e a pasta "/ (root)"
+5. Clique em "Save"
+
+Após a implementação, o site estará disponível em: `https://[seu-usuario].github.io/luaraujo-calculadoras/`
 
 ## 📝 Licença
 

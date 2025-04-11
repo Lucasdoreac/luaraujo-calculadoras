@@ -548,12 +548,20 @@ footer a:hover {
 }
 
 .card-text {
-    color: #bbbbbb;
+    color: #ffffff; /* Alterado de #bbbbbb para branco */
 }
 
 .card-footer {
     background-color: #1e1e1e;
     border-top: 1px solid #333333;
+}
+
+.card-footer small {
+    color: #bbbbbb !important; /* Garantir cor clara para texto em footer de cards */
+}
+
+.text-muted {
+    color: #bbbbbb !important; /* Mudado para garantir melhor contraste */
 }
 
 /* Formulários */
@@ -636,4 +644,30 @@ footer a:hover {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* Ajustes específicos para texto na seção de calculadoras */
+.section-title {
+    color: #ffffff;
+}
+
+.calculator-card .card-title {
+    color: #ffffff;
+}
+
+.calculator-card .card-text {
+    color: #ffffff;
+}
+
+.calculator-card small {
+    color: #bbbbbb !important;
+}
+
+/* Corrigir cores nas seções de recursos */
+.feature-item p {
+    color: #ffffff !important;
+}
+
+.feature-item h3 {
+    color: #ffffff;
 }

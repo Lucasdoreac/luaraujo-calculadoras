@@ -51,39 +51,54 @@ function loadComponents() {
 
     // Carregar Footer
     document.getElementById('footer-container').innerHTML = `
-        <footer class="bg-dark text-white py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>Luciana Araujo</h5>
-                        <p><i class="fas fa-phone"></i> (61) 98342-6774</p>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:contato@luaraujo.com">contato@luaraujo.com</a></p>
+        <footer class="footer-custom text-white py-5">
+            <div class="container footer-container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-section">
+                            <h5 class="footer-heading"><i class="fas fa-user-tie me-2"></i>Luciana Araujo</h5>
+                            <ul class="footer-contact list-unstyled">
+                                <li><i class="fas fa-phone-alt me-2 icon-primary"></i>(61) 98342-6774</li>
+                                <li><i class="fas fa-envelope me-2 icon-primary"></i><a href="mailto:contato@luaraujo.com">contato@luaraujo.com</a></li>
+                                <li><i class="fas fa-map-marker-alt me-2 icon-primary"></i>Brasília, DF</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <h5>Links Rápidos</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="index.html">Calculadora Principal</a></li>
-                            <li><a href="calculadoras/calc-2.html">Simulador PGBL vs CDB</a></li>
-                            <li><a href="calculadoras/calc-3.html">Simulador de Investimentos</a></li>
-                        </ul>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-section">
+                            <h5 class="footer-heading"><i class="fas fa-link me-2"></i>Links Rápidos</h5>
+                            <ul class="footer-links list-unstyled">
+                                <li><a href="index.html"><i class="fas fa-home me-2 icon-primary"></i>Página Inicial</a></li>
+                                <li><a href="calculadoras/calc-1.html"><i class="fas fa-calculator me-2 icon-primary"></i>Simulador Educacional</a></li>
+                                <li><a href="calculadoras/calc-2.html"><i class="fas fa-piggy-bank me-2 icon-primary"></i>PGBL vs CDB</a></li>
+                                <li><a href="calculadoras/calc-3.html"><i class="fas fa-coins me-2 icon-primary"></i>Simulador de Investimentos</a></li>
+                                <li><a href="contato.html"><i class="fas fa-envelope me-2 icon-primary"></i>Contato</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <h5>Redes Sociais</h5>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" class="text-white" target="_blank">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <!-- Adicionando o link do WhatsApp -->
-                            <a href="https://wa.me/5561983426774" class="text-white" target="_blank">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer-section">
+                            <h5 class="footer-heading"><i class="fas fa-globe me-2"></i>Redes Sociais</h5>
+                            <div class="footer-social mb-3">
+                                <a href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" class="footer-social-icon" target="_blank" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://wa.me/5561983426774" class="footer-social-icon" target="_blank" aria-label="WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                            <div class="footer-cta mt-3">
+                                <a href="https://wa.me/5561983426774?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta." class="btn btn-outline-primary btn-sm" target="_blank">
+                                    <i class="fab fa-whatsapp me-1"></i> Agende sua consultoria
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <hr>
+                <hr class="footer-divider">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p class="mb-0">© 2025 Luciana Araujo. Todos os direitos reservados.</p>
+                        <p class="copyright mb-0">© 2025 Luciana Araujo. Todos os direitos reservados.</p>
                     </div>
                 </div>
             </div>

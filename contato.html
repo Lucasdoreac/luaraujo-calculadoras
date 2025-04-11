@@ -68,24 +68,52 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/components.js"></script>
+    <script src="assets/js/modules/validation.js"></script>
+    <script src="assets/js/main.js"></script>
     <script>
-        // Manipulação do formulário de contato
+        // Manipulação do formulário de contato com validação
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Em uma implementação real, aqui enviaria dados para API/backend
-            // Como estamos no GitHub Pages (estático), apenas simulamos o sucesso
+            // Validar o formulário usando o módulo de validação
+            const regrasValidacao = {
+                'name': {
+                    obrigatorio: true,
+                    mensagens: {
+                        obrigatorio: 'Por favor, informe seu nome'
+                    }
+                },
+                'email': {
+                    obrigatorio: true,
+                    tipo: 'email',
+                    mensagens: {
+                        obrigatorio: 'Por favor, informe seu email',
+                        invalido: 'Por favor, informe um email válido'
+                    }
+                },
+                'message': {
+                    obrigatorio: true,
+                    mensagens: {
+                        obrigatorio: 'Por favor, escreva sua mensagem'
+                    }
+                }
+            };
             
-            // Limpar formulário
-            this.reset();
-            
-            // Mostrar mensagem de sucesso
-            document.getElementById('formSuccess').style.display = 'block';
-            
-            // Esconder mensagem após 5 segundos
-            setTimeout(() => {
-                document.getElementById('formSuccess').style.display = 'none';
-            }, 5000);
+            if (Validation.validarFormulario('contactForm', regrasValidacao)) {
+                // Em uma implementação real, aqui enviaria dados para API/backend
+                // Como estamos no GitHub Pages (estático), apenas simulamos o sucesso
+                
+                // Limpar formulário
+                this.reset();
+                
+                // Mostrar mensagem de sucesso
+                document.getElementById('formSuccess').style.display = 'block';
+                
+                // Esconder mensagem após 5 segundos
+                setTimeout(() => {
+                    document.getElementById('formSuccess').style.display = 'none';
+                }, 5000);
+            }
         });
     </script>
 </body>

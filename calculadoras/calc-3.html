@@ -331,7 +331,7 @@
             const ctxGlobal = document.getElementById('chartGlobal').getContext('2d');
             
             // Destruir gráfico anterior se existir
-            if (window.chartGlobal) {
+            if (window.chartGlobal && typeof window.chartGlobal.destroy === 'function') {
                 window.chartGlobal.destroy();
             }
             
@@ -446,7 +446,7 @@
             const ctxMensal = document.getElementById('chartMensal').getContext('2d');
             
             // Destruir gráfico anterior se existir
-            if (window.chartMensal) {
+            if (window.chartMensal && typeof window.chartMensal.destroy === 'function') {
                 window.chartMensal.destroy();
             }
             

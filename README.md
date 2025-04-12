@@ -1,80 +1,94 @@
-# Hub de Conhecimento Financeiro 📊
+# Luaraujo Calculadoras Financeiras
 
-Calculadoras e simuladores financeiros com interface de alto contraste.
+Este repositório contém as calculadoras financeiras educativas do site luaraujo.com. As calculadoras fornecem simulações e análises financeiras para ajudar os visitantes a tomar decisões de investimento mais informadas.
 
-## 🚀 Funcionalidades
+## Calculadoras Disponíveis
 
-- ✅ Simulador Educacional de Investimentos
-- ✅ Comparador PGBL vs CDB
-- ✅ Sistema de temas escuro
-- ✅ Navegação responsiva
-- ✅ Tooltips e ajuda contextual
-- ✅ Simulador de Investimentos
+1. **Simulador Educacional** (`calculadoras/calc-1.html`)
+   - Simulador básico de investimentos com cálculos de juros compostos
+   - Inclui ajuste para inflação e comparações entre produtos financeiros
 
-## 🛠️ Tecnologias
+2. **PGBL vs CDB** (`calculadoras/calc-2.html`)
+   - Comparativo entre investimentos em PGBL e CDB
+   - Incorpora benefícios fiscais e análise de longo prazo
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Bootstrap 5.3.x
-- Chart.js
-- Font Awesome
+3. **Simulador de Investimentos** (`calculadoras/calc-3.html`)
+   - Simulação mais detalhada com análise mensal
+   - Permite personalizar aportes e taxas por mês
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
-📁 luaraujo-calculadoras/
- ├── index.html                # Página inicial
- ├── contato.html              # Página de contato
- ├── 📁 calculadoras/          # Calculadoras principais
- │   ├── calc-1.html           # Simulador Educacional
- │   ├── calc-2.html           # PGBL vs CDB
- │   └── calc-3.html           # Simulador de Investimentos
- └── 📁 assets/                # Recursos estáticos
-     ├── 📁 css/
-     │   ├── styles.css
-     │   └── integrated-styles.css
-     └── 📁 js/
-         ├── components.js      # Componentes reutilizáveis (navbar, footer)
-         ├── main.js           # Inicialização e funções globais
-         └── 📁 modules/
-             ├── calculadora.js # Funções de cálculo financeiro
-             ├── calculo-investimentos.js # Simulações específicas
-             └── validation.js # Validação de formulários
+├── assets/
+│   ├── css/
+│   │   ├── styles.css            # Estilos gerais do site
+│   │   └── enhanced-charts.css   # Estilos específicos para gráficos
+│   ├── js/
+│   │   ├── components.js         # Componentes reutilizáveis (navbar, footer)
+│   │   ├── chart-helpers.js      # Funções auxiliares para gráficos
+│   │   └── pgbl-cdb-fix.js       # Correções para o simulador PGBL vs CDB
+│   └── img/                      # Imagens do site
+├── calculadoras/
+│   ├── calc-1.html               # Simulador Educacional
+│   ├── calc-2.html               # Simulador PGBL vs CDB
+│   └── calc-3.html               # Simulador de Investimentos
+├── index.html                    # Página inicial
+├── contato.html                  # Página de contato
+└── README.md                     # Este arquivo
 ```
 
-## 📋 Esquema Visual
+## Tecnologias Utilizadas
 
-- **Paleta de cores:**
-  * Fundo primário: #121212 (quase preto)
-  * Fundo secundário: #1e1e1e (cinza escuro)
-  * Texto principal: #ffffff (branco)
-  * Texto secundário: #bbbbbb (cinza claro)
-  * Destaque primário: #3498db (azul)
-  * Destaque secundário: #2ecc71 (verde)
-  * Alerta: #e74c3c (vermelho)
-  * Bordas/Separadores: #333333 (cinza médio)
+- HTML5, CSS3, JavaScript
+- Bootstrap 5 para o layout responsivo
+- Chart.js para visualização de dados
+- Font Awesome para ícones
 
-- **Tipografia:**
-  * Fonte principal: Roboto/Roboto Mono
-  * Espaçamento de linha aumentado (1.6) para melhor legibilidade
+## Requisitos para Desenvolvimento
 
-## 📦 Implementação
+- Conhecimento básico de HTML, CSS e JavaScript
+- Familiaridade com Bootstrap 5
+- Compreensão de conceitos financeiros (juros compostos, produtos de investimento)
 
-Este projeto é uma versão estática das calculadoras financeiras, adaptada para funcionar com GitHub Pages.
+## Solução de Problemas
 
-### Configuração do GitHub Pages
+### Simulador PGBL vs CDB
 
-Para configurar o projeto para ser hospedado no GitHub Pages:
+O simulador PGBL vs CDB (calc-2.html) teve problemas em exibir resultados corretamente devido a:
 
-1. Acesse as configurações do repositório (Settings)
-2. Na seção "Pages" em "Code and automation"
-3. Em "Source", selecione "Deploy from a branch"
-4. Selecione a branch "main" e a pasta "/ (root)"
-5. Clique em "Save"
+1. Inconsistências na lógica de cálculo 
+2. Problemas de renderização do gráfico comparativo
+3. Falhas na exibição da seção de resultados
 
-Após a implementação, o site estará disponível em: `https://[seu-usuario].github.io/luaraujo-calculadoras/`
+Uma solução alternativa foi implementada através do arquivo `pgbl-cdb-fix.js`, que:
 
-## 📝 Licença
+- Adiciona verificação robusta de erros
+- Corrige os cálculos de restituição e rendimentos
+- Garante a exibição da seção de resultados
+- Melhora o tratamento de erros de renderização de gráficos
 
-Este projeto está sob a licença MIT.
+## Uso em Produção
+
+Ao implantar o site em produção, é recomendável:
+
+1. Concatenar e minificar arquivos CSS e JavaScript para melhor performance
+2. Otimizar imagens para carregamento mais rápido  
+3. Configurar cache adequado para os recursos estáticos
+
+## Contribuição
+
+Para contribuir com o projeto:
+
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-calculadora`)
+3. Faça commit das alterações (`git commit -m 'Adiciona nova calculadora'`)
+4. Faça push para a branch (`git push origin feature/nova-calculadora`)
+5. Abra um Pull Request
+
+## Contato
+
+Para mais informações sobre o desenvolvimento deste projeto, entre em contato através do GitHub.
+
+## Licença
+
+Todos os direitos reservados © Luciana Araujo.

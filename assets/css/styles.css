@@ -759,10 +759,21 @@ button:hover {
 }
 
 /* Garantir que textos em cards com fundo escuro sejam claros */
-.card.bg-dark .card-body p,
-.card.bg-dark .card-body span,
-.card.bg-dark .card-body strong {
+.card.bg-dark .card-body p:not(.alert *),
+.card.bg-dark .card-body span:not(.alert *),
+.card.bg-dark .card-body strong:not(.alert *) {
     color: #ffffff !important; /* Texto branco para garantir visibilidade */
+}
+
+/* Garantir que alertas mantenham suas próprias cores de texto */
+.alert {
+    color: inherit;
+}
+.alert-primary {
+    color: #084298;
+}
+.alert-success {
+    color: #0f5132;
 }
 
 /* Animações */

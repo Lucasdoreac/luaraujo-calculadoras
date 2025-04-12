@@ -42,7 +42,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="rendaTributavel">Renda Anual Tributável (R$):</label>
-                        <input type="number" id="rendaTributavel" class="form-control" step="0.01" required>
+                        <input type="number" id="rendaTributavel" class="form-control" value="120000" step="0.01" required>
                         <div class="instruction">Informe sua renda anual sujeita à tributação no IR.</div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="anos">Período de Investimento (em anos):</label>
-                        <input type="number" id="anos" class="form-control" required min="1">
+                        <input type="number" id="anos" class="form-control" value="15" required min="1">
                         <div class="instruction">Quanto tempo pretende manter o investimento.</div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                 // Adicionar linha na tabela de detalhes
                 const row = tabelaDetalhes.insertRow();
                 row.insertCell().innerText = i;
-                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteEfetivo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual);
                 row.insertCell().innerText = ChartHelpers.formatarMoeda(restituicao);
                 row.insertCell().innerText = ChartHelpers.formatarMoeda(pgblSaldo);
                 row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual);
@@ -288,10 +288,10 @@
             const rowTotal = tabelaDetalhes.insertRow();
             rowTotal.classList.add('total');
             rowTotal.insertCell().innerText = "Total";
-            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(pgblDesembolso - aporteInicial);
-            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(Math.abs(pgblDesembolso - aporteInicial - (aporteAnual * anos)));
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual * anos);
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual * aliquotaIR * (anos - 1));
             rowTotal.insertCell().innerText = ""; // Saldo PGBL não é somado
-            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(cdbDesembolso - aporteInicial);
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual * anos);
             rowTotal.insertCell().innerText = ""; // Saldo CDB não é somado
             
             // Calcular IR no resgate
@@ -318,7 +318,7 @@
             
             // Análise comparativa
             const diferencaLiquida = pgblLiquido - cdbLiquido;
-            const totalRestituido = pgblDesembolso - aporteInicial - (aporteAnual * anos);
+            const totalRestituido = aporteAnual * aliquotaIR * (anos - 1);
             const rentabilidadePGBL = ((pgblLiquido - pgblDesembolso) / pgblDesembolso) * 100;
             const rentabilidadeCDB = ((cdbLiquido - cdbDesembolso) / cdbDesembolso) * 100;
             
@@ -406,9 +406,7 @@
         
         // Inicializar quando o DOM estiver carregado
         document.addEventListener('DOMContentLoaded', function() {
-            // Definir valores iniciais para exemplo
-            document.getElementById('rendaTributavel').value = '120000';
-            document.getElementById('anos').value = '15';
+            // Valores iniciais já definidos nos inputs
         });
     </script>
 </body>

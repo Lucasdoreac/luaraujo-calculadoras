@@ -7,6 +7,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/enhanced-charts.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -136,6 +137,10 @@
                 </div>
              </div>
              
+             <div class="chart-container mt-4">
+                <canvas id="chartComparativo"></canvas>
+             </div>
+             
              <h3 class="mt-4">Detalhamento Anual <i class="fas fa-table"></i></h3>
              <div class="table-responsive">
                 <table id="tabelaDetalhes" class="comparison-table">
@@ -153,10 +158,6 @@
                         <!-- As linhas serão preenchidas pelo JavaScript -->
                     </tbody>
                 </table>
-             </div>
-            
-             <div class="chart-container mt-4">
-                <canvas id="chartComparativo"></canvas>
              </div>
              
              <div class="card bg-dark mb-4 mt-4">
@@ -184,6 +185,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/components.js"></script>
+    <script src="../assets/js/chart-helpers.js"></script>
     <script>
         // Funções de ajuda UI
         function toggleTips() {
@@ -199,15 +201,10 @@
             return 0.15; // 15% (acima de 24 meses)
         }
         
-        // Função formatadora de moeda
-        function formatarMoeda(valor) {
-            return new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }).format(valor);
-        }
-        
         function calcular() {
+            // Preparar container do gráfico
+            ChartHelpers.prepareChartContainer('chartComparativo');
+            
             // Obter valores dos inputs
             const rendaTributavel = parseFloat(document.getElementById('rendaTributavel').value);
             const aporteInicial = parseFloat(document.getElementById('aporteInicial').value) || 0;
@@ -219,14 +216,17 @@
             // Validar entradas
             if (isNaN(rendaTributavel) || rendaTributavel <= 0) {
                 alert("Por favor, insira uma renda anual tributável válida.");
+                ChartHelpers.removeLoading('chartComparativo');
                 return;
             }
             if (isNaN(anos) || anos <= 0) {
                 alert("Por favor, insira um período de investimento válido.");
+                ChartHelpers.removeLoading('chartComparativo');
                 return;
             }
             if (isNaN(cdi) || cdi <= 0) {
                 alert("Por favor, insira uma taxa do CDI válida.");
+                ChartHelpers.removeLoading('chartComparativo');
                 return;
             }
             
@@ -246,9 +246,9 @@
             tabelaDetalhes.innerHTML = "";
             
             // Arrays para o gráfico
-            const anosLabels = [];
-            const pgblData = [];
-            const cdbData = [];
+            const anosLabels = ['Inicial'];
+            const pgblData = [aporteInicial];
+            const cdbData = [aporteInicial];
             
             // Calcular acumulação ao longo dos anos
             for (let i = 1; i <= anos; i++) {
@@ -277,12 +277,22 @@
                 // Adicionar linha na tabela de detalhes
                 const row = tabelaDetalhes.insertRow();
                 row.insertCell().innerText = i;
-                row.insertCell().innerText = formatarMoeda(aporteEfetivo);
-                row.insertCell().innerText = formatarMoeda(restituicao);
-                row.insertCell().innerText = formatarMoeda(pgblSaldo);
-                row.insertCell().innerText = formatarMoeda(aporteAnual);
-                row.insertCell().innerText = formatarMoeda(cdbSaldo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteEfetivo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(restituicao);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(pgblSaldo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(cdbSaldo);
             }
+            
+            // Adicionar linha de totalização na tabela
+            const rowTotal = tabelaDetalhes.insertRow();
+            rowTotal.classList.add('total');
+            rowTotal.insertCell().innerText = "Total";
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(pgblDesembolso - aporteInicial);
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(Math.abs(pgblDesembolso - aporteInicial - (aporteAnual * anos)));
+            rowTotal.insertCell().innerText = ""; // Saldo PGBL não é somado
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(cdbDesembolso - aporteInicial);
+            rowTotal.insertCell().innerText = ""; // Saldo CDB não é somado
             
             // Calcular IR no resgate
             const pgblIR = pgblSaldo * aliquotaIRPGBL;
@@ -295,16 +305,16 @@
             const cdbLiquido = cdbSaldo - cdbIR; // Valor líquido após IR
             
             // Exibir resultados
-            document.getElementById('pgblAcumulado').textContent = formatarMoeda(pgblSaldo);
-            document.getElementById('pgblDesembolso').textContent = formatarMoeda(pgblDesembolso);
-            document.getElementById('pgblIR').textContent = formatarMoeda(pgblIR);
-            document.getElementById('pgblLiquido').textContent = formatarMoeda(pgblLiquido);
-            document.getElementById('pgblTaxaAdm').textContent = formatarMoeda(totalTaxaAdministracao);
+            document.getElementById('pgblAcumulado').textContent = ChartHelpers.formatarMoeda(pgblSaldo);
+            document.getElementById('pgblDesembolso').textContent = ChartHelpers.formatarMoeda(pgblDesembolso);
+            document.getElementById('pgblIR').textContent = ChartHelpers.formatarMoeda(pgblIR);
+            document.getElementById('pgblLiquido').textContent = ChartHelpers.formatarMoeda(pgblLiquido);
+            document.getElementById('pgblTaxaAdm').textContent = ChartHelpers.formatarMoeda(totalTaxaAdministracao);
             
-            document.getElementById('cdbAcumulado').textContent = formatarMoeda(cdbSaldo);
-            document.getElementById('cdbDesembolso').textContent = formatarMoeda(cdbDesembolso);
-            document.getElementById('cdbIR').textContent = formatarMoeda(cdbIR);
-            document.getElementById('cdbLiquido').textContent = formatarMoeda(cdbLiquido);
+            document.getElementById('cdbAcumulado').textContent = ChartHelpers.formatarMoeda(cdbSaldo);
+            document.getElementById('cdbDesembolso').textContent = ChartHelpers.formatarMoeda(cdbDesembolso);
+            document.getElementById('cdbIR').textContent = ChartHelpers.formatarMoeda(cdbIR);
+            document.getElementById('cdbLiquido').textContent = ChartHelpers.formatarMoeda(cdbLiquido);
             
             // Análise comparativa
             const diferencaLiquida = pgblLiquido - cdbLiquido;
@@ -312,8 +322,8 @@
             const rentabilidadePGBL = ((pgblLiquido - pgblDesembolso) / pgblDesembolso) * 100;
             const rentabilidadeCDB = ((cdbLiquido - cdbDesembolso) / cdbDesembolso) * 100;
             
-            document.getElementById('diferencaLiquida').textContent = formatarMoeda(diferencaLiquida);
-            document.getElementById('totalRestituido').textContent = formatarMoeda(Math.abs(totalRestituido));
+            document.getElementById('diferencaLiquida').textContent = ChartHelpers.formatarMoeda(diferencaLiquida);
+            document.getElementById('totalRestituido').textContent = ChartHelpers.formatarMoeda(Math.abs(totalRestituido));
             document.getElementById('rentabilidadePGBL').textContent = rentabilidadePGBL.toFixed(2) + "%";
             document.getElementById('rentabilidadeCDB').textContent = rentabilidadeCDB.toFixed(2) + "%";
             
@@ -322,10 +332,10 @@
             const recomendacaoAlert = document.getElementById('recomendacaoAlert');
             
             if (diferencaLiquida > 0) {
-                recomendacao.textContent = `O PGBL é mais vantajoso neste cenário, apresentando uma diferença de ${formatarMoeda(diferencaLiquida)} a favor.`;
+                recomendacao.textContent = `O PGBL é mais vantajoso neste cenário, apresentando uma diferença de ${ChartHelpers.formatarMoeda(diferencaLiquida)} a favor.`;
                 recomendacaoAlert.className = 'alert alert-primary mt-3';
             } else {
-                recomendacao.textContent = `O CDB é mais vantajoso neste cenário, apresentando uma diferença de ${formatarMoeda(Math.abs(diferencaLiquida))} a favor.`;
+                recomendacao.textContent = `O CDB é mais vantajoso neste cenário, apresentando uma diferença de ${ChartHelpers.formatarMoeda(Math.abs(diferencaLiquida))} a favor.`;
                 recomendacaoAlert.className = 'alert alert-success mt-3';
             }
             
@@ -337,7 +347,8 @@
                 window.chartComparativo.destroy();
             }
             
-            window.chartComparativo = new Chart(ctxChart, {
+            // Configuração do gráfico com tema escuro
+            const configGrafico = {
                 type: 'line',
                 data: {
                     labels: anosLabels,
@@ -348,7 +359,8 @@
                             borderColor: '#3498db',
                             backgroundColor: 'rgba(52, 152, 219, 0.1)',
                             borderWidth: 2,
-                            fill: true
+                            fill: true,
+                            tension: 0.4
                         },
                         {
                             label: 'CDB',
@@ -356,60 +368,48 @@
                             borderColor: '#2ecc71',
                             backgroundColor: 'rgba(46, 204, 113, 0.1)',
                             borderWidth: 2,
-                            fill: true
+                            fill: true,
+                            tension: 0.4
                         }
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#ffffff',
-                                callback: function(value) {
-                                    return formatarMoeda(value);
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#ffffff'
-                            }
-                        }
-                    },
+                    ...ChartHelpers.darkThemeConfig(),
                     plugins: {
-                        legend: {
-                            labels: {
-                                color: '#ffffff'
-                            }
-                        },
+                        ...ChartHelpers.darkThemeConfig().plugins,
                         tooltip: {
+                            ...ChartHelpers.darkThemeConfig().plugins.tooltip,
                             callbacks: {
                                 label: function(context) {
-                                    return context.dataset.label + ': ' + formatarMoeda(context.raw);
+                                    return context.dataset.label + ': ' + ChartHelpers.formatarMoeda(context.raw);
                                 }
                             }
                         }
                     }
                 }
-            });
+            };
+            
+            // Criar gráfico
+            window.chartComparativo = new Chart(ctxChart, configGrafico);
+            
+            // Remover indicador de loading
+            ChartHelpers.removeLoading('chartComparativo');
             
             // Mostrar resultados
             document.getElementById('resultados').style.display = 'block';
             
             // Scroll para resultados
-            document.getElementById('resultados').scrollIntoView({
-                behavior: 'smooth'
-            });
+            setTimeout(() => {
+                document.getElementById('resultados').scrollIntoView({behavior: 'smooth'});
+            }, 500);
         }
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Definir valores iniciais para exemplo
+            document.getElementById('rendaTributavel').value = '120000';
+            document.getElementById('anos').value = '15';
+        });
     </script>
 </body>
 </html>

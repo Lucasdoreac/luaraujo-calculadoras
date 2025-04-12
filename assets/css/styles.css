@@ -758,6 +758,13 @@ button:hover {
     color: #ffffff;
 }
 
+/* Garantir que textos em cards com fundo escuro sejam claros */
+.card.bg-dark .card-body p,
+.card.bg-dark .card-body span,
+.card.bg-dark .card-body strong {
+    color: #ffffff !important; /* Texto branco para garantir visibilidade */
+}
+
 /* Animações */
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -774,4 +781,30 @@ button:hover {
 .footer-social-icon:focus {
     outline: 2px solid #3498db;
     outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    .chart-container {
+        page-break-inside: avoid;
+        border: 1px solid #ddd;
+    }
+    
+    .result-card {
+        page-break-inside: avoid;
+    }
 }

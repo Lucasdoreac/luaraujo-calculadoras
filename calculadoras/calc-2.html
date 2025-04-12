@@ -186,13 +186,26 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../assets/js/components.js"></script>
     <script src="../assets/js/chart-helpers.js"></script>
-    <script src="../assets/js/pgbl-cdb-fix.js?v=1.0.1"></script>
+    <script src="../assets/js/pgbl-cdb-fix.js?v=1.0.2"></script>
     <script>
         // Funções de ajuda UI
         function toggleTips() {
             const tipsContent = document.getElementById('tipsContent');
             tipsContent.style.display = tipsContent.style.display === 'block' ? 'none' : 'block';
         }
+
+        // Executar simulação automática quando solicitado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se há parâmetro 'auto' na URL para simulação automática
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('auto')) {
+                setTimeout(() => {
+                    if (typeof calcular === 'function') {
+                        calcular();
+                    }
+                }, 800);
+            }
+        });
     </script>
 </body>
 </html>

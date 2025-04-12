@@ -217,7 +217,7 @@ function calcularPGBLvsCDB() {
         const ctx = ctxChart.getContext('2d');
         
         // Destruir gráfico anterior se existir
-        if (window.chartComparativo) {
+        if (window.chartComparativo && typeof window.chartComparativo.destroy === 'function') {
             window.chartComparativo.destroy();
         }
         
@@ -272,6 +272,7 @@ function calcularPGBLvsCDB() {
         // Mostrar resultados - forçar exibição do container de resultados
         const resultadosContainer = document.getElementById('resultados');
         if (resultadosContainer) {
+            // Força a exibição do container de resultados alterando diretamente o estilo
             resultadosContainer.style.display = 'block';
             console.log("Container de resultados exibido");
             
@@ -292,28 +293,35 @@ function calcularPGBLvsCDB() {
     }
 }
 
+// Definir a função calcular diretamente para evitar problemas de substituição
+window.calcular = calcularPGBLvsCDB;
+
 // Inicializar quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Inicializando correções para PGBL vs CDB");
     
-    // Substituir a função original pela versão corrigida
-    if (typeof window.calcular === 'function') {
-        console.log("Substituindo função calcular() original");
-        window.calcular_original = window.calcular;
-        window.calcular = calcularPGBLvsCDB;
-    } else {
-        console.log("Definindo função calcular()");
-        window.calcular = calcularPGBLvsCDB;
-    }
+    // Garantir que a função calcular está configurada corretamente
+    window.calcular = calcularPGBLvsCDB;
     
     // Adicionar listener ao botão de simulação para garantir
     const botaoSimular = document.querySelector('button[onclick="calcular()"]');
     if (botaoSimular) {
         console.log("Adicionando listener adicional ao botão Simular");
         botaoSimular.addEventListener('click', function(event) {
-            // Prevenindo a execução duplicada
+            // Prevenir comportamento padrão e chamar a função
             event.preventDefault();
             calcularPGBLvsCDB();
         });
+    } else {
+        console.warn("Botão de simulação não encontrado");
+    }
+    
+    // Verificar se há um parâmetro na URL que indique simulação automática
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('simular')) {
+        console.log("Simulação automática detectada na URL");
+        setTimeout(() => {
+            calcularPGBLvsCDB();
+        }, 1000);
     }
 });

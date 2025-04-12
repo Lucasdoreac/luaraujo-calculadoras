@@ -1,0 +1,99 @@
+/* Melhorias para visualização de gráficos e tabelas */
+.chart-container {
+    height: 400px !important;
+    min-height: 400px;
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Garantir que os gráficos sejam renderizados corretamente */
+.chart-container canvas {
+    max-width: 100%;
+}
+
+/* Melhorar a visualização de tabelas */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comparison-table th, 
+.comparison-table td {
+    padding: 12px 15px;
+    border: 1px solid #333333;
+    text-align: left;
+    color: #ffffff;
+}
+
+.comparison-table th {
+    background-color: #2c2c2c;
+    font-weight: bold;
+    color: #3498db;
+}
+
+.comparison-table tr:nth-child(even) {
+    background-color: #262626;
+}
+
+.comparison-table tr.total {
+    background-color: rgba(52, 152, 219, 0.1);
+    font-weight: bold;
+}
+
+.comparison-table tr:hover {
+    background-color: #333333;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animações para melhorar a experiência do usuário */
+@keyframes chartFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chart-container {
+    animation: chartFadeIn 0.5s ease forwards;
+}
+
+/* Indicador de carregamento para gráficos */
+.chart-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border-radius: 8px;
+}
+
+.chart-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(52, 152, 219, 0.3);
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

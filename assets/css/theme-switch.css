@@ -31,32 +31,32 @@
     --theme-transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Variáveis para o tema claro (reformuladas para reduzir fadiga visual) */
+/* Variáveis para o tema claro - design ergonômico profissional */
 [data-theme="light"] {
-    /* Cores de fundo */
-    --bg-primary: #f4f4f0; /* Off-white com tom levemente quente para reduzir fadiga visual */
-    --bg-secondary: #f9f9f5; /* Quase branco, mas não puro */
-    --bg-tertiary: #e8e8e2; /* Tom neutro quente para áreas de destaque */
-    --bg-card: #f9f9f5;
-    --bg-input: #fafaf6; /* Sutilmente diferente */
+    /* Sistema de Fundos - Design em Camadas */
+    --bg-primary: #f8f9fa;      /* Fundo principal, muito suave */
+    --bg-secondary: #ffffff;    /* Elementos secundários com sombra */
+    --bg-tertiary: #f0f2f5;     /* Elementos terciários e destacados */
+    --bg-card: #ffffff;         /* Cards com sombra para separar visualmente */
+    --bg-input: #f3f4f6;        /* Inputs sutilmente destacados */
     
-    /* Cores de texto */
-    --text-primary: #2d2d2a; /* Quase preto, mas não totalmente para reduzir contraste extremo */
-    --text-secondary: #504f4a; /* Cinza escuro com leve tonalidade quente */
-    --text-muted: #767670; /* Cinza médio para textos secundários */
+    /* Sistema de Texto - Contraste Intermediário */
+    --text-primary: #1a202c;    /* Texto principal, não totalmente preto */
+    --text-secondary: #4a5568;  /* Texto secundário, contraste médio */
+    --text-muted: #718096;      /* Texto terciário, mais suave */
     
-    /* Cores de destaque e elementos */
-    --primary-color: #1f6ba6; /* Azul menos saturado, mais amigável aos olhos */
-    --primary-color-rgb: 31, 107, 166; /* Versão RGB para uso com opacidade */
-    --primary-color-hover: #18558a; /* Mais escuro mas ainda com menor saturação */
-    --primary-shadow: rgba(31, 107, 166, 0.25); /* Sombra mais sutil */
-    --success-color: #2a9758; /* Verde menos intenso */
-    --danger-color: #b33430; /* Vermelho menos saturado */
-    --border-color: #c5c4be; /* Borda suave que não cria contraste extremo */
-    --shadow-color: rgba(0, 0, 0, 0.08); /* Sombras muito sutis */
+    /* Cores de Destaque - Menos Saturadas */
+    --primary-color: #3182ce;   /* Azul mais agradável aos olhos */
+    --primary-color-rgb: 49, 130, 206;
+    --primary-color-hover: #2c5282;
+    --primary-shadow: rgba(49, 130, 206, 0.15);
+    --success-color: #38a169;   /* Verde mais suave */
+    --danger-color: #e53e3e;    /* Vermelho ajustado */
     
-    /* Opacidades */
-    --hover-opacity: 0.15; /* Feedback visual mais sutil */
+    /* Elementos Visuais */
+    --border-color: #e2e8f0;    /* Bordas mais sutis */
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --hover-opacity: 0.08;      /* Efeitos hover mais sutis */
 }
 
 /* Aplicação das variáveis */
@@ -230,7 +230,49 @@ button:hover {
     box-shadow: 0 2px 4px var(--shadow-color);
 }
 
-/* Melhorias nas tabelas */
+/* Sistema profissional de tabelas */
+[data-theme="light"] .comparison-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    border: none;
+}
+
+[data-theme="light"] .comparison-table th {
+    background: #edf2f7;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    padding: 12px 16px;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .comparison-table td {
+    padding: 12px 16px;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+[data-theme="light"] .comparison-table tr:nth-child(even) {
+    background-color: #f7fafc;
+}
+
+[data-theme="light"] .comparison-table tr:hover {
+    background-color: #edf2f7;
+}
+
+[data-theme="light"] .comparison-table th.primary-header {
+    background-color: var(--primary-color);
+    color: white !important;
+}
+
+/* Versão do tema escuro para tabelas */
 .comparison-table th,
 .comparison-table td {
     border: 2px solid var(--border-color); /* Bordas mais grossas */
@@ -260,7 +302,19 @@ button:hover {
     color: var(--primary-color);
 }
 
-/* Melhorias nos cards */
+/* Sistema profissional de cards */
+[data-theme="light"] .card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    border-color: transparent;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .card:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+}
+
+/* Melhorias nos cards padrão */
 .card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color); /* Borda mais sutil para reduzir contraste */
@@ -287,6 +341,7 @@ button:hover {
     border-top: 1px solid var(--border-color);
 }
 
+/* Footer e Rodapé */
 .footer-custom {
     background-color: var(--bg-secondary);
     color: var(--text-primary);
@@ -350,24 +405,37 @@ button:hover {
     transition: var(--theme-transition);
 }
 
-/* Garantir que os textos nos alertas tenham bom contraste */
-.alert {
-    color: var(--text-primary);
+/* Sistema de alertas otimizado */
+[data-theme="light"] .alert {
+    border-radius: 6px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 [data-theme="light"] .alert-primary {
     color: #0a3984;
     background-color: #e8f0ff;
+    border-color: #c3dafe;
 }
 
 [data-theme="light"] .alert-success {
     color: #0a573c;
     background-color: #e4f7ee;
+    border-color: #c6f6d5;
 }
 
 [data-theme="light"] .alert-danger {
     color: #8e2727;
     background-color: #f7e8e8;
+    border-color: #fed7d7;
+}
+
+/* Sistema de foco otimizado */
+[data-theme="light"] :focus {
+    outline-color: rgba(66, 153, 225, 0.6);
+    outline-width: 1px;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.25);
 }
 
 /* Melhorar o contraste das áreas de foco */
@@ -394,6 +462,7 @@ button:hover {
     color: var(--text-primary) !important;
 }
 
+/* Elementos de texto em vários contextos */
 [data-theme="light"] .results p,
 [data-theme="light"] .educational-content p,
 [data-theme="light"] .comparison-table td,
@@ -422,9 +491,13 @@ button:hover {
     color: var(--text-primary) !important;
 }
 
-/* Garantir que os cabeçalhos de tabela mantenham texto branco */
-[data-theme="light"] .comparison-table th {
-    color: white !important;
+/* Garantir que os cabeçalhos de tabela mantenham texto adequado */
+[data-theme="light"] .comparison-table th:not(.primary-header) {
+    color: var(--text-primary) !important;
+    background-color: #edf2f7;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
 }
 
 /* Corrigir problema de texto branco em fundo claro na página inicial */
@@ -473,33 +546,35 @@ button:hover {
 
 /* Design ergonômico adicional para o tema claro */
 [data-theme="light"] .container {
-    box-shadow: 0 3px 8px var(--shadow-color);
-    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.03);
+    border: none;
 }
 
 [data-theme="light"] input, 
 [data-theme="light"] select, 
 [data-theme="light"] .form-control {
-    border-color: var(--border-color);
+    border: 1px solid var(--border-color);
     background-color: var(--bg-input);
 }
 
-/* Adicionar efeito de profundidade suave para interfaces não-planas */
+/* Elementos com profundidade para interfaces modernas */
 [data-theme="light"] .card,
 [data-theme="light"] .educational-tips,
 [data-theme="light"] .results,
-[data-theme="light"] .tab-content {
-    box-shadow: 0 1px 3px var(--shadow-color);
+[data-theme="light"] .tab-content,
+[data-theme="light"] .concept-explanation {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+    border: none;
 }
 
-/* Reduzir a intensidade das sombras */
+/* Hover states mais sutis */
 [data-theme="light"] .btn:hover {
-    box-shadow: 0 2px 5px var(--shadow-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04);
 }
 
-/* Bordas mais suaves */
+/* Bordas mais sutis */
 [data-theme="light"] .navbar-custom {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 /* Ajustes finos para contrastes menos agressivos */
@@ -514,21 +589,36 @@ button:hover {
     background-attachment: fixed;
 }
 
-/* Aumentar espaçamento para melhor respiração visual */
-[data-theme="light"] .container {
-    padding: 25px;
-}
-
-/* Arredondamento de bordas para elementos de formulário */
+/* Refinamentos de formulários */
 [data-theme="light"] input,
 [data-theme="light"] select,
 [data-theme="light"] textarea,
 [data-theme="light"] .form-control {
     border-radius: 6px;
+    transition: all 0.2s ease;
 }
 
-/* Botões menos saturados */
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] .form-control:focus {
+    border-color: #cbd5e0;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+/* Botões mais refinados */
 [data-theme="light"] .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+[data-theme="light"] button:not(.btn-primary):not(.btn-success):not(.btn-danger) {
+    background-color: #f3f4f6;
+    border: 1px solid #e2e8f0;
+    color: #4a5568;
+}
+
+[data-theme="light"] button:hover:not(.btn-primary):not(.btn-success):not(.btn-danger) {
+    background-color: #edf2f7;
 }

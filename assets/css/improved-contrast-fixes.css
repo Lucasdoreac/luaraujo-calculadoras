@@ -174,7 +174,7 @@
 /* Melhorar contraste nos ícones de ajuda */
 [data-theme="light"] .help-icon {
     color: white !important;
-    background-color: #718096;
+    background-color: #4a5568;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -249,4 +249,95 @@
 [data-theme="light"] .card.bg-dark .card-body p,
 [data-theme="light"] .card.bg-dark .card-body span {
     color: var(--text-primary) !important;
+}
+
+/* Correções específicas para botões outline-primary no tema claro */
+[data-theme="light"] .btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+[data-theme="light"] .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Melhorar a acessibilidade do foco nos elementos interativos */
+:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Garantir que os elementos de UI sejam sempre visíveis no tema escuro */
+.table,
+.table th,
+.table td {
+    color: var(--text-primary) !important;
+}
+
+/* Melhorar a visibilidade de elementos informativos */
+.text-muted {
+    color: var(--text-muted) !important;
+    opacity: 0.95;
+}
+
+/* Melhoria para elementos de navegação ativos */
+.nav-item.active,
+.nav-link.active {
+    font-weight: 600;
+}
+
+/* Corrigir problema com cards na seção de destaque da página inicial */
+[data-theme="light"] .feature-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Melhorar o contraste visual do botão de alternância de tema */
+.theme-toggle-btn {
+    border: 1px solid transparent;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--border-color);
+}
+
+[data-theme="light"] .theme-toggle-btn i.fa-moon {
+    color: var(--primary-color) !important;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2));
+}
+
+[data-theme="light"] .theme-toggle-btn i.fa-sun {
+    color: #cc8800 !important;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Melhorar a diferenciação visual no rodapé */
+[data-theme="light"] .footer-custom {
+    background-color: #f8fafc;
+}
+
+[data-theme="light"] .footer-links a {
+    padding: 3px 0;
+    display: inline-block;
+}
+
+[data-theme="light"] .footer-social-icon {
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .footer-social-icon:hover {
+    background-color: var(--primary-color);
+    color: white !important;
+    transform: translateY(-2px);
 }

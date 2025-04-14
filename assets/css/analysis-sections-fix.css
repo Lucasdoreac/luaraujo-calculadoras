@@ -1,0 +1,173 @@
+/**
+ * Correções específicas para seções de Análise de Retorno e Análise Comparativa
+ * Garantindo contraste adequado para texto e elementos no tema claro
+ */
+
+/* Estilos para cabeçalhos das seções */
+[data-theme="light"] .analise-retorno h3,
+[data-theme="light"] .analise-comparativa h3,
+[data-theme="light"] .analise-retorno .card-header,
+[data-theme="light"] .analise-comparativa .card-header,
+[data-theme="light"] h3.analise-header,
+[data-theme="light"] h3.section-header,
+[data-theme="light"] div.blue-header,
+[data-theme="light"] .analise-title,
+[data-theme="light"] .section-title {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+}
+
+/* Para headers específicos "Análise de Retorno" e "Análise Comparativa" */
+[data-theme="light"] h3:matches("Análise de Retorno"),
+[data-theme="light"] h3:matches("Análise Comparativa"),
+[data-theme="light"] .card-header:matches("Análise de Retorno"),
+[data-theme="light"] .card-header:matches("Análise Comparativa") {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Estilos para valores e resultados dentro das seções de análise */
+[data-theme="light"] .analise-retorno .valor,
+[data-theme="light"] .analise-comparativa .valor,
+[data-theme="light"] .analise-retorno .resultado,
+[data-theme="light"] .analise-comparativa .resultado,
+[data-theme="light"] .analise-retorno span,
+[data-theme="light"] .analise-comparativa span,
+[data-theme="light"] [id^="valorTotalInvestido"],
+[data-theme="light"] [id^="retornoTotal"],
+[data-theme="light"] [id^="percentualRetorno"],
+[data-theme="light"] [id^="diferenca"],
+[data-theme="light"] span.valor,
+[data-theme="light"] span.percentual,
+[data-theme="light"] .valor-destaque,
+[data-theme="light"] .percentual-destaque {
+    color: #000000 !important;
+    font-weight: bold !important;
+    text-shadow: none !important;
+}
+
+/* Estilos para tabelas nas seções de análise */
+[data-theme="light"] .analise-retorno table,
+[data-theme="light"] .analise-comparativa table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+[data-theme="light"] .analise-retorno th,
+[data-theme="light"] .analise-comparativa th {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    padding: 8px !important;
+    text-align: left !important;
+}
+
+[data-theme="light"] .analise-retorno td,
+[data-theme="light"] .analise-comparativa td {
+    border: 1px solid #dddddd !important;
+    padding: 8px !important;
+    color: #000000 !important;
+    font-weight: 500 !important;
+}
+
+/* Estilos para linhas alternadas nas tabelas */
+[data-theme="light"] .analise-retorno tr:nth-child(even),
+[data-theme="light"] .analise-comparativa tr:nth-child(even) {
+    background-color: #f2f2f2 !important;
+}
+
+/* Estilos para valores negativos */
+[data-theme="light"] .analise-retorno .valor-negativo,
+[data-theme="light"] .analise-comparativa .valor-negativo,
+[data-theme="light"] .analise-retorno .negativo,
+[data-theme="light"] .analise-comparativa .negativo,
+[data-theme="light"] span.negativo,
+[data-theme="light"] [id*="negativo"] {
+    color: #c42c2c !important;
+    font-weight: bold !important;
+}
+
+/* Estilos para valores positivos */
+[data-theme="light"] .analise-retorno .valor-positivo,
+[data-theme="light"] .analise-comparativa .valor-positivo,
+[data-theme="light"] .analise-retorno .positivo,
+[data-theme="light"] .analise-comparativa .positivo,
+[data-theme="light"] span.positivo,
+[data-theme="light"] [id*="positivo"] {
+    color: #157f3d !important;
+    font-weight: bold !important;
+}
+
+/* Seletores para elementos mais específicos baseados nos screenshots fornecidos */
+[data-theme="light"] .analise-retorno label,
+[data-theme="light"] .analise-comparativa label,
+[data-theme="light"] .analise-retorno .label,
+[data-theme="light"] .analise-comparativa .label {
+    color: #000000 !important;
+    font-weight: 500 !important;
+}
+
+/* Garantir que os fundos de seção são adequados */
+[data-theme="light"] .analise-retorno,
+[data-theme="light"] .analise-comparativa,
+[data-theme="light"] .analise-section,
+[data-theme="light"] .resultado-section {
+    background-color: #ffffff !important;
+    border: 1px solid #dddddd !important;
+    border-radius: 5px !important;
+    margin: 10px 0 !important;
+    padding: 15px !important;
+}
+
+/* Garantir visibilidade em fundos coloridos */
+[data-theme="light"] .bg-primary *,
+[data-theme="light"] .bg-info *,
+[data-theme="light"] .bg-blue *,
+[data-theme="light"] [class*="blue-bg"] * {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Garantir que elementos específicos do calc-2 tenham bom contraste */
+[data-theme="light"] #calc-2 [id*="valor"],
+[data-theme="light"] #calc-2 [id*="total"],
+[data-theme="light"] #calc-2 [id*="retorno"],
+[data-theme="light"] #calc-2 [id*="percentual"],
+[data-theme="light"] #calc-2 [id*="diferenca"],
+[data-theme="light"] #calc-2 .valor,
+[data-theme="light"] #calc-2 .total,
+[data-theme="light"] #calc-2 .retorno,
+[data-theme="light"] #calc-2 .percentual,
+[data-theme="light"] #calc-2 .diferenca {
+    color: #000000 !important;
+    font-weight: bold !important;
+    background-color: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Garantir que textos em fundos azuis sejam visíveis */
+[data-theme="light"] .analise-retorno .bg-primary,
+[data-theme="light"] .analise-comparativa .bg-primary,
+[data-theme="light"] .diferenca-liquida,
+[data-theme="light"] .valor-total,
+[data-theme="light"] .blue-bg {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    padding: 5px 8px !important;
+    border-radius: 4px !important;
+}
+
+/* Garantir que os valores dentro de fundos azuis sejam visíveis */
+[data-theme="light"] .analise-retorno .bg-primary *,
+[data-theme="light"] .analise-comparativa .bg-primary *,
+[data-theme="light"] .diferenca-liquida *,
+[data-theme="light"] .valor-total *,
+[data-theme="light"] .blue-bg * {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}

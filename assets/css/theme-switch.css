@@ -11,20 +11,21 @@
     
     /* Cores de texto */
     --text-primary: #ffffff;
-    --text-secondary: #d4d4d4; /* Mais claro que o original para melhor contraste */
-    --text-muted: #d4d4d4; /* Mais claro que o original para melhor contraste */
+    --text-secondary: #e0e0e0; /* Mais claro que o original para melhor contraste */
+    --text-muted: #e0e0e0; /* Mais claro que o original para melhor contraste */
     
     /* Cores de destaque e elementos */
     --primary-color: #3498db;
+    --primary-color-rgb: 52, 152, 219; /* Versão RGB para uso com opacidade */
     --primary-color-hover: #2980b9;
     --primary-shadow: rgba(52, 152, 219, 0.5);
     --success-color: #2ecc71;
     --danger-color: #e74c3c;
-    --border-color: #454545; /* Mais claro para melhor contraste */
+    --border-color: #5a5a5a; /* Mais claro para melhor contraste */
     --shadow-color: rgba(0, 0, 0, 0.5);
     
     /* Opacidades */
-    --hover-opacity: 0.15;
+    --hover-opacity: 0.25; /* Aumentado para melhor feedback visual */
     
     /* Transição suave entre temas */
     --theme-transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
@@ -35,7 +36,7 @@
     /* Cores de fundo */
     --bg-primary: #f2f2f2; /* Mais escuro que o original para melhor contraste */
     --bg-secondary: #ffffff;
-    --bg-tertiary: #e2e2e2; /* Mais escuro que o original para melhor contraste */
+    --bg-tertiary: #d8d8d8; /* Mais escuro que o original para melhor contraste */
     --bg-card: #ffffff;
     --bg-input: #f5f5f5; /* Ligeiramente acinzentado para visibilidade da borda */
     
@@ -46,15 +47,16 @@
     
     /* Cores de destaque e elementos */
     --primary-color: #0957c3; /* Mais escuro que o original para melhor contraste */
+    --primary-color-rgb: 9, 87, 195; /* Versão RGB para uso com opacidade */
     --primary-color-hover: #0745a0; /* Mais escuro que o original para melhor contraste */
     --primary-shadow: rgba(9, 87, 195, 0.4);
     --success-color: #157f3d; /* Mais escuro que o original para melhor contraste */
     --danger-color: #c42c2c; /* Mais escuro que o original para melhor contraste */
-    --border-color: #b0b0b0; /* Mais escuro que o original para melhor contraste */
+    --border-color: #8a8a8a; /* Mais escuro que o original para melhor contraste */
     --shadow-color: rgba(0, 0, 0, 0.15);
     
     /* Opacidades */
-    --hover-opacity: 0.12;
+    --hover-opacity: 0.20; /* Aumentado para melhor feedback visual */
 }
 
 /* Aplicação das variáveis */
@@ -85,11 +87,11 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-    background-color: rgba(var(--primary-color), var(--hover-opacity));
+    background-color: rgba(var(--primary-color-rgb), var(--hover-opacity));
 }
 
 .navbar-nav .nav-link.active {
-    background-color: rgba(var(--primary-color), calc(var(--hover-opacity) * 2));
+    background-color: rgba(var(--primary-color-rgb), calc(var(--hover-opacity) * 2));
     color: var(--primary-color) !important;
     font-weight: 600;
 }
@@ -132,7 +134,7 @@ input, select, .form-control {
     background-color: var(--bg-input);
     color: var(--text-primary);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
 }
 
 button {
@@ -171,44 +173,103 @@ button:hover {
     transition: var(--theme-transition);
 }
 
+/* Ícones de ajuda com melhor contraste */
 .help-icon {
-    background: var(--border-color);
-    color: var(--text-primary);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: #666; /* Mais claro no tema escuro */
+    color: #ffffff;
+    font-weight: bold; /* Melhor legibilidade */
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+    border: 1px solid var(--border-color); /* Borda para maior destaque */
 }
 
+.help-icon:hover {
+    background: var(--primary-color); /* Usar a cor primária no hover */
+    color: white;
+    transform: scale(1.1); /* Efeito visual de aumento */
+}
+
+[data-theme="light"] .help-icon {
+    background: #555; /* Mais escuro no tema claro */
+    color: white;
+}
+
+/* Botões de tab e seus estados */
 .tab-button {
+    padding: 10px 20px;
+    border: none;
     background: var(--bg-tertiary);
-    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    transition: all 0.3s;
+    color: var(--text-primary) !important;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+}
+
+.tab-button:hover {
+    background: rgba(var(--primary-color-rgb), 0.1);
+    border-color: var(--primary-color);
 }
 
 .tab-button.active {
     background: var(--primary-color);
     color: white !important;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
+/* Melhorias nas tabelas */
 .comparison-table th,
 .comparison-table td {
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color); /* Bordas mais grossas */
     color: var(--text-primary);
 }
 
 .comparison-table th {
-    background: var(--border-color);
-    color: var(--text-primary);
+    background: var(--primary-color); /* Usar cor primária */
+    color: white !important; /* Garantir texto branco para contraste */
+    font-weight: bold;
 }
 
 .comparison-table tr:nth-child(even) {
-    background: var(--border-color);
+    background: rgba(var(--primary-color-rgb), 0.05); /* Usar cor primária com baixa opacidade */
+}
+
+.comparison-table tr.total {
+    background-color: rgba(var(--primary-color-rgb), 0.2); /* Mais distinto */
+    font-weight: bold;
+}
+
+.comparison-table tr:hover {
+    background-color: rgba(var(--primary-color-rgb), 0.1); /* Hover mais distinto */
 }
 
 .results strong {
     color: var(--primary-color);
 }
 
+/* Melhorias nos cards */
 .card {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color); /* Borda mais grossa */
+    border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s, var(--theme-transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+    border-color: var(--primary-color); /* Destacar com a cor primária */
 }
 
 .card-title {
@@ -273,7 +334,7 @@ button:hover {
 }
 
 .theme-toggle-btn:hover {
-    background-color: rgba(var(--primary-color), var(--hover-opacity));
+    background-color: rgba(var(--primary-color-rgb), var(--hover-opacity));
     transform: rotate(30deg);
 }
 
@@ -310,6 +371,14 @@ button:hover {
 /* Melhorar o contraste das áreas de foco */
 :focus {
     outline-color: var(--primary-color);
-    outline-width: 2px;
+    outline-width: 3px; /* Aumentado para melhor visibilidade */
     outline-offset: 2px;
+}
+
+/* Melhorar a visibilidade de elementos com foco */
+.btn:focus, 
+.form-control:focus,
+.tab-button:focus,
+.help-icon:focus {
+    box-shadow: 0 0 0 3px var(--primary-shadow);
 }

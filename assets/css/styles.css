@@ -12,7 +12,7 @@ body {
 .navbar-custom {
     min-height: 70px;
     background-color: #1e1e1e; /* Fundo secundário */
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #454545; /* Borda mais visível */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     margin: 0;
     width: 100%;
@@ -74,7 +74,7 @@ body {
 }
 
 .social-link {
-    color: #bbbbbb;
+    color: #d4d4d4; /* Mais claro para melhor contraste */
     font-size: 1.25rem;
     transition: all 0.3s ease;
     padding: 6px 10px;
@@ -91,7 +91,7 @@ body {
 }
 
 .navbar-toggler {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Borda mais visível */
     padding: 6px 10px;
 }
 
@@ -115,7 +115,7 @@ body {
         padding: 1rem;
         border-radius: 0 0 10px 10px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        border-top: 1px solid #333333;
+        border-top: 1px solid #454545; /* Borda mais visível */
         margin-top: 10px;
     }
     
@@ -166,13 +166,13 @@ label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #bbbbbb; /* Texto secundário */
+    color: #d4d4d4; /* Texto secundário mais claro para melhor contraste */
 }
 
 input, select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #333333; /* Bordas/Separadores */
+    border: 1px solid #454545; /* Bordas mais visíveis */
     border-radius: 5px;
     font-size: 16px;
     margin-top: 5px;
@@ -185,7 +185,7 @@ button {
     width: 100%;
     padding: 12px;
     background-color: #3498db; /* Destaque primário */
-    color: white;
+    color: white !important; /* Garantindo texto branco nos botões */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -207,7 +207,7 @@ button:hover {
 
 .btn-outline-primary:hover {
     background-color: #3498db;
-    color: white;
+    color: white !important;
     box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
 }
 
@@ -218,13 +218,14 @@ button:hover {
     border-radius: 8px;
     margin: 20px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 .concept-explanation {
     display: none;
     background: #2c2c2c;
     padding: 15px;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
     border-radius: 5px;
     margin-top: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -236,7 +237,7 @@ button:hover {
     height: 20px;
     line-height: 20px;
     text-align: center;
-    background: #333333;
+    background: #454545; /* Fundo mais visível */
     color: #fff;
     border-radius: 50%;
     cursor: pointer;
@@ -246,7 +247,7 @@ button:hover {
 }
 
 .help-icon:hover {
-    background: #444;
+    background: #666; /* Hover mais claro e visível */
 }
 
 .goals-section {
@@ -254,7 +255,7 @@ button:hover {
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 /* Tabs */
@@ -266,7 +267,7 @@ button:hover {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
-    border-bottom: 2px solid #333333;
+    border-bottom: 2px solid #454545; /* Borda mais visível */
     padding-bottom: 10px;
 }
 
@@ -283,7 +284,7 @@ button:hover {
     width: auto;
     padding: 0.6rem 0.8rem;
     background-color: #3498db;
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -300,7 +301,7 @@ button:hover {
 
 .container-botoes a {
     text-decoration: none;
-    color: white;
+    color: white !important;
 }
 
 .tab-button {
@@ -311,13 +312,13 @@ button:hover {
     border-radius: 5px 5px 0 0;
     font-weight: bold;
     transition: all 0.3s;
-    color: #fff;
+    color: #fff !important;
     box-sizing: border-box;
 }
 
 .tab-button.active {
     background: #3498db;
-    color: white;
+    color: white !important;
 }
 
 .tab-content {
@@ -326,6 +327,7 @@ button:hover {
     background: #2c2c2c;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 .tab-content.active {
@@ -344,13 +346,13 @@ button:hover {
 .comparison-table th, 
 .comparison-table td {
     padding: 12px;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
     text-align: left;
     color: #fff;
 }
 
 .comparison-table th {
-    background: #333333;
+    background: #3a3a3a; /* Fundo mais claro para melhor distinção */
     font-weight: bold;
     color: #fff;
 }
@@ -367,7 +369,7 @@ button:hover {
     border-radius: 5px;
     margin: 10px 0;
     display: none;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 /* Resultados */
@@ -378,12 +380,13 @@ button:hover {
     margin-top: 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     color: #ffffff;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 .results p {
     margin: 10px 0 20px 0;
     padding: 8px;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #454545; /* Borda mais visível */
 }
 
 .results strong {
@@ -397,6 +400,7 @@ button:hover {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     overflow-x: auto;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 /* Conteúdo educacional */
@@ -404,6 +408,7 @@ button:hover {
     padding: 20px;
     background: #2c2c2c;
     border-radius: 5px;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 .educational-content h4 {
@@ -440,11 +445,11 @@ button:hover {
 }
 
 .highlight {
-    background-color: #333333;
+    background-color: #454545; /* Fundo mais claro para melhor visibilidade */
 }
 
 .instruction {
-    color: #e74c3c; /* Alerta */
+    color: #ff6b6b; /* Alerta mais claro e visível */
     font-size: 0.9em;
     margin-top: 5px;
 }
@@ -455,7 +460,7 @@ button:hover {
     color: white;
     padding: 50px 0 30px;
     width: 100%;
-    border-top: 1px solid #333333;
+    border-top: 1px solid #454545; /* Borda mais visível */
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
     position: relative;
     animation: fadeIn 0.5s ease-in-out;
@@ -485,7 +490,7 @@ button:hover {
     font-size: 1.2rem;
     margin-bottom: 1.25rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #333333;
+    border-bottom: 2px solid #454545; /* Borda mais visível */
     display: inline-block;
 }
 
@@ -536,7 +541,7 @@ button:hover {
 }
 
 .footer-divider {
-    border-color: #333333;
+    border-color: #454545; /* Borda mais visível */
     margin: 2rem 0;
     opacity: 0.3;
 }
@@ -559,7 +564,7 @@ button:hover {
     font-size: 1.25rem;
     transition: all 0.3s ease;
     text-decoration: none;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
 }
 
 .footer-social-icon:hover {
@@ -574,7 +579,7 @@ button:hover {
 }
 
 .copyright {
-    color: #bbbbbb;
+    color: #d4d4d4; /* Mais claro para melhor contraste */
     font-size: 0.9rem;
 }
 
@@ -619,7 +624,7 @@ button:hover {
 /* Cards */
 .card {
     background-color: #2c2c2c;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
     border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -634,26 +639,26 @@ button:hover {
 }
 
 .card-text {
-    color: #ffffff; /* Alterado de #bbbbbb para branco */
+    color: #ffffff;
 }
 
 .card-footer {
     background-color: #1e1e1e;
-    border-top: 1px solid #333333;
+    border-top: 1px solid #454545; /* Borda mais visível */
 }
 
 .card-footer small {
-    color: #bbbbbb !important; /* Garantir cor clara para texto em footer de cards */
+    color: #d4d4d4 !important; /* Mais claro para melhor contraste */
 }
 
 .text-muted {
-    color: #bbbbbb !important; /* Mudado para garantir melhor contraste */
+    color: #d4d4d4 !important; /* Mais claro para melhor contraste */
 }
 
 /* Formulários */
 .form-control {
     background-color: #2c2c2c;
-    border: 1px solid #333333;
+    border: 1px solid #454545; /* Borda mais visível */
     color: #ffffff;
 }
 
@@ -672,6 +677,7 @@ button:hover {
 .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
+    color: white !important;
 }
 
 .btn-primary:hover {
@@ -683,6 +689,7 @@ button:hover {
 .btn-success {
     background-color: #2ecc71;
     border-color: #2ecc71;
+    color: white !important;
 }
 
 .btn-success:hover {
@@ -694,6 +701,7 @@ button:hover {
 .btn-danger {
     background-color: #e74c3c;
     border-color: #e74c3c;
+    color: white !important;
 }
 
 .btn-danger:hover {
@@ -746,7 +754,7 @@ button:hover {
 }
 
 .calculator-card small {
-    color: #bbbbbb !important;
+    color: #d4d4d4 !important; /* Mais claro para melhor contraste */
 }
 
 /* Corrigir cores nas seções de recursos */
@@ -769,11 +777,23 @@ button:hover {
 .alert {
     color: inherit;
 }
+
 .alert-primary {
     color: #084298;
+    background-color: #cfe2ff;
+    border-color: #084298;
 }
+
 .alert-success {
     color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #0f5132;
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #842029;
 }
 
 /* Animações */
@@ -790,6 +810,12 @@ button:hover {
 .navbar-nav .nav-link:focus,
 .footer-links a:focus,
 .footer-social-icon:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Melhorar acessibilidade de foco em elementos interativos */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
     outline: 2px solid #3498db;
     outline-offset: 2px;
 }
@@ -818,4 +844,23 @@ button:hover {
     .result-card {
         page-break-inside: avoid;
     }
+}
+
+/* Ajustes específicos para o tema claro */
+[data-theme="light"] .alert-primary {
+    color: #0a3984;
+    background-color: #d6e6ff;
+    border-color: #0a3984;
+}
+
+[data-theme="light"] .alert-success {
+    color: #0a573c;
+    background-color: #d1ffde;
+    border-color: #0a573c;
+}
+
+[data-theme="light"] .alert-danger {
+    color: #8e2727;
+    background-color: #ffd4d4;
+    border-color: #8e2727;
 }

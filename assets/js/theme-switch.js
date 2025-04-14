@@ -64,6 +64,15 @@ const ThemeManager = {
     setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         
+        // Alternar entre as classes text-light e text-dark do Bootstrap
+        if (theme === 'dark') {
+            document.body.classList.add('text-light');
+            document.body.classList.remove('text-dark');
+        } else {
+            document.body.classList.add('text-dark');
+            document.body.classList.remove('text-light');
+        }
+        
         // Atualizar o ícone do botão
         const themeButtons = document.querySelectorAll('.theme-toggle-btn i');
         themeButtons.forEach(icon => {

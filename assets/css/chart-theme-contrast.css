@@ -3,235 +3,139 @@
  * Melhoria para resolver problemas de visibilidade APENAS no tema claro
  */
 
-/* ===== CORREÇÕES APENAS PARA TEMA CLARO ===== */
+/* ===== CORREÇÕES PRIORITÁRIAS PARA TEMA CLARO - GRÁFICOS ===== */
 
-/* Canvas e containers de gráficos */
-[data-theme="light"] .chart-container {
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-}
-
-/* CORREÇÃO URGENTE: Análise de Retorno e Análise Comparativa */
-[data-theme="light"] .analise-retorno,
-[data-theme="light"] .analise-comparativa,
-[data-theme="light"] [class*="analise"],
-[data-theme="light"] [id*="analise"],
-[data-theme="light"] .card-header:contains("Análise"),
-[data-theme="light"] h3:contains("Análise"),
-[data-theme="light"] h4:contains("Análise"),
-[data-theme="light"] h5:contains("Análise") {
-    background-color: #0957c3 !important;
-    color: #ffffff !important;
-    font-weight: bold !important;
-}
-
-/* Textos dentro das seções de análise */
-[data-theme="light"] .analise-retorno *,
-[data-theme="light"] .analise-comparativa *,
-[data-theme="light"] [class*="analise"] *,
-[data-theme="light"] [id*="analise"] * {
+/* Todos os textos dos gráficos devem ser pretos e em negrito */
+[data-theme="light"] .chart-container text,
+[data-theme="light"] .chart-container .tick text,
+[data-theme="light"] .chart-container .axis text,
+[data-theme="light"] .chart-container .legend text,
+[data-theme="light"] .chart-container .c3-axis text,
+[data-theme="light"] .chart-container .c3-legend-item text {
     color: #000000 !important;
-    font-weight: 600 !important;
-}
-
-/* Elementos específicos Chart.js - Legendas */
-[data-theme="light"] .chartjs-legend li span,
-[data-theme="light"] .chart-legend li span,
-[data-theme="light"] .chart-container .chartjs-legend li span {
-    color: #000000 !important;
-    font-weight: bold !important;
-}
-
-/* Textos dos valores nos gráficos */
-[data-theme="light"] .chart-container .chart-value,
-[data-theme="light"] .chart-container .value-text,
-[data-theme="light"] .chart-container [class*="valor"],
-[data-theme="light"] .chart-container [class*="price"],
-[data-theme="light"] .chart-container [class*="total"] {
     fill: #000000 !important;
-    color: #000000 !important;
     font-weight: 700 !important;
     stroke: none !important;
+    paint-order: stroke !important;
+    stroke-width: 0 !important;
+    text-shadow: 0 0 2px white !important;
+    opacity: 1 !important;
 }
 
-/* Linha de dados em gráficos de linha */
-[data-theme="light"] .chart-container .ct-line,
+/* Linhas e elementos de gráficos */
+[data-theme="light"] .chart-container path,
+[data-theme="light"] .chart-container line.line,
 [data-theme="light"] .chart-container path.line {
-    stroke: #0957c3 !important;
     stroke-width: 3px !important;
+    opacity: 1 !important;
 }
 
-/* Pontos de dados em gráficos de linha */
-[data-theme="light"] .chart-container .ct-point,
-[data-theme="light"] .chart-container circle.point {
-    stroke: #083a7a !important;
-    fill: #0957c3 !important;
+/* Pontos em gráficos de linha */
+[data-theme="light"] .chart-container circle,
+[data-theme="light"] .chart-container .point {
+    r: 4 !important;
     stroke-width: 2px !important;
+    opacity: 1 !important;
 }
 
-/* Barras em gráficos de barra */
-[data-theme="light"] .chart-container .ct-bar,
-[data-theme="light"] .chart-container rect.bar {
-    stroke: none !important;
-    fill: #0957c3 !important;
+/* Linhas de grade mais visíveis */
+[data-theme="light"] .chart-container .grid line,
+[data-theme="light"] .chart-container .grid path,
+[data-theme="light"] .chart-container .domain {
+    stroke: rgba(0, 0, 0, 0.3) !important;
+    stroke-width: 0.8px !important;
+    opacity: 1 !important;
 }
 
-/* Áreas em gráficos de área */
-[data-theme="light"] .chart-container .ct-area,
-[data-theme="light"] .chart-container path.area {
-    fill: rgba(9, 87, 195, 0.5) !important;
-    stroke: #0957c3 !important;
-    stroke-width: 2px !important;
-}
-
-/* Rótulos de texto nos eixos */
-[data-theme="light"] .chart-container .ct-label,
-[data-theme="light"] .chart-container .axis-label,
-[data-theme="light"] .chart-container g.tick text {
+/* Legendas de gráficos */
+[data-theme="light"] .chart-legend text,
+[data-theme="light"] .chart-legend span,
+[data-theme="light"] .chart-legend label,
+[data-theme="light"] .chartjs-legend li span {
     color: #000000 !important;
     fill: #000000 !important;
-    font-weight: 600 !important;
-    font-size: 12px !important;
-}
-
-/* Linhas de grade */
-[data-theme="light"] .chart-container .ct-grid,
-[data-theme="light"] .chart-container .grid line,
-[data-theme="light"] .chart-container g.grid line {
-    stroke: rgba(0, 0, 0, 0.2) !important;
-    stroke-width: 0.8px !important;
-}
-
-/* Tooltips */
-[data-theme="light"] .chartjs-tooltip,
-[data-theme="light"] .chart-tooltip {
-    background: rgba(0, 0, 0, 0.9) !important;
-    color: #ffffff !important;
-    border: 1px solid #000000 !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
-    font-weight: 600 !important;
+    font-weight: bold !important;
 }
 
 /* Títulos de gráficos */
 [data-theme="light"] .chart-title,
-[data-theme="light"] .chart-container .title {
+[data-theme="light"] .c3-title,
+[data-theme="light"] .chart-header {
     color: #000000 !important;
     fill: #000000 !important;
-    font-weight: 700 !important;
+    font-weight: bold !important;
     font-size: 16px !important;
 }
 
-/* Subtítulos e descrições */
-[data-theme="light"] .chart-subtitle,
-[data-theme="light"] .chart-description {
-    color: #000000 !important;
-    font-weight: 600 !important;
-}
-
-/* Classes específicas para projeções financeiras */
-[data-theme="light"] .projecao,
-[data-theme="light"] .projecao-area,
-[data-theme="light"] .projecao-line {
-    stroke: #083a7a !important;
-    fill: rgba(9, 87, 195, 0.3) !important;
-    stroke-dasharray: 5, 5 !important; /* Linha tracejada para diferenciar */
-    stroke-width: 2px !important;
-}
-
-/* Textos de projeção */
-[data-theme="light"] .projecao-text,
-[data-theme="light"] .projecao-label,
-[data-theme="light"] .titulo-projecao {
+/* Estilos específicos para as legendas vazias */
+[data-theme="light"] .chart-container .legend-text rect:empty + text {
     fill: #000000 !important;
     color: #000000 !important;
-    font-weight: 700 !important;
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    padding: 2px 5px !important;
-    border-radius: 3px !important;
-}
-
-/* CORREÇÃO ESPECÍFICA para calc-2 */
-[data-theme="light"] #calc-2 .chart-container path,
-[data-theme="light"] #calc-2 .chart-container line,
-[data-theme="light"] #calc-2 .chart-container rect,
-[data-theme="light"] #calc-2 .chart-container circle {
-    stroke-width: 2.5px !important;
-}
-
-[data-theme="light"] #calc-2 .chart-container text {
-    fill: #000000 !important;
     font-weight: bold !important;
-    font-size: 12px !important;
 }
 
-/* Garantir que as legendas no calc-2 sejam visíveis */
-[data-theme="light"] #calc-2 .chart-legend rect,
-[data-theme="light"] #calc-2 .chart-legend-item rect {
-    stroke: #000000 !important;
+/* Garantir que as barras tenham contraste adequado */
+[data-theme="light"] .chart-container rect.bar,
+[data-theme="light"] .chart-container .c3-bar {
+    fill: #0957c3 !important;
+    stroke: #083a7a !important;
     stroke-width: 1px !important;
 }
 
-/* Reforçar visibilidade de linhas e pontos nos gráficos */
-[data-theme="light"] .chart-container .c3-line,
-[data-theme="light"] .chart-container .c3-chart-line path,
-[data-theme="light"] .chart-container .recharts-line-curve,
-[data-theme="light"] .chart-container .recharts-line,
-[data-theme="light"] .chart-container .apex-line,
-[data-theme="light"] .chart-container .highcharts-graph {
+/* ===== CORREÇÕES PARA GRÁFICOS ESPECÍFICOS - CALC-2 ===== */
+
+[data-theme="light"] #calc-2 .chart-container text,
+[data-theme="light"] [id*="calc-2"] .chart-container text {
+    fill: #000000 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    text-shadow: none !important;
+}
+
+[data-theme="light"] #calc-2 .chart-container path,
+[data-theme="light"] #calc-2 .chart-container line {
     stroke-width: 3px !important;
 }
 
-[data-theme="light"] .chart-container .c3-circle,
-[data-theme="light"] .chart-container .c3-chart-line circle,
-[data-theme="light"] .chart-container .recharts-dot,
-[data-theme="light"] .chart-container .apex-point,
-[data-theme="light"] .chart-container .highcharts-point {
-    stroke: #000000 !important;
-    stroke-width: 1.5px !important;
-    r: 4 !important; /* Raio maior para os pontos */
+[data-theme="light"] #calc-2 .chart-container circle {
+    r: 5 !important;
+    stroke-width: 2px !important;
 }
 
-/* Garantir transição suave apenas para o tema claro */
-[data-theme="light"] .chart-container,
-[data-theme="light"] .chart-container *,
-[data-theme="light"] .chartjs-tooltip,
-[data-theme="light"] .chart-tooltip,
-[data-theme="light"] .chartjs-legend li span,
-[data-theme="light"] .chart-legend li span {
-    transition: color 0.3s, fill 0.3s, stroke 0.3s, background-color 0.3s !important;
-}
+/* ===== CORREÇÕES PARA ANALISE DE RETORNO E COMPARATIVA ===== */
 
-/* CORREÇÕES ESPECÍFICAS para elementos blue-background */
+/* Cabeçalhos azuis com texto branco */
+[data-theme="light"] .analise-retorno h3,
+[data-theme="light"] .analise-comparativa h3,
+[data-theme="light"] [class*="analise"] .card-header,
+[data-theme="light"] [id*="analise"] .card-header,
 [data-theme="light"] .blue-background,
-[data-theme="light"] .bg-primary,
-[data-theme="light"] .header-blue,
-[data-theme="light"] .card-header.bg-primary,
-[data-theme="light"] [class*="analise"] .card-header {
+[data-theme="light"] .bg-primary {
     background-color: #0957c3 !important;
     color: #ffffff !important;
     font-weight: bold !important;
 }
 
-/* Para garantir que qualquer valor numérico seja visível */
+/* Textos de valores em preto */
+[data-theme="light"] .analise-retorno span,
+[data-theme="light"] .analise-comparativa span,
 [data-theme="light"] [id*="valor"],
 [data-theme="light"] [id*="total"],
-[data-theme="light"] [id*="retorno"],
 [data-theme="light"] [id*="diferenca"],
 [data-theme="light"] [id*="percentual"],
 [data-theme="light"] [class*="valor"],
 [data-theme="light"] [class*="total"],
-[data-theme="light"] [class*="retorno"],
 [data-theme="light"] [class*="diferenca"],
 [data-theme="light"] [class*="percentual"] {
     color: #000000 !important;
     font-weight: bold !important;
 }
 
-/* Garantir que textos em azul sobre fundo branco sejam legíveis */
-[data-theme="light"] .text-primary,
-[data-theme="light"] .text-info,
-[data-theme="light"] .text-info-dark {
-    color: #0745a0 !important; /* Azul mais escuro */
+/* Exceção para texto em fundos coloridos */
+[data-theme="light"] .bg-primary *,
+[data-theme="light"] .blue-background *,
+[data-theme="light"] [style*="background-color: rgb(9, 87, 195)"] * {
+    color: #ffffff !important;
     font-weight: bold !important;
 }

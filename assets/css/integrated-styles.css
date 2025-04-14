@@ -35,12 +35,14 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
-    background: var(--dark-bg);
+    background: var(--bg-tertiary);
     border-radius: 5px;
     box-shadow: 0 2px 8px var(--shadow-color);
     width: 250px;
     display: none;
     z-index: 1000;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
 .educational-tip:hover .tip-content {
@@ -82,10 +84,11 @@
 }
 
 .result-card {
-    background: var(--dark-bg);
+    background: var(--bg-tertiary);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    border: 1px solid var(--border-color);
 }
 
 .result-value {
@@ -95,7 +98,7 @@
 }
 
 .result-value.positive {
-    color: var(--secondary-color);
+    color: var(--success-color);
 }
 
 .result-value.negative {
@@ -106,18 +109,26 @@
 .history-table {
     width: 100%;
     margin-top: 20px;
+    border: 1px solid var(--border-color);
+    border-collapse: collapse;
 }
 
 .history-table th {
-    background: var(--dark-bg);
-    color: var(--light-text);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
     padding: 12px;
     text-align: left;
+    border: 1px solid var(--border-color);
 }
 
 .history-table td {
     padding: 10px;
-    border-bottom: 1px solid var(--border-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.history-table tr:nth-child(even) {
+    background-color: rgba(var(--border-color), 0.1);
 }
 
 /* Responsividade para diferentes dispositivos */
@@ -200,6 +211,34 @@
         margin: 0 -10px;
         padding: 0 10px;
     }
+}
+
+/* Acessibilidade - Focagem de elementos interativos */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Tema claro específico para resultado */
+[data-theme="light"] .result-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .result-value {
+    color: var(--primary-color);
+}
+
+[data-theme="light"] .result-value.positive {
+    color: var(--success-color);
+}
+
+[data-theme="light"] .result-value.negative {
+    color: var(--danger-color);
 }
 
 /* Print Styles */

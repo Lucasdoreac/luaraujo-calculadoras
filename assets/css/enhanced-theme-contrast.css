@@ -31,8 +31,20 @@
 [data-theme="light"] #analiseRetorno,
 [data-theme="light"] #analisePercentual,
 [data-theme="light"] #analiseTaxaMedia {
-    color: #2d3748 !important; /* Cinza escuro para maior contraste */
+    color: #1a202c !important; /* Texto mais escuro para maior contraste */
     font-weight: 500;
+}
+
+/* Área de análise de retorno mais distinta */
+[data-theme="light"] .card .card-header:not(.bg-primary):not(.bg-success):not(.bg-danger) {
+    background-color: #edf2f7 !important; /* Fundo mais distinto para o cabeçalho */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Texto forte mais distinto em análises */
+[data-theme="light"] .card-body strong {
+    color: #1a202c !important;
+    font-weight: 600;
 }
 
 /* Melhorar a legibilidade dos valores em todas as áreas de análise */
@@ -43,8 +55,17 @@
 [data-theme="light"] [id^="taxa"],
 [data-theme="light"] [id^="juros"],
 [data-theme="light"] [id^="roi"] {
-    color: #2d3748 !important;
+    color: #1a202c !important;
     font-weight: 500;
+}
+
+/* Valores nos resultados de simulação */
+[data-theme="light"] #valorFuturoGlobal,
+[data-theme="light"] #totalInvestidoGlobal,
+[data-theme="light"] #jurosAcumuladosGlobal,
+[data-theme="light"] #roiGlobal {
+    color: #1a202c !important;
+    font-weight: 600;
 }
 
 /* Melhorar a visibilidade em tabelas */
@@ -54,33 +75,44 @@
 }
 
 [data-theme="light"] .comparison-table th {
-    background-color: #2d3748 !important; /* Fundo escuro para melhor contraste */
+    background-color: #3182ce !important; /* Cor primária azul mais clara */
     color: white !important;
     font-weight: 600;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .comparison-table td {
-    color: #2d3748 !important;
+    color: #1a202c !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalhos para dar maior destaque ao conteúdo */
+[data-theme="light"] h1, 
+[data-theme="light"] h2, 
+[data-theme="light"] h3, 
+[data-theme="light"] h4, 
+[data-theme="light"] h5, 
+[data-theme="light"] h6 {
+    color: #1a202c !important;
+    font-weight: 700;
 }
 
 /* Especificamente para valores nas células da tabela */
 [data-theme="light"] span.valorFuturo,
 [data-theme="light"] span.taxaMensal,
 [data-theme="light"] span.meses {
-    color: #2d3748 !important;
+    color: #1a202c !important;
     font-weight: 500;
 }
 
 /* Linha de total na tabela */
 [data-theme="light"] .comparison-table tr.total {
-    background-color: rgba(45, 55, 72, 0.08);
+    background-color: rgba(49, 130, 206, 0.1);
     font-weight: 600;
 }
 
 [data-theme="light"] .comparison-table tr.total td {
-    color: #2d3748 !important;
+    color: #1a202c !important;
     font-weight: 600;
 }
 
@@ -105,12 +137,12 @@
 
 /* Resultados de simulação global com melhor contraste */
 [data-theme="light"] .results p strong {
-    color: #2d3748 !important;
+    color: #1a202c !important;
     font-weight: 600;
 }
 
 [data-theme="light"] .results p {
-    color: #2d3748 !important;
+    color: #1a202c !important;
 }
 
 /* Outras melhorias de contraste */
@@ -136,7 +168,7 @@
 [data-theme="light"] .comparison-table input.form-control {
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    color: #2d3748 !important;
+    color: #1a202c !important;
 }
 
 /* Separadores */

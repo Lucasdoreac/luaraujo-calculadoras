@@ -424,3 +424,47 @@ button:hover {
 [data-theme="light"] .comparison-table th {
     color: white !important;
 }
+
+/* Corrigir problema de texto branco em fundo claro na página inicial */
+[data-theme="light"] .hero-section h1,
+[data-theme="light"] .hero-section p,
+[data-theme="light"] .section-title,
+[data-theme="light"] .feature-item h3,
+[data-theme="light"] .feature-item p,
+[data-theme="light"] h1, 
+[data-theme="light"] h2, 
+[data-theme="light"] h3, 
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] p,
+[data-theme="light"] .lead,
+[data-theme="light"] .display-4,
+[data-theme="light"] .cta-section h2,
+[data-theme="light"] .cta-section p {
+    color: var(--text-primary) !important;
+}
+
+/* Corrigir texto no rodapé */
+[data-theme="light"] .footer-custom,
+[data-theme="light"] .footer-custom a,
+[data-theme="light"] .footer-custom p,
+[data-theme="light"] .footer-custom h5,
+[data-theme="light"] .footer-custom li,
+[data-theme="light"] .footer-social-icon,
+[data-theme="light"] .copyright {
+    color: var(--text-primary) !important;
+}
+
+/* Corrigir cores de ícones no tema claro */
+[data-theme="light"] .theme-toggle-btn i.fa-moon {
+    color: var(--primary-color) !important;
+}
+
+[data-theme="light"] .theme-toggle-btn i.fa-sun {
+    color: #FFC107 !important; /* Cor amarela para o sol */
+}
+
+/* Garantir que o ícone de tema seja sempre visível */
+.theme-toggle-btn i {
+    font-size: 1.2rem;
+}

@@ -36,10 +36,16 @@
     color: var(--text-primary);
 }
 
+/* Apenas os cabeçalhos de tabela devem ter fundo colorido e texto branco */
 .comparison-table th {
     background: var(--primary-color); /* Usar cor primária */
-    color: white !important; /* Garantir texto branco para contraste */
+    color: white !important; /* Garantir texto branco para contraste com fundo colorido */
     font-weight: bold;
+}
+
+/* Células normais das tabelas devem usar a cor de texto do tema atual */
+.comparison-table td {
+    color: var(--text-primary);
 }
 
 .comparison-table tr:nth-child(even) {
@@ -111,15 +117,15 @@
     /* Já controladas por variáveis CSS */
 }
 
-[data-theme="light"] .comparison-table th, 
+/* Garantir que células de tabela no tema claro usem a cor adequada */
 [data-theme="light"] .comparison-table td {
-    /* Já controladas por variáveis CSS */
+    color: var(--text-primary); /* Usar cor de texto do tema claro */
 }
 
+/* Manter o texto branco apenas nos cabeçalhos de tabela no tema claro */
 [data-theme="light"] .comparison-table th {
-    /* Usando cor primária diretamente via variável CSS */
     background-color: var(--primary-color);
-    color: white !important; /* Garantir texto branco para contraste em todos os temas */
+    color: white !important; /* Garantir texto branco para contraste com fundo colorido */
 }
 
 [data-theme="light"] .comparison-table tr:nth-child(even) {

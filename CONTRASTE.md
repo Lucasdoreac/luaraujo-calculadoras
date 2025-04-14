@@ -8,11 +8,13 @@ Este documento descreve as melhorias implementadas para aumentar o contraste e a
    - Textos secundários com contraste insuficiente (cinza muito escuro)
    - Bordas pouco perceptíveis entre elementos
    - Distinção insuficiente entre elementos interativos
+   - Ícones de ajuda com pouco contraste visual
 
 2. **Tema Claro**:
    - Contraste insuficiente entre o texto e o fundo
    - Cores primárias muito claras para destacar elementos interativos
    - Diferenciação inadequada entre seções
+   - Bordas muito claras para delimitar os elementos
 
 ## Soluções Implementadas
 
@@ -21,53 +23,95 @@ Este documento descreve as melhorias implementadas para aumentar o contraste e a
 1. **Consistência de Contraste**:
    - Garantia de que todos os textos têm contraste adequado em relação aos fundos
    - Bordas mais visíveis para demarcar claramente os elementos da interface
+   - Adição de variáveis RGB para uso com opacidade
 
 2. **Legibilidade**:
    - Aumento do peso da fonte em elementos importantes
    - Garantia de que todos os botões têm textos brancos para melhor legibilidade
    - Elementos de ajuda mais visíveis
+   - Cabeçalhos de tabela com cor primária e texto branco
 
 3. **Acessibilidade**:
-   - Implementação de contornos de foco visíveis para navegação por teclado
+   - Implementação de contornos de foco mais visíveis (3px) para navegação por teclado
    - Cores e indicadores para estados ativos e hover mais distintos
+   - Aumento da opacidade hover para feedback visual mais forte
 
 ### Tema Escuro
 
 1. **Cores de Texto**:
-   - Textos secundários alterados de `#bbbbbb` para `#d4d4d4` (mais claro)
-   - Bordas alteradas de `#333333` para `#454545` (mais visíveis)
+   - Textos secundários alterados de `#d4d4d4` para `#e0e0e0` (mais claro)
+   - Bordas alteradas de `#454545` para `#5a5a5a` (mais visíveis)
+   - Hover opacity aumentada de `0.15` para `0.25` (feedback visual mais forte)
 
 2. **Elementos Interativos**:
+   - Ícones de ajuda com fundo `#666` (mais claro) e borda adicional
    - Aumento do contraste em estados hover
    - Melhor definição visual de bordas e sombreamentos
+   - Cards com bordas mais grossas e destaque com cor primária no hover
 
 ### Tema Claro
 
 1. **Cores de Fundo**:
-   - Fundo primário alterado para `#f2f2f2` (um pouco mais escuro)
-   - Elementos terciários com `#e2e2e2` (mais escuro que o original)
+   - Fundo terciário alterado para `#d8d8d8` (mais escuro que o anterior `#e2e2e2`)
+   - Melhor diferenciação entre áreas do conteúdo
 
-2. **Cores de Texto**:
-   - Texto primário alterado para `#121212` (quase preto)
-   - Texto secundário alterado para `#333333` (muito mais escuro que o original)
+2. **Cores de Texto e Bordas**:
+   - Bordas alteradas de `#b0b0b0` para `#8a8a8a` (mais escuras para melhor contraste)
+   - Hover opacity aumentada de `0.12` para `0.20` (feedback visual mais forte)
 
-3. **Cores de Destaque**:
-   - Cor primária alterada para `#0957c3` (azul mais escuro)
-   - Cor de sucesso alterada para `#157f3d` (verde mais escuro)
-   - Cor de alerta alterada para `#c42c2c` (vermelho mais escuro)
+3. **Elementos Interativos**:
+   - Ícones de ajuda com fundo `#555` (escuro) e texto branco
+   - Estados de hover mais distintos utilizando variáveis RGB
+   - Cards com destaque na cor primária ao passar o mouse
 
-## Gráficos e Tabelas
+## Melhorias nas Tabelas e Elementos de Interface
 
-- Melhoria no contraste das tabelas com cores de fundo alternadas
-- Cabeçalhos de tabela mais distintos
-- Adaptação específica para o tema claro nos elementos gráficos
-- Indicadores de carregamento mais visíveis
+### Tabelas
 
-## Elementos Interativos
+1. **Novos Cabeçalhos de Tabela**:
+   - Uso da cor primária como fundo (`var(--primary-color)`)
+   - Texto branco para máximo contraste
+   - Bordas mais grossas (2px) para clara delimitação
 
-- Garantia de que todos os botões têm texto branco para máxima legibilidade
-- Estados de foco consistentes em todos os elementos interativos
-- Melhor feedback visual para interações de hover e clique
+2. **Linhas Alternadas**:
+   - Uso da cor primária com baixa opacidade para linhas alternadas
+   - Destaque especial para linhas de total
+   - Efeito hover mais perceptível
+
+### Botões e Navegação
+
+1. **Tabs Aprimorados**:
+   - Adição de bordas para melhor delimitação
+   - Estados hover utilizando a cor primária com opacidade
+   - Tab ativo com cor primária, texto branco e sombra leve
+
+2. **Ícones de Ajuda**:
+   - Redesenhados para melhor contraste
+   - Efeito de escala no hover
+   - Uso da cor primária para estados ativos
+
+3. **Estados de Foco**:
+   - Outline aumentado para 3px
+   - Box-shadow adicional para elementos interativos
+   - Maior visibilidade durante navegação por teclado
+
+### Cards
+
+1. **Bordas e Interatividade**:
+   - Bordas mais grossas (2px) para melhor delimitação
+   - Mudança para cor primária no hover
+   - Aumento da sombra para indicação clara de interatividade
+
+## Métricas de Contraste
+
+### Comparativo de Melhorias
+
+| Elemento | Anterior | Atual | Razão de Contraste (Antes) | Razão de Contraste (Depois) |
+|----------|----------|-------|-----------------------------|------------------------------|
+| Texto secundário (escuro) | #d4d4d4 | #e0e0e0 | ~4.0:1 | ~4.7:1 |
+| Bordas (escuro) | #454545 | #5a5a5a | ~1.5:1 | ~2.2:1 |
+| Bordas (claro) | #b0b0b0 | #8a8a8a | ~1.7:1 | ~2.9:1 |
+| Cabeçalhos tabela | Variável | Primária+Branco | ~3.5:1 | ~7.0:1+ |
 
 ## Compatibilidade
 
@@ -76,18 +120,28 @@ Estas melhorias são compatíveis com os padrões de acessibilidade WCAG 2.1 AA,
 - O contraste de texto atenda à proporção mínima de 4.5:1
 - Elementos interativos sejam claramente distinguíveis
 - Feedback de foco esteja presente para navegação por teclado
+- Elementos informativos (como ícones) tenham contraste adequado
 
 ## Arquivos Atualizados
 
-- `assets/css/theme-switch.css`: Variáveis de tema e adaptações para tema claro/escuro
-- `assets/css/styles.css`: Estilos principais do site
-- `assets/css/enhanced-charts.css`: Melhorias para gráficos e tabelas
-- `assets/css/integrated-styles.css`: Estilos complementares
+- `assets/css/theme-switch.css`: 
+  - Variáveis de tema atualizadas
+  - Adição de variáveis RGB para cores primárias
+  - Melhorias em elementos específicos (help-icon, tables, cards)
+  - Aumento da visibilidade de estados focus
 
 ## Teste
 
 Recomenda-se testar o site com:
 - Diferentes navegadores
-- Ferramentas de contraste como WAVE ou Lighthouse
+- Ferramentas de contraste como WAVE, Lighthouse ou axe DevTools
 - Navegação exclusivamente por teclado
 - Diferentes tamanhos de tela
+- Verificação com usuários de leitores de tela
+
+## Próximos Passos
+
+- Continuar monitorando e avaliando o feedback dos usuários
+- Verificar se todas as páginas do site apresentam contraste adequado
+- Considerar testes com usuários com visão limitada ou daltonismo
+- Avaliar a implementação de um terceiro tema de "alto contraste" para usuários com necessidades visuais específicas

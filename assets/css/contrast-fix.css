@@ -1,0 +1,129 @@
+/**
+ * Arquivo de correção específica para problemas de contraste
+ * Carregado após todos os outros estilos para garantir a aplicação das regras
+ */
+
+/* Força sobrescrição de cores em casos específicos do tema claro */
+[data-theme="light"] body,
+[data-theme="light"] .container,
+[data-theme="light"] .card,
+[data-theme="light"] .results,
+[data-theme="light"] .tab-content,
+[data-theme="light"] .educational-tips,
+[data-theme="light"] .goals-section,
+[data-theme="light"] .concept-explanation,
+[data-theme="light"] .educational-content {
+    color: var(--text-primary) !important;
+}
+
+/* Corrigir textos em cards com .text-light, .text-white */
+[data-theme="light"] .text-light,
+[data-theme="light"] .text-white,
+[data-theme="light"] .text-light:not(.btn):not(.badge):not(.alert *),
+[data-theme="light"] .text-white:not(.btn):not(.badge):not(.alert *) {
+    color: var(--text-primary) !important;
+}
+
+/* Corrigir elementos pai/filho com herança de cor */
+[data-theme="light"] .card .text-light *:not(.btn):not(.badge),
+[data-theme="light"] .card .text-white *:not(.btn):not(.badge),
+[data-theme="light"] .container .text-light *:not(.btn):not(.badge),
+[data-theme="light"] .container .text-white *:not(.btn):not(.badge) {
+    color: var(--text-primary) !important;
+}
+
+/* Manter texto branco em elementos que precisam ter texto branco */
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .btn-success,
+[data-theme="light"] .btn-danger,
+[data-theme="light"] .btn-primary *,
+[data-theme="light"] .btn-success *,
+[data-theme="light"] .btn-danger *,
+[data-theme="light"] .bg-primary,
+[data-theme="light"] .bg-success,
+[data-theme="light"] .bg-danger,
+[data-theme="light"] .bg-primary *,
+[data-theme="light"] .bg-success *,
+[data-theme="light"] .bg-danger * {
+    color: white !important;
+}
+
+/* Corrigir elementos específicos das calculadoras */
+[data-theme="light"] span.valorFuturo,
+[data-theme="light"] span.taxaMensal,
+[data-theme="light"] span.meses,
+[data-theme="light"] [id^="pgbl"],
+[data-theme="light"] [id^="cdb"],
+[data-theme="light"] [id^="result"],
+[data-theme="light"] [id^="valor"],
+[data-theme="light"] [id^="total"],
+[data-theme="light"] [id^="diferenca"],
+[data-theme="light"] [id^="rentabilidade"],
+[data-theme="light"] [id^="analise"],
+[data-theme="light"] [id^="taxa"],
+[data-theme="light"] [id^="ganho"],
+[data-theme="light"] [id^="recomendacao"],
+[data-theme="light"] [id^="laudo"] {
+    color: var(--text-primary) !important;
+}
+
+/* Correções específicas para cabeçalhos de card */
+[data-theme="light"] .card-header.bg-primary h3,
+[data-theme="light"] .card-header.bg-success h3,
+[data-theme="light"] .card-header.bg-danger h3,
+[data-theme="light"] .card-header.bg-primary .card-title,
+[data-theme="light"] .card-header.bg-success .card-title,
+[data-theme="light"] .card-header.bg-danger .card-title {
+    color: white !important;
+}
+
+/* Garantir que elementos na página inicial tenham cor correta */
+[data-theme="light"] .hero-section h1,
+[data-theme="light"] .hero-section p,
+[data-theme="light"] .section-title,
+[data-theme="light"] .feature-item h3,
+[data-theme="light"] .feature-item p,
+[data-theme="light"] .cta-section h2,
+[data-theme="light"] .cta-section p,
+[data-theme="light"] .lead,
+[data-theme="light"] .display-4 {
+    color: var(--text-primary) !important;
+}
+
+/* Corrigir cores de texto na tabela de comparação */
+[data-theme="light"] #tabelaDetalhes td,
+[data-theme="light"] .comparison-table td span,
+[data-theme="light"] .comparison-table p {
+    color: var(--text-primary) !important;
+}
+
+/* Garantir fundo claro em elementos com fundo escuro no tema claro */
+[data-theme="light"] .bg-dark {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Manter cores adequadas nos alertas */
+[data-theme="light"] .alert {
+    color: inherit !important;
+}
+
+/* Corrigir elementos no rodapé */
+[data-theme="light"] .footer-custom,
+[data-theme="light"] .footer-custom a,
+[data-theme="light"] .footer-custom p,
+[data-theme="light"] .footer-custom h5,
+[data-theme="light"] .footer-custom li,
+[data-theme="light"] .footer-custom span,
+[data-theme="light"] .footer-social-icon,
+[data-theme="light"] .copyright {
+    color: var(--text-primary) !important;
+}
+
+/* Quando o botão tem fundo transparente com texto colorido */
+[data-theme="light"] .btn-outline-primary {
+    color: var(--primary-color) !important;
+}
+
+[data-theme="light"] .btn-outline-primary:hover {
+    color: white !important;
+}

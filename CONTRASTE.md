@@ -130,6 +130,47 @@ Estas melhorias são compatíveis com os padrões de acessibilidade WCAG 2.1 AA,
   - Melhorias em elementos específicos (help-icon, tables, cards)
   - Aumento da visibilidade de estados focus
 
+- `assets/css/enhanced-charts.css`:
+  - Substituição de valores fixos por variáveis CSS
+  - Correção para usar `var(--primary-color)` nos cabeçalhos de tabela
+  - Uso consistente de `var(--border-color)` para bordas
+  - Aplicação de `rgba(var(--primary-color-rgb), X)` para transparências
+  - Aumento da espessura das bordas para 2px
+
+## Análise de Conflitos e Correções Realizadas
+
+### Problema Identificado
+Após a implementação inicial das melhorias de contraste, identificamos que ainda havia problemas de visualização no site publicado no GitHub Pages. Após análise, detectamos que o problema estava em conflitos entre os arquivos CSS.
+
+### Causas do Problema
+1. **Inconsistências entre arquivos CSS**:
+   - Enquanto `theme-switch.css` foi atualizado com variáveis e valores de melhor contraste, o arquivo `enhanced-charts.css` continuava usando valores fixos (#454545, #3a3a3a, etc.)
+   - Os valores fixos em `enhanced-charts.css` estavam sobrescrevendo as variáveis CSS definidas no `theme-switch.css`
+
+2. **Especificidade CSS**:
+   - Algumas regras em `enhanced-charts.css` tinham maior especificidade, fazendo com que prevalecessem sobre as regras em `theme-switch.css`
+
+3. **Problema com GitHub Pages**:
+   - As mudanças nos arquivos não estavam sendo refletidas imediatamente no site publicado
+
+### Correções Aplicadas
+1. **Atualização do enhanced-charts.css**:
+   - Substituição de todos os valores fixos por variáveis CSS (var(--property))
+   - Implementação coerente de bordas mais grossas (2px)
+   - Uso consistente de `var(--primary-color)` para cabeçalhos de tabela
+   - Aplicação de `rgba(var(--primary-color-rgb), X)` para transparências
+   - Remoção de duplicações desnecessárias para o tema claro
+
+2. **Técnicas para Garantir Consistência**:
+   - Uso do valor `!important` em elementos críticos como a cor do texto em cabeçalhos de tabela
+   - Reorganização de algumas regras CSS para manter o contraste consistente
+
+### Resultados das Correções
+- Melhoria significativa na consistência visual entre temas
+- Eliminação de conflitos que prejudicavam o contraste
+- Experiência mais unificada em diferentes partes do site
+- Melhor adaptação entre temas claro e escuro
+
 ## Teste
 
 Recomenda-se testar o site com:
@@ -141,7 +182,8 @@ Recomenda-se testar o site com:
 
 ## Próximos Passos
 
-- Continuar monitorando e avaliando o feedback dos usuários
+- Monitorar a propagação das mudanças no GitHub Pages
+- Continuar avaliando o feedback dos usuários
 - Verificar se todas as páginas do site apresentam contraste adequado
 - Considerar testes com usuários com visão limitada ou daltonismo
 - Avaliar a implementação de um terceiro tema de "alto contraste" para usuários com necessidades visuais específicas

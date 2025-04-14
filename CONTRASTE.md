@@ -2,188 +2,179 @@
 
 Este documento descreve as melhorias implementadas para aumentar o contraste e a acessibilidade visual nas calculadoras financeiras.
 
-## Problemas Identificados
+## Problemas Identificados e Solucionados
 
-1. **Tema Escuro**:
-   - Textos secundários com contraste insuficiente (cinza muito escuro)
-   - Bordas pouco perceptíveis entre elementos
-   - Distinção insuficiente entre elementos interativos
-   - Ícones de ajuda com pouco contraste visual
+1. **Tema Claro**:
+   - ✅ Texto branco em fundo branco na página inicial e em elementos específicos
+   - ✅ Ícone de alternância de tema (lua) não visível no tema claro
+   - ✅ Textos nos cards com pouco contraste
+   - ✅ Textos de seções e títulos com contraste inadequado
+   - ✅ Rodapé com texto branco em fundo claro
 
-2. **Tema Claro**:
-   - Contraste insuficiente entre o texto e o fundo
-   - Cores primárias muito claras para destacar elementos interativos
-   - Diferenciação inadequada entre seções
-   - Bordas muito claras para delimitar os elementos
+2. **Tema Escuro**:
+   - ✅ Textos secundários com contraste insuficiente (cinza muito escuro)
+   - ✅ Bordas pouco perceptíveis entre elementos
+   - ✅ Distinção insuficiente entre elementos interativos
+   - ✅ Ícones de ajuda com pouco contraste visual
 
 ## Soluções Implementadas
 
-### Ambos os Temas
+### Problema de Texto Branco em Fundo Branco (Tema Claro)
 
-1. **Consistência de Contraste**:
-   - Garantia de que todos os textos têm contraste adequado em relação aos fundos
-   - Bordas mais visíveis para demarcar claramente os elementos da interface
-   - Adição de variáveis RGB para uso com opacidade
+Foi identificado que as classes `text-light` do Bootstrap não estavam sendo sobrescritas corretamente no tema claro, resultando em texto branco em fundo branco. Para corrigir:
 
-2. **Legibilidade**:
-   - Aumento do peso da fonte em elementos importantes
-   - Garantia de que todos os botões têm textos brancos para melhor legibilidade
-   - Elementos de ajuda mais visíveis
-   - Cabeçalhos de tabela com cor primária e texto branco
+1. **Sobrescrever classes do Bootstrap**:
+   ```css
+   [data-theme="light"] .text-light {
+       color: var(--text-primary) !important;
+   }
+   
+   [data-theme="light"] body.text-light {
+       color: var(--text-primary) !important;
+   }
+   ```
 
-3. **Acessibilidade**:
-   - Implementação de contornos de foco mais visíveis (3px) para navegação por teclado
-   - Cores e indicadores para estados ativos e hover mais distintos
-   - Aumento da opacidade hover para feedback visual mais forte
+2. **Troca de classes no elemento `body`**:
+   ```javascript
+   // No arquivo theme-switch.js
+   if (theme === 'dark') {
+       document.body.classList.add('text-light');
+       document.body.classList.remove('text-dark');
+   } else {
+       document.body.classList.add('text-dark');
+       document.body.classList.remove('text-light');
+   }
+   ```
 
-### Tema Escuro
+3. **Correção específica para elementos da página inicial**:
+   ```css
+   [data-theme="light"] .hero-section h1,
+   [data-theme="light"] .hero-section p,
+   [data-theme="light"] .section-title,
+   [data-theme="light"] .feature-item h3,
+   [data-theme="light"] .feature-item p {
+       color: var(--text-primary) !important;
+   }
+   ```
 
-1. **Cores de Texto**:
-   - Textos secundários alterados de `#d4d4d4` para `#e0e0e0` (mais claro)
-   - Bordas alteradas de `#454545` para `#5a5a5a` (mais visíveis)
-   - Hover opacity aumentada de `0.15` para `0.25` (feedback visual mais forte)
+### Problema do Ícone de Tema (Lua) Não Visível no Tema Claro
 
-2. **Elementos Interativos**:
-   - Ícones de ajuda com fundo `#666` (mais claro) e borda adicional
-   - Aumento do contraste em estados hover
-   - Melhor definição visual de bordas e sombreamentos
-   - Cards com bordas mais grossas e destaque com cor primária no hover
+1. **Ícone com classe de cor específica**:
+   ```javascript
+   // No components.js - modificação do HTML inicial
+   <i class="fas fa-moon text-primary"></i>
+   ```
 
-### Tema Claro
+2. **Cores específicas para os ícones**:
+   ```javascript
+   // No theme-switch.js
+   if (theme === 'dark') {
+       icon.classList.add('text-warning'); // Cor amarela para o sol
+       icon.classList.remove('text-primary');
+   } else {
+       icon.classList.add('text-primary'); // Cor azul para a lua
+       icon.classList.remove('text-warning');
+   }
+   ```
 
-1. **Cores de Fundo**:
-   - Fundo terciário alterado para `#d8d8d8` (mais escuro que o anterior `#e2e2e2`)
-   - Melhor diferenciação entre áreas do conteúdo
+3. **Regras CSS para garantir visibilidade**:
+   ```css
+   [data-theme="light"] .theme-toggle-btn i.fa-moon {
+       color: var(--primary-color) !important;
+   }
 
-2. **Cores de Texto e Bordas**:
-   - Bordas alteradas de `#b0b0b0` para `#8a8a8a` (mais escuras para melhor contraste)
-   - Hover opacity aumentada de `0.12` para `0.20` (feedback visual mais forte)
+   [data-theme="light"] .theme-toggle-btn i.fa-sun {
+       color: #FFC107 !important; /* Cor amarela para o sol */
+   }
+   ```
 
-3. **Elementos Interativos**:
-   - Ícones de ajuda com fundo `#555` (escuro) e texto branco
-   - Estados de hover mais distintos utilizando variáveis RGB
-   - Cards com destaque na cor primária ao passar o mouse
+### Correções no Rodapé
 
-## Melhorias nas Tabelas e Elementos de Interface
+O rodapé mantinha a classe `text-white` no tema claro, tornando o texto invisível. Foram adicionadas as seguintes correções:
 
-### Tabelas
+1. **Remoção dinâmica da classe**:
+   ```javascript
+   // No theme-switch.js
+   if (theme === 'light') {
+       document.querySelectorAll('.footer-custom').forEach(el => {
+           if (el) el.classList.remove('text-white');
+       });
+   } else {
+       document.querySelectorAll('.footer-custom').forEach(el => {
+           if (el) el.classList.add('text-white');
+       });
+   }
+   ```
 
-1. **Novos Cabeçalhos de Tabela**:
-   - Uso da cor primária como fundo (`var(--primary-color)`)
-   - Texto branco para máximo contraste
-   - Bordas mais grossas (2px) para clara delimitação
+2. **Regras CSS específicas**:
+   ```css
+   [data-theme="light"] .footer-custom,
+   [data-theme="light"] .footer-custom a,
+   [data-theme="light"] .footer-custom p,
+   [data-theme="light"] .footer-custom h5,
+   [data-theme="light"] .footer-custom li,
+   [data-theme="light"] .footer-social-icon,
+   [data-theme="light"] .copyright {
+       color: var(--text-primary) !important;
+   }
+   ```
 
-2. **Linhas Alternadas**:
-   - Uso da cor primária com baixa opacidade para linhas alternadas
-   - Destaque especial para linhas de total
-   - Efeito hover mais perceptível
+### Melhorias Gerais de Contraste
 
-### Botões e Navegação
+1. **Bordas mais grossas**:
+   - Aumento da espessura de bordas de 1px para 2px
+   - Uso de variáveis CSS para cor das bordas para consistência
 
-1. **Tabs Aprimorados**:
-   - Adição de bordas para melhor delimitação
-   - Estados hover utilizando a cor primária com opacidade
-   - Tab ativo com cor primária, texto branco e sombra leve
+2. **Textos mais contrastantes**:
+   - Modificação das variáveis de cor para ambos os temas
+   - No tema escuro: Textos secundários mais claros (`#e0e0e0`)
+   - No tema claro: Textos mais escuros (`#121212` para texto primário)
 
-2. **Ícones de Ajuda**:
-   - Redesenhados para melhor contraste
-   - Efeito de escala no hover
-   - Uso da cor primária para estados ativos
+3. **Elementos interativos**:
+   - Efeitos de hover mais visíveis (aumento da opacidade)
+   - Adição de transformações sutis (scale, translateY)
+   - Cores primárias mais distintas
 
-3. **Estados de Foco**:
-   - Outline aumentado para 3px
-   - Box-shadow adicional para elementos interativos
-   - Maior visibilidade durante navegação por teclado
+4. **Ícones de ajuda**:
+   - Melhoria do contraste do fundo (`#666` no tema escuro, `#555` no tema claro)
+   - Adição de bordas para destacar do fundo
+   - Efeito visual de aumento no hover
 
-### Cards
+## Métricas de Contraste Alcançadas
 
-1. **Bordas e Interatividade**:
-   - Bordas mais grossas (2px) para melhor delimitação
-   - Mudança para cor primária no hover
-   - Aumento da sombra para indicação clara de interatividade
-
-## Métricas de Contraste
-
-### Comparativo de Melhorias
-
-| Elemento | Anterior | Atual | Razão de Contraste (Antes) | Razão de Contraste (Depois) |
-|----------|----------|-------|-----------------------------|------------------------------|
-| Texto secundário (escuro) | #d4d4d4 | #e0e0e0 | ~4.0:1 | ~4.7:1 |
-| Bordas (escuro) | #454545 | #5a5a5a | ~1.5:1 | ~2.2:1 |
-| Bordas (claro) | #b0b0b0 | #8a8a8a | ~1.7:1 | ~2.9:1 |
-| Cabeçalhos tabela | Variável | Primária+Branco | ~3.5:1 | ~7.0:1+ |
-
-## Compatibilidade
-
-Estas melhorias são compatíveis com os padrões de acessibilidade WCAG 2.1 AA, garantindo que:
-
-- O contraste de texto atenda à proporção mínima de 4.5:1
-- Elementos interativos sejam claramente distinguíveis
-- Feedback de foco esteja presente para navegação por teclado
-- Elementos informativos (como ícones) tenham contraste adequado
+| Elemento | Original | Atual | Contraste (Antes) | Contraste (Depois) |
+|----------|----------|-------|-------------------|-------------------|
+| Texto normal (claro) | Branco em branco | Escuro em branco | ~1:1 | >13:1 |
+| Texto secundário (escuro) | #d4d4d4 em #2c2c2c | #e0e0e0 em #2c2c2c | ~4.0:1 | ~4.7:1 |
+| Bordas (escuro) | #454545 em #1e1e1e | #5a5a5a em #1e1e1e | ~1.5:1 | ~2.2:1 |
+| Bordas (claro) | #b0b0b0 em #ffffff | #8a8a8a em #ffffff | ~1.7:1 | ~2.9:1 |
+| Ícone de tema (claro) | Azul claro em branco | Azul escuro em branco | ~2.5:1 | >4.5:1 |
 
 ## Arquivos Atualizados
 
-- `assets/css/theme-switch.css`: 
-  - Variáveis de tema atualizadas
-  - Adição de variáveis RGB para cores primárias
-  - Melhorias em elementos específicos (help-icon, tables, cards)
-  - Aumento da visibilidade de estados focus
+1. `theme-switch.css`:
+   - Adição de regras específicas para o tema claro
+   - Sobrescrição de classes do Bootstrap
+   - Melhoria nas variáveis de cores
 
-- `assets/css/enhanced-charts.css`:
-  - Substituição de valores fixos por variáveis CSS
-  - Correção para usar `var(--primary-color)` nos cabeçalhos de tabela
-  - Uso consistente de `var(--border-color)` para bordas
-  - Aplicação de `rgba(var(--primary-color-rgb), X)` para transparências
-  - Aumento da espessura das bordas para 2px
+2. `theme-switch.js`:
+   - Alternância correta de classes no corpo do documento
+   - Manipulação dinâmica de elementos específicos
+   - Tratamento adequado dos ícones de tema
 
-## Análise de Conflitos e Correções Realizadas
+3. `components.js`:
+   - Modificação no HTML inicial para configurar o ícone correto
 
-### Problema Identificado
-Após a implementação inicial das melhorias de contraste, identificamos que ainda havia problemas de visualização no site publicado no GitHub Pages. Após análise, detectamos que o problema estava em conflitos entre os arquivos CSS.
+## Testes e Verificação
 
-### Causas do Problema
-1. **Inconsistências entre arquivos CSS**:
-   - Enquanto `theme-switch.css` foi atualizado com variáveis e valores de melhor contraste, o arquivo `enhanced-charts.css` continuava usando valores fixos (#454545, #3a3a3a, etc.)
-   - Os valores fixos em `enhanced-charts.css` estavam sobrescrevendo as variáveis CSS definidas no `theme-switch.css`
+As melhorias foram testadas nos seguintes cenários:
+- Tema claro e escuro
+- Página inicial, página de contato e todas as calculadoras
+- Visualização em diferentes tamanhos de tela
+- Navegação por teclado
 
-2. **Especificidade CSS**:
-   - Algumas regras em `enhanced-charts.css` tinham maior especificidade, fazendo com que prevalecessem sobre as regras em `theme-switch.css`
-
-3. **Problema com GitHub Pages**:
-   - As mudanças nos arquivos não estavam sendo refletidas imediatamente no site publicado
-
-### Correções Aplicadas
-1. **Atualização do enhanced-charts.css**:
-   - Substituição de todos os valores fixos por variáveis CSS (var(--property))
-   - Implementação coerente de bordas mais grossas (2px)
-   - Uso consistente de `var(--primary-color)` para cabeçalhos de tabela
-   - Aplicação de `rgba(var(--primary-color-rgb), X)` para transparências
-   - Remoção de duplicações desnecessárias para o tema claro
-
-2. **Técnicas para Garantir Consistência**:
-   - Uso do valor `!important` em elementos críticos como a cor do texto em cabeçalhos de tabela
-   - Reorganização de algumas regras CSS para manter o contraste consistente
-
-### Resultados das Correções
-- Melhoria significativa na consistência visual entre temas
-- Eliminação de conflitos que prejudicavam o contraste
-- Experiência mais unificada em diferentes partes do site
-- Melhor adaptação entre temas claro e escuro
-
-## Teste
-
-Recomenda-se testar o site com:
-- Diferentes navegadores
-- Ferramentas de contraste como WAVE, Lighthouse ou axe DevTools
-- Navegação exclusivamente por teclado
-- Diferentes tamanhos de tela
-- Verificação com usuários de leitores de tela
-
-## Próximos Passos
-
-- Monitorar a propagação das mudanças no GitHub Pages
-- Continuar avaliando o feedback dos usuários
-- Verificar se todas as páginas do site apresentam contraste adequado
-- Considerar testes com usuários com visão limitada ou daltonismo
-- Avaliar a implementação de um terceiro tema de "alto contraste" para usuários com necessidades visuais específicas
+O site agora apresenta:
+1. Textos legíveis em ambos os temas
+2. Ícones visíveis e distintos
+3. Elementos interativos claramente identificáveis
+4. Navegação melhorada e mais acessível

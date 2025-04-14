@@ -127,3 +127,46 @@
 [data-theme="light"] .btn-outline-primary:hover {
     color: white !important;
 }
+
+/* NOVAS CORREÇÕES - Corrigir contraste na calculadora PGBL vs CDB */
+[data-theme="light"] #resultados .card-body p,
+[data-theme="light"] #resultados .card-body span,
+[data-theme="light"] #resultados .card-body strong,
+[data-theme="light"] #tabelaDetalhes tbody tr td,
+[data-theme="light"] .card .card-body p strong,
+[data-theme="light"] .card .card-body span,
+[data-theme="light"] .results p strong,
+[data-theme="light"] .results strong,
+[data-theme="light"] .alert#recomendacaoAlert span,
+[data-theme="light"] .alert#recomendacaoAlert strong {
+    color: var(--text-primary) !important;
+}
+
+/* Garantir que elementos específicos no tema claro da calculadora 2 sejam visíveis */
+[data-theme="light"] .results p,
+[data-theme="light"] .results span {
+    color: var(--text-primary) !important;
+}
+
+/* Garantir visibilidade em elementos de alerta de recomendação */
+[data-theme="light"] #recomendacaoAlert strong,
+[data-theme="light"] #recomendacaoAlert span {
+    color: inherit !important;
+}
+
+/* Garantir contraste nos textos da tabela */
+[data-theme="light"] #tabelaDetalhes tr,
+[data-theme="light"] #tabelaDetalhes tr td {
+    color: var(--text-primary) !important;
+}
+
+/* Certifique-se que todos os textos nos cards são visíveis */
+[data-theme="light"] .card.bg-dark {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="light"] .card.bg-dark .card-body,
+[data-theme="light"] .card.bg-dark .card-body p,
+[data-theme="light"] .card.bg-dark .card-body span {
+    color: var(--text-primary) !important;
+}

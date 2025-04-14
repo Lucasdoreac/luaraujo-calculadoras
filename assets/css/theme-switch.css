@@ -54,9 +54,9 @@
     --danger-color: #e53e3e;    /* Vermelho ajustado */
     
     /* Elementos Visuais */
-    --border-color: #e2e8f0;    /* Bordas mais sutis */
+    --border-color: #8a8a8a;    /* Bordas mais escuras para melhor contraste */
     --shadow-color: rgba(0, 0, 0, 0.05);
-    --hover-opacity: 0.08;      /* Efeitos hover mais sutis */
+    --hover-opacity: 0.20;      /* Efeitos hover mais visíveis */
 }
 
 /* Aplicação das variáveis */
@@ -290,12 +290,12 @@ button:hover {
 }
 
 .comparison-table tr.total {
-    background-color: rgba(var(--primary-color-rgb), 0.1); /* Mais sutil para menor contraste */
+    background-color: rgba(var(--primary-color-rgb), 0.2); /* Mais distinto */
     font-weight: bold;
 }
 
 .comparison-table tr:hover {
-    background-color: rgba(var(--primary-color-rgb), 0.08); /* Hover mais sutil para reduzir fadiga */
+    background-color: rgba(var(--primary-color-rgb), 0.1); /* Hover mais distinto */
 }
 
 .results strong {
@@ -317,14 +317,14 @@ button:hover {
 /* Melhorias nos cards padrão */
 .card {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-color); /* Borda mais sutil para reduzir contraste */
+    border: 2px solid var(--border-color); /* Borda mais grossa para melhor contraste */
     border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s, var(--theme-transition);
 }
 
 .card:hover {
-    transform: translateY(-3px); /* Movimento mais sutil */
-    box-shadow: 0 6px 15px var(--shadow-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
     border-color: var(--primary-color); /* Destacar com a cor primária */
 }
 
@@ -337,7 +337,7 @@ button:hover {
 }
 
 .card-footer {
-    background-color: var(--bg-tertiary);
+    background-color: rgba(var(--primary-color-rgb), 0.05); /* Fundo sutilmente destacado */
     border-top: 1px solid var(--border-color);
 }
 
@@ -430,18 +430,9 @@ button:hover {
     border-color: #fed7d7;
 }
 
-/* Sistema de foco otimizado */
-[data-theme="light"] :focus {
-    outline-color: rgba(66, 153, 225, 0.6);
-    outline-width: 1px;
-    outline-offset: 1px;
-    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.25);
-}
-
 /* Melhorar o contraste das áreas de foco */
 :focus {
-    outline-color: var(--primary-color);
-    outline-width: 2px; /* Menos agressivo visualmente */
+    outline: 3px solid var(--primary-color); /* Outline mais visível */
     outline-offset: 2px;
 }
 
@@ -450,7 +441,7 @@ button:hover {
 .form-control:focus,
 .tab-button:focus,
 .help-icon:focus {
-    box-shadow: 0 0 0 2px var(--primary-shadow);
+    box-shadow: 0 0 0 3px var(--primary-shadow);
 }
 
 /* Correções específicas para o tema claro */

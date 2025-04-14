@@ -1,0 +1,91 @@
+/**
+ * Correções específicas para textos e legendas dos gráficos
+ * Solução para o problema de legibilidade mostrado nas imagens
+ */
+
+/* Solução para as legendas de projeção em azul claro */
+[data-theme="light"] .chart-container text,
+[data-theme="light"] .chart-title text,
+[data-theme="light"] .legend-text,
+[data-theme="light"] .chart-text {
+    color: #1a202c !important;
+    fill: #1a202c !important; /* Importante para SVG */
+    font-weight: 600 !important;
+    stroke: none !important;
+    opacity: 1 !important;
+}
+
+/* Corrigir especificamente os textos "Projeção: faça os aportes..." */
+[data-theme="light"] text:contains("Projeção"),
+[data-theme="light"] .projecao-label,
+[data-theme="light"] .titulo-projecao {
+    color: #1a202c !important;
+    fill: #1a202c !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+/* Linhas de grade mais visíveis no tema claro */
+[data-theme="light"] .chart-container .grid-line,
+[data-theme="light"] .chart-container path.domain,
+[data-theme="light"] .chart-container .grid path,
+[data-theme="light"] .chart-container g.grid line {
+    stroke: #718096 !important;
+    stroke-width: 0.5px !important;
+    stroke-opacity: 0.6 !important;
+}
+
+/* Melhorar contraste para os valores nos eixos */
+[data-theme="light"] .chart-container .tick text,
+[data-theme="light"] .chart-container .axis text {
+    fill: #1a202c !important;
+    color: #1a202c !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+}
+
+/* Correção específica para os valores de "Análise de Retorno" */
+[data-theme="light"] .analise-retorno,
+[data-theme="light"] .analise-retorno *,
+[data-theme="light"] [id^="valorTotalInvestido"],
+[data-theme="light"] [id^="retornoTotal"],
+[data-theme="light"] [id^="percentualRetorno"] {
+    color: #1a202c !important;
+    font-weight: 600 !important;
+}
+
+/* Estilo para destacar as barras nos gráficos */
+[data-theme="light"] .chart-container rect.bar {
+    fill: #3182ce !important;
+    stroke: #2c5282 !important;
+    stroke-width: 1px !important;
+}
+
+/* Evitar transparência excessiva nos elementos gráficos */
+[data-theme="light"] .chart-container .element {
+    opacity: 1 !important;
+}
+
+/* Adicionar contorno aos textos para maior legibilidade */
+[data-theme="light"] .chart-container .overlay-text {
+    text-shadow: 0 0 2px white, 0 0 2px white, 0 0 2px white, 0 0 2px white;
+}
+
+/* Corrigir problema de contraste em textos destacados */
+[data-theme="light"] .valor-destaque,
+[data-theme="light"] .percentual-destaque {
+    color: #2c5282 !important;
+    font-weight: 700 !important;
+    background-color: rgba(49, 130, 206, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Para garantir que mesmo seletores específicos não sejam afetados */
+[data-theme="light"] .chart-container [class*="projecao"],
+[data-theme="light"] .chart-container [class*="legend"],
+[data-theme="light"] .chart-container [class*="text"],
+[data-theme="light"] .chart-container [class*="label"] {
+    color: #1a202c !important;
+    fill: #1a202c !important;
+}

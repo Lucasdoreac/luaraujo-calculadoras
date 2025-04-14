@@ -1,153 +1,63 @@
 /**
- * Correções específicas de contraste para elementos de gráficos
- * Melhoria para resolver problemas de visibilidade APENAS no tema claro
+ * Correções de contraste simples para gráficos no tema claro
+ * Solução única e centralizada para evitar conflitos entre regras
  */
 
-/* ===== CORREÇÕES PRIORITÁRIAS PARA TEMA CLARO - GRÁFICOS ===== */
-
-/* Todos os textos dos gráficos devem ser pretos e em negrito */
-[data-theme="light"] .chart-container text,
-[data-theme="light"] .chart-container .tick text,
-[data-theme="light"] .chart-container .axis text,
-[data-theme="light"] .chart-container .legend text,
-[data-theme="light"] .chart-container .c3-axis text,
-[data-theme="light"] .chart-container .c3-legend-item text {
-    color: #000000 !important;
+/* Regra básica para texto em SVG no tema claro */
+[data-theme="light"] text {
     fill: #000000 !important;
-    font-weight: 700 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
     stroke: none !important;
-    paint-order: stroke !important;
-    stroke-width: 0 !important;
-    text-shadow: 0 0 2px white !important;
     opacity: 1 !important;
 }
 
-/* Forçar estilos específicos para o calc-1 e calc-2 */
-[data-theme="light"] #calc-1 .chart-container text,
-[data-theme="light"] #calc-2 .chart-container text,
-[data-theme="light"] [id^="calc-1"] .chart-container text,
-[data-theme="light"] [id^="calc-2"] .chart-container text {
-    color: #000000 !important;
-    fill: #000000 !important;
-    font-weight: 900 !important; /* Extra bold para garantir visibilidade */
-    font-size: 13px !important; /* Tamanho maior */
-    stroke: none !important;
-    text-shadow: 0 0 3px white, 0 0 3px white !important; /* Sombra mais forte */
-    opacity: 1 !important;
-}
-
-/* Forçar estilos para legendas nos calc-1 e calc-2 */
-[data-theme="light"] #calc-1 .chart-legend *,
-[data-theme="light"] #calc-2 .chart-legend *,
-[data-theme="light"] #calc-1 .legend *,
-[data-theme="light"] #calc-2 .legend *,
-[data-theme="light"] #calc-1 [class*="legend"] *,
-[data-theme="light"] #calc-2 [class*="legend"] * {
-    color: #000000 !important;
-    fill: #000000 !important;
-    font-weight: 700 !important;
-    text-shadow: 0 0 2px white !important;
-    opacity: 1 !important;
-}
-
-/* Linhas e elementos de gráficos */
-[data-theme="light"] .chart-container path,
-[data-theme="light"] .chart-container line.line,
-[data-theme="light"] .chart-container path.line {
-    stroke-width: 3px !important;
-    opacity: 1 !important;
-}
-
-/* Pontos em gráficos de linha */
-[data-theme="light"] .chart-container circle,
-[data-theme="light"] .chart-container .point {
-    r: 4 !important;
-    stroke-width: 2px !important;
-    opacity: 1 !important;
-}
-
-/* Linhas de grade mais visíveis */
-[data-theme="light"] .chart-container .grid line,
-[data-theme="light"] .chart-container .grid path,
-[data-theme="light"] .chart-container .domain {
-    stroke: rgba(0, 0, 0, 0.3) !important;
-    stroke-width: 0.8px !important;
-    opacity: 1 !important;
-}
-
-/* Legendas de gráficos */
+/* Garantir visibilidade para todos os elementos de legenda */
+[data-theme="light"] .legend text,
 [data-theme="light"] .chart-legend text,
+[data-theme="light"] [class*="legend"] text {
+    fill: #000000 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+/* Garantir visibilidade para elementos de legenda não-SVG */
+[data-theme="light"] .legend span,
 [data-theme="light"] .chart-legend span,
+[data-theme="light"] [class*="legend"] span,
+[data-theme="light"] .legend label,
 [data-theme="light"] .chart-legend label,
-[data-theme="light"] .chartjs-legend li span {
-    color: #000000 !important;
-    fill: #000000 !important;
-    font-weight: bold !important;
-}
-
-/* Títulos de gráficos */
-[data-theme="light"] .chart-title,
-[data-theme="light"] .c3-title,
-[data-theme="light"] .chart-header {
-    color: #000000 !important;
-    fill: #000000 !important;
-    font-weight: bold !important;
-    font-size: 16px !important;
-}
-
-/* Estilos específicos para as legendas vazias */
-[data-theme="light"] .chart-container .legend-text rect:empty + text {
-    fill: #000000 !important;
+[data-theme="light"] [class*="legend"] label {
     color: #000000 !important;
     font-weight: bold !important;
 }
 
-/* Garantir que as barras tenham contraste adequado */
-[data-theme="light"] .chart-container rect.bar,
-[data-theme="light"] .chart-container .c3-bar {
-    fill: #0957c3 !important;
-    stroke: #083a7a !important;
-    stroke-width: 1px !important;
-}
-
-/* ===== CORREÇÕES PARA GRÁFICOS ESPECÍFICOS - CALC-2 ===== */
-
-[data-theme="light"] #calc-2 .chart-container text,
-[data-theme="light"] [id*="calc-2"] .chart-container text {
-    fill: #000000 !important;
-    color: #000000 !important;
-    font-weight: bold !important;
-    font-size: 12px !important;
-    text-shadow: none !important;
-}
-
-[data-theme="light"] #calc-2 .chart-container path,
-[data-theme="light"] #calc-2 .chart-container line {
-    stroke-width: 3px !important;
-}
-
-[data-theme="light"] #calc-2 .chart-container circle {
-    r: 5 !important;
+/* Linhas mais visíveis */
+[data-theme="light"] line,
+[data-theme="light"] path[stroke]:not([fill]) {
     stroke-width: 2px !important;
+    opacity: 1 !important;
 }
 
-/* ===== CORREÇÕES PARA ANALISE DE RETORNO E COMPARATIVA ===== */
+/* Pontos mais visíveis */
+[data-theme="light"] circle.point,
+[data-theme="light"] circle[r] {
+    r: 4 !important;
+    stroke-width: 1.5px !important;
+    opacity: 1 !important;
+}
 
-/* Cabeçalhos azuis com texto branco */
+/* Garantir visibilidade para cabeçalhos de análise */
 [data-theme="light"] .analise-retorno h3,
 [data-theme="light"] .analise-comparativa h3,
 [data-theme="light"] [class*="analise"] .card-header,
-[data-theme="light"] [id*="analise"] .card-header,
-[data-theme="light"] .blue-background,
-[data-theme="light"] .bg-primary {
+[data-theme="light"] [id*="analise"] .card-header {
     background-color: #0957c3 !important;
     color: #ffffff !important;
     font-weight: bold !important;
 }
 
-/* Textos de valores em preto */
-[data-theme="light"] .analise-retorno span,
-[data-theme="light"] .analise-comparativa span,
+/* Garantir visibilidade para valores e resultados */
 [data-theme="light"] [id*="valor"],
 [data-theme="light"] [id*="total"],
 [data-theme="light"] [id*="diferenca"],
@@ -160,7 +70,7 @@
     font-weight: bold !important;
 }
 
-/* Exceção para texto em fundos coloridos */
+/* Texto branco para elementos com fundo azul */
 [data-theme="light"] .bg-primary *,
 [data-theme="light"] .blue-background *,
 [data-theme="light"] [style*="background-color: rgb(9, 87, 195)"] * {

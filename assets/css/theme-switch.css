@@ -382,3 +382,45 @@ button:hover {
 .help-icon:focus {
     box-shadow: 0 0 0 3px var(--primary-shadow);
 }
+
+/* Correções específicas para o tema claro */
+[data-theme="light"] body.text-light {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card .card-body {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .results p,
+[data-theme="light"] .educational-content p,
+[data-theme="light"] .comparison-table td,
+[data-theme="light"] .form-group .instruction,
+[data-theme="light"] .concept-explanation p,
+[data-theme="light"] .concept-explanation li {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card-body p,
+[data-theme="light"] .card-body span:not(.alert *) {
+    color: var(--text-primary) !important;
+}
+
+/* Garantir que texto seja sempre legível */
+[data-theme="light"] .text-light {
+    color: var(--text-primary) !important;
+}
+
+/* Sobreescrever classes do Bootstrap */
+[data-theme="light"] .bg-dark {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="light"] .bg-dark.text-light {
+    color: var(--text-primary) !important;
+}
+
+/* Garantir que os cabeçalhos de tabela mantenham texto branco */
+[data-theme="light"] .comparison-table th {
+    color: white !important;
+}

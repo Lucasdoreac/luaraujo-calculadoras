@@ -622,3 +622,123 @@ button:hover {
 [data-theme="light"] button:hover:not(.btn-primary):not(.btn-success):not(.btn-danger) {
     background-color: #edf2f7;
 }
+
+/* NOVAS CORREÇÕES DE CONTRASTE PARA O TEMA CLARO */
+
+/* Força sobrescrição global de classes de texto branco no tema claro */
+[data-theme="light"] .text-light,
+[data-theme="light"] .text-white,
+[data-theme="light"] .text-light *:not(.alert *):not(.badge),
+[data-theme="light"] .text-white *:not(.alert *):not(.badge) {
+    color: var(--text-primary) !important;
+}
+
+/* Corrige elementos específicos que podem ter problemas de herança de cor */
+[data-theme="light"] .card,
+[data-theme="light"] .card .card-header,
+[data-theme="light"] .card .card-body,
+[data-theme="light"] .card .card-title,
+[data-theme="light"] .card .card-text,
+[data-theme="light"] .card .card-footer {
+    color: var(--text-primary) !important;
+}
+
+/* Corrige elementos específicos onde o texto pode estar oculto */
+[data-theme="light"] .bg-dark,
+[data-theme="light"] .bg-dark p,
+[data-theme="light"] .bg-dark h1,
+[data-theme="light"] .bg-dark h2,
+[data-theme="light"] .bg-dark h3,
+[data-theme="light"] .bg-dark h4,
+[data-theme="light"] .bg-dark h5,
+[data-theme="light"] .bg-dark li,
+[data-theme="light"] .bg-dark td,
+[data-theme="light"] .bg-dark th,
+[data-theme="light"] .bg-dark span:not(.badge):not(.alert *) {
+    color: var(--text-primary) !important;
+}
+
+/* Correção específica para cabeçalhos de cartão com fundo escuro */
+[data-theme="light"] .card-header.bg-primary,
+[data-theme="light"] .card-header.bg-success,
+[data-theme="light"] .card-header.bg-danger,
+[data-theme="light"] .card-header.bg-warning,
+[data-theme="light"] .card-header.bg-info,
+[data-theme="light"] .card-header.bg-dark {
+    color: white !important;
+}
+
+/* Corrige gráficos e campos de texto */
+[data-theme="light"] .chart-container,
+[data-theme="light"] .form-group span,
+[data-theme="light"] .form-group label,
+[data-theme="light"] .form-group .instruction {
+    color: var(--text-primary) !important;
+}
+
+/* Garante que texto em botões primários e de outros tipos permaneçam visíveis */
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .btn-success,
+[data-theme="light"] .btn-danger {
+    color: white !important;
+}
+
+/* Garante que valores e resultados sejam visíveis */
+[data-theme="light"] [id^="result"],
+[data-theme="light"] [id^="valor"],
+[data-theme="light"] [id^="pgbl"],
+[data-theme="light"] [id^="cdb"],
+[data-theme="light"] [id^="analise"],
+[data-theme="light"] [id^="taxa"],
+[data-theme="light"] [id^="total"],
+[data-theme="light"] [id^="ganho"],
+[data-theme="light"] [id^="diferenca"],
+[data-theme="light"] [id^="rentabilidade"],
+[data-theme="light"] [id^="comparacao"],
+[data-theme="light"] [id^="laudo"] {
+    color: var(--text-primary) !important;
+}
+
+/* Corrige cards com texto claro ou branco */
+[data-theme="light"] .calculator-card,
+[data-theme="light"] .calculator-card h3,
+[data-theme="light"] .calculator-card p,
+[data-theme="light"] .calculator-card .card-footer small {
+    color: var(--text-primary) !important;
+}
+
+/* Correção específica para campos de cabeçalho escuros */
+[data-theme="light"] .bg-primary.text-white,
+[data-theme="light"] .bg-success.text-white,
+[data-theme="light"] .bg-danger.text-white,
+[data-theme="light"] .bg-warning.text-white,
+[data-theme="light"] .bg-info.text-white,
+[data-theme="light"] .bg-dark.text-white {
+    color: white !important;
+}
+
+/* Corrige valores em tabelas */
+[data-theme="light"] .comparison-table .valorFuturo,
+[data-theme="light"] .comparison-table .taxaMensal,
+[data-theme="light"] .comparison-table .meses,
+[data-theme="light"] span.valorFuturo,
+[data-theme="light"] span.taxaMensal,
+[data-theme="light"] span.meses {
+    color: var(--text-primary) !important;
+}
+
+/* Corrige fundo transparente em alertas */
+[data-theme="light"] .alert-primary,
+[data-theme="light"] .alert-success,
+[data-theme="light"] .alert-danger,
+[data-theme="light"] .alert-warning,
+[data-theme="light"] .alert-info {
+    color: inherit !important;
+}
+
+/* Garantir que texto em campos de entrada seja sempre visível */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+    color: var(--text-primary) !important;
+}

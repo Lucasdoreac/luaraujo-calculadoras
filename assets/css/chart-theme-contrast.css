@@ -1,0 +1,215 @@
+/**
+ * Correções específicas de contraste para elementos de gráficos
+ * Melhoria para resolver problemas de visibilidade em tema claro e escuro
+ */
+
+/* ===== CORREÇÕES PARA TEMA CLARO ===== */
+
+/* Canvas e containers de gráficos */
+[data-theme="light"] .chart-container {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* Elementos específicos Chart.js - Legendas */
+[data-theme="light"] .chartjs-legend li span,
+[data-theme="light"] .chart-legend li span,
+[data-theme="light"] .chart-container .chartjs-legend li span {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+/* Textos dos valores nos gráficos */
+[data-theme="light"] .chart-container .chart-value,
+[data-theme="light"] .chart-container .value-text,
+[data-theme="light"] .chart-container [class*="valor"],
+[data-theme="light"] .chart-container [class*="price"],
+[data-theme="light"] .chart-container [class*="total"] {
+    fill: #000000 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    stroke: none !important;
+}
+
+/* Linha de dados em gráficos de linha */
+[data-theme="light"] .chart-container .ct-line,
+[data-theme="light"] .chart-container path.line {
+    stroke: #0957c3 !important;
+    stroke-width: 3px !important;
+}
+
+/* Pontos de dados em gráficos de linha */
+[data-theme="light"] .chart-container .ct-point,
+[data-theme="light"] .chart-container circle.point {
+    stroke: #083a7a !important;
+    fill: #0957c3 !important;
+    stroke-width: 2px !important;
+}
+
+/* Barras em gráficos de barra */
+[data-theme="light"] .chart-container .ct-bar,
+[data-theme="light"] .chart-container rect.bar {
+    stroke: none !important;
+    fill: #0957c3 !important;
+}
+
+/* Áreas em gráficos de área */
+[data-theme="light"] .chart-container .ct-area,
+[data-theme="light"] .chart-container path.area {
+    fill: rgba(9, 87, 195, 0.5) !important;
+    stroke: #0957c3 !important;
+    stroke-width: 2px !important;
+}
+
+/* Rótulos de texto nos eixos */
+[data-theme="light"] .chart-container .ct-label,
+[data-theme="light"] .chart-container .axis-label,
+[data-theme="light"] .chart-container g.tick text {
+    color: #000000 !important;
+    fill: #000000 !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+}
+
+/* Linhas de grade */
+[data-theme="light"] .chart-container .ct-grid,
+[data-theme="light"] .chart-container .grid line,
+[data-theme="light"] .chart-container g.grid line {
+    stroke: rgba(0, 0, 0, 0.2) !important;
+    stroke-width: 0.8px !important;
+}
+
+/* Tooltips */
+[data-theme="light"] .chartjs-tooltip,
+[data-theme="light"] .chart-tooltip {
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid #000000 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 600 !important;
+}
+
+/* Títulos de gráficos */
+[data-theme="light"] .chart-title,
+[data-theme="light"] .chart-container .title {
+    color: #000000 !important;
+    fill: #000000 !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+}
+
+/* Subtítulos e descrições */
+[data-theme="light"] .chart-subtitle,
+[data-theme="light"] .chart-description {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+/* Classes específicas para projeções financeiras */
+[data-theme="light"] .projecao,
+[data-theme="light"] .projecao-area,
+[data-theme="light"] .projecao-line {
+    stroke: #083a7a !important;
+    fill: rgba(9, 87, 195, 0.3) !important;
+    stroke-dasharray: 5, 5 !important; /* Linha tracejada para diferenciar */
+    stroke-width: 2px !important;
+}
+
+/* Textos de projeção */
+[data-theme="light"] .projecao-text,
+[data-theme="light"] .projecao-label,
+[data-theme="light"] .titulo-projecao {
+    fill: #000000 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    padding: 2px 5px !important;
+    border-radius: 3px !important;
+}
+
+/* ===== CORREÇÕES PARA TEMA ESCURO ===== */
+
+/* Canvas e containers de gráficos */
+[data-theme="dark"] .chart-container,
+:root:not([data-theme="light"]) .chart-container {
+    background-color: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Legendas */
+[data-theme="dark"] .chartjs-legend li span,
+[data-theme="dark"] .chart-legend li span,
+:root:not([data-theme="light"]) .chartjs-legend li span,
+:root:not([data-theme="light"]) .chart-legend li span {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Textos dos valores nos gráficos */
+[data-theme="dark"] .chart-container .chart-value,
+[data-theme="dark"] .chart-container .value-text,
+[data-theme="dark"] .chart-container [class*="valor"],
+[data-theme="dark"] .chart-container [class*="price"],
+[data-theme="dark"] .chart-container [class*="total"],
+:root:not([data-theme="light"]) .chart-container .chart-value,
+:root:not([data-theme="light"]) .chart-container .value-text,
+:root:not([data-theme="light"]) .chart-container [class*="valor"],
+:root:not([data-theme="light"]) .chart-container [class*="price"],
+:root:not([data-theme="light"]) .chart-container [class*="total"] {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    stroke: none !important;
+}
+
+/* Componentes gráficos para tema escuro - já definidos em outros arquivos */
+
+/* Rótulos de texto nos eixos */
+[data-theme="dark"] .chart-container .ct-label,
+[data-theme="dark"] .chart-container .axis-label,
+[data-theme="dark"] .chart-container g.tick text,
+:root:not([data-theme="light"]) .chart-container .ct-label,
+:root:not([data-theme="light"]) .chart-container .axis-label,
+:root:not([data-theme="light"]) .chart-container g.tick text {
+    color: #e0e0e0 !important;
+    fill: #e0e0e0 !important;
+    font-weight: 600 !important;
+}
+
+/* Tooltips */
+[data-theme="dark"] .chartjs-tooltip,
+[data-theme="dark"] .chart-tooltip,
+:root:not([data-theme="light"]) .chartjs-tooltip,
+:root:not([data-theme="light"]) .chart-tooltip {
+    background: rgba(52, 152, 219, 0.9) !important;
+    color: #ffffff !important;
+    border: 1px solid #2980b9 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Textos de projeção */
+[data-theme="dark"] .projecao-text,
+[data-theme="dark"] .projecao-label,
+[data-theme="dark"] .titulo-projecao,
+:root:not([data-theme="light"]) .projecao-text,
+:root:not([data-theme="light"]) .projecao-label,
+:root:not([data-theme="light"]) .titulo-projecao {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    background-color: rgba(52, 152, 219, 0.2) !important;
+    padding: 2px 5px !important;
+    border-radius: 3px !important;
+}
+
+/* Garantir transição suave entre os temas */
+.chart-container,
+.chart-container *,
+.chartjs-tooltip,
+.chart-tooltip,
+.chartjs-legend li span,
+.chart-legend li span {
+    transition: color 0.3s, fill 0.3s, stroke 0.3s, background-color 0.3s !important;
+}

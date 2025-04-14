@@ -42,3 +42,764 @@
                 </ul>
             </div>
         </div>
+        <div class="goals-section">
+            <h3>Planejamento Financeiro <i class="fas fa-tasks"></i></h3>
+            <div class="form-group">
+               <label for="goalAmount">Meta Financeira (R$):</label>
+               <input type="number" id="goalAmount">
+                <span class="help-icon" onclick="showConcept('goal')">?</span>
+               <div id="goalConcept" class="concept-explanation">
+                    <p>Defina o valor que deseja acumular. Exemplos: <i>reserva de emergência</i>, entrada para um imóvel, aposentadoria, etc.</p>
+                </div>
+           </div>
+             <div class="form-group">
+                <label for="goalYears">Prazo para atingir a meta (anos):</label>
+                <input type="number" id="goalYears">
+           </div>
+        </div>
+        <form id="simulador-form">
+            <div class="form-group">
+                <label for="valorInicial">Valor Inicial (R$):</label>
+               <input type="number" id="valorInicial" required>
+               <span class="help-icon" onclick="showConcept('valorInicial')">?</span>
+                <div id="valorInicialConcept" class="concept-explanation">
+                    <p>Informe o <i>valor inicial</i> que você tem para investir.</p>
+                </div>
+           </div>
+            <div class="form-group">
+                <label for="aporteMensal">Aporte Mensal (R$):</label>
+               <input type="number" id="aporteMensal" required>
+                <span class="help-icon" onclick="showConcept('aporteMensal')">?</span>
+                <div id="aporteMensalConcept" class="concept-explanation">
+                   <p>Informe o valor que você pode investir <i>mensalmente</i>.</p>
+                </div>
+           </div>
+            <div class="form-group">
+                <label for="tipoRendimento">Tipo de Rendimento:</label>
+               <select id="tipoRendimento" required>
+                    <option value="fixa">Taxa Fixa</option>
+                    <option value="cdi">Taxa do CDI</option>
+                </select>
+                <span class="help-icon" onclick="showConcept('tipoRendimento')">?</span>
+               <div id="tipoRendimentoConcept" class="concept-explanation">
+                   <p>Escolha entre uma <i>taxa fixa</i> ou uma <i>taxa atrelada ao CDI</i>.</p>
+                </div>
+           </div>
+             <div id="taxaFixaGroup" class="form-group">
+                <label for="taxaFixa">Taxa Fixa Mensal (%):</label>
+                <input type="number" id="taxaFixa" step="0.01">
+               <div class="instruction">Informe a <i>taxa de rendimento mensal</i> (em %).</div>
+            </div>
+             <div id="cdiGroup" style="display: none;">
+                 <div class="form-group">
+                   <label for="taxaCDI">Taxa CDI Anual (%):</label>
+                   <input type="number" id="taxaCDI" step="0.01" value="13.15">
+                    <div class="instruction">Informe a <i>taxa do CDI anual</i> (em %).</div>
+                </div>
+                <div class="form-group">
+                    <label for="percentualCDIComImposto">Percentual do CDI - Com IR (%):</label>
+                    <input type="number" id="percentualCDIComImposto" step="0.1" value="100">
+               </div>
+                <div class="form-group">
+                    <label for="percentualCDISemImposto">Percentual do CDI - Sem IR (%):</label>
+                    <input type="number" id="percentualCDISemImposto" step="0.1" value="93">
+               </div>
+           </div>
+            <div class="form-group">
+                <label for="prazo">Prazo (meses):</label>
+               <input type="number" id="prazo" required>
+                <span class="help-icon" onclick="showConcept('prazo')">?</span>
+                 <div id="prazoConcept" class="concept-explanation">
+                    <p>Informe o <i>prazo do investimento</i> em meses.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inflacao">Inflação Anual Estimada (%):</label>
+                <input type="number" id="inflacao" step="0.1" value="4.5">
+                <span class="help-icon" onclick="showConcept('inflacao')">?</span>
+               <div id="inflacaoConcept" class="concept-explanation">
+                    <p>Informe a <i>taxa de inflação anual</i> estimada.</p>
+               </div>
+            </div>
+            <button type="button" onclick="calcularRentabilidade()" class="btn btn-primary">Calcular Simulação <i class="fas fa-calculator"></i></button>
+        </form>
+       <div class="tab-container">
+             <div class="container-botoes">
+                 <button class="tab-button active" onclick="showTab('resultados')">Resultados <i class="fas fa-chart-bar"></i></button>
+                 <button class="tab-button" onclick="showTab('comparacoes')">Comparações <i class="fas fa-balance-scale"></i></button>
+                <button class="tab-button" onclick="showTab('educacional')">Material Educativo <i class="fas fa-book-open"></i></button>
+                 <button class="tab-button" onclick="showTab('pgblCdb')">PGBL vs CDB <i class="fas fa-money-check-alt"></i></button>
+            </div>
+           <div id="resultadosTab" class="tab-content active">
+               <div id="results" class="results" style="display: none;">
+                    <h3>Resultados da Simulação <i class="fas fa-chart-line"></i></h3>
+                    <p><strong>Valor Inicial:</strong> R$ <span id="resultValorInicial"></span></p>
+                    <p><strong>Aporte Mensal:</strong> R$ <span id="resultAporteMensal"></span></p>
+                   <p><strong>Prazo:</strong> <span id="resultPrazo"></span> meses</p>
+                     <p><strong>Taxa de Rendimento:</strong> <span id="resultTaxaRendimento"></span>% ao mês</p>
+                    <p><strong>Valor Final:</strong> R$ <span id="resultValorFinal"></span></p>
+                    <p><strong>Ganho Total:</strong> R$ <span id="resultGanhoTotal"></span></p>
+                    <p><strong>Inflação Acumulada:</strong> <span id="resultInflacaoAcumulada"></span>%</p>
+                    <p><strong>Valor Final Ajustado pela Inflação:</strong> R$ <span id="resultValorFinalAjustado"></span></p>
+                    <div class="chart-container">
+                        <canvas id="chartSimulacao"></canvas>
+                    </div>
+                </div>
+            </div>
+             <div id="comparacoesTab" class="tab-content">
+                <h3>Comparações <i class="fas fa-chart-pie"></i></h3>
+                <div class="table-responsive">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Investimento</th>
+                                <th>Valor Final</th>
+                                <th>Ganho Total</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <tr>
+                                <td>Poupança</td>
+                                <td id="comparacaoPoupancaValorFinal">-</td>
+                                <td id="comparacaoPoupancaGanhoTotal">-</td>
+                            </tr>
+                            <tr>
+                                <td>CDB</td>
+                                <td id="comparacaoCDBValorFinal">-</td>
+                                <td id="comparacaoCDBGanhoTotal">-</td>
+                            </tr>
+                            <tr>
+                                <td>LCI/LCA</td>
+                                <td id="comparacaoLCILCAValorFinal">-</td>
+                                <td id="comparacaoLCILCAGanhoTotal">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartComparacoes"></canvas>
+               </div>
+                <div class="educational-content">
+                    <h4>Laudo Comparativo <i class="fas fa-file-alt"></i></h4>
+                   <p id="laudoComparativo"></p>
+                    <p id="laudoMeta"></p>
+                    <p id="laudoPercentualCDB"></p>
+                </div>
+            </div>
+            <div id="educacionalTab" class="tab-content">
+               <h3>Material Educativo <i class="fas fa-book"></i></h3>
+                <div class="educational-content">
+                    <h4>Como Funcionam os Investimentos? <i class="fas fa-question-circle"></i></h4>
+                   <p>Investir é uma forma de fazer o dinheiro trabalhar para você. Existem diferentes tipos de investimentos, cada um com suas características, riscos e retornos. Aqui estão alguns conceitos básicos:</p>
+                   <ul>
+                        <li><strong>Renda Fixa:</strong> Investimentos com retornos previsíveis, como <i>títulos públicos</i> e <strong>CDBs</strong>.</li>
+                        <li><strong>Renda Variável:</strong> Investimentos com retornos variáveis, como <i>ações</i> e <i>fundos imobiliários</i>.</li>
+                        <li><strong>Diversificação:</strong> Estratégia de distribuir investimentos em diferentes tipos de ativos para reduzir riscos.</li>
+                        <li><strong>Juros Compostos:</strong> Juros que incidem sobre o <i>capital inicial</i> e sobre os juros acumulados, gerando <i>crescimento exponencial</i>.</li>
+                    </ul>
+                </div>
+            </div>
+          <div id="pgblCdbTab" class="tab-content">
+                 <h3>Simulador PGBL vs CDB <i class="fas fa-hand-holding-usd"></i></h3>
+                <form id="simulador-pgbl-cdb">
+                    <div class="form-group">
+                        <label for="rendaTributavel">Renda Anual Tributável (R$):</label>
+                        <input type="number" id="rendaTributavel" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aporteInicial">Aporte Inicial (opcional) - R$:</label>
+                        <input type="number" id="aporteInicial" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="anos">Período de Investimento (em anos):</label>
+                        <input type="number" id="anos" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="cdi">Taxa do CDI Anual (%):</label>
+                        <input type="number" id="cdi" step="0.01" value="10" required min="0">
+                    </div>
+                    <button type="button" onclick="calcularPGBLCDB()" class="btn btn-primary">Simular <i class="fas fa-calculator"></i></button>
+                </form>
+                <div class="results" id="resultados-pgbl-cdb" style="display: none;">
+                    <h2>Resultados <i class="fas fa-poll-h"></i></h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mb-3"><strong>PGBL</strong></h4>
+                            <p><strong>Valor Total Acumulado:</strong> R$ <span id="pgblAcumulado"></span></p>
+                            <p><strong>Desembolso Efetivo:</strong> R$ <span id="pgblDesembolso"></span></p>
+                            <p><strong>IR no Resgate:</strong> R$ <span id="pgblIR"></span></p>
+                            <p><strong>Valor Líquido:</strong> R$ <span id="pgblLiquido"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3"><strong>CDB</strong></h4>
+                            <p><strong>Valor Total Acumulado:</strong> R$ <span id="cdbAcumulado"></span></p>
+                            <p><strong>Desembolso Efetivo:</strong> R$ <span id="cdbDesembolso"></span></p>
+                            <p><strong>IR no Resgate:</strong> R$ <span id="cdbIR"></span></p>
+                            <p><strong>Valor Líquido:</strong> R$ <span id="cdbLiquido"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container mt-4">
+                        <canvas id="chartPgblCdb"></canvas>
+                    </div>
+                   
+                    <h3 class="mt-4">Detalhamento Anual <i class="fas fa-table"></i></h3>
+                    <div class="table-responsive">
+                        <table id="tabelaDetalhes" class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Ano</th>
+                                    <th>Aporte PGBL (R$)</th>
+                                    <th>Restituição PGBL (R$)</th>
+                                    <th>Saldo PGBL (R$)</th>
+                                    <th>Aporte CDB (R$)</th>
+                                    <th>Saldo CDB (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- As linhas serão preenchidas pelo JavaScript -->
+                            </tbody>
+                       </table>
+                    </div>
+                    
+                    <div class="card bg-dark mt-4">
+                        <div class="card-header">
+                            <h3 class="card-title h5">Análise Comparativa <i class="fas fa-balance-scale"></i></h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Diferença Líquida (PGBL - CDB):</strong> R$ <span id="diferencaLiquida"></span></p>
+                            <p><strong>Valor Total Restituído (PGBL):</strong> R$ <span id="totalRestituido"></span></p>
+                            <p><strong>Resultado Final Ajustado:</strong> R$ <span id="resultadoFinalAjustado"></span></p>
+                            <p><strong>Rentabilidade Líquida PGBL:</strong> <span id="rentabilidadePGBL"></span></p>
+                            <p><strong>Rentabilidade Líquida CDB:</strong> <span id="rentabilidadeCDB"></span></p>
+                            
+                            <div class="alert mt-3" id="recomendacaoAlert">
+                                <strong>Recomendação:</strong> <span id="recomendacao"></span>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+       </div>
+   </div>
+
+    <!-- Footer (será carregado via JavaScript) -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/components.js"></script>
+    <script src="../assets/js/theme-switch.js"></script>
+    <script src="../assets/js/chart-helpers.js"></script>
+    <script src="../assets/js/fix-charts.js"></script>
+    <script>
+        function toggleTips() {
+           const tipsContent = document.getElementById('tipsContent');
+            tipsContent.style.display = tipsContent.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function showConcept(concept) {
+            const conceptElement = document.getElementById(concept + 'Concept');
+            if (conceptElement) {
+                conceptElement.style.display = conceptElement.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+        
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+            document.getElementById(tabId + 'Tab').style.display = 'block';
+            
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+        
+        document.getElementById('tipoRendimento').addEventListener('change', function() {
+            const tipoRendimento = this.value;
+            if (tipoRendimento === 'fixa') {
+                document.getElementById('taxaFixaGroup').style.display = 'block';
+                document.getElementById('cdiGroup').style.display = 'none';
+            } else {
+                document.getElementById('taxaFixaGroup').style.display = 'none';
+                document.getElementById('cdiGroup').style.display = 'block';
+            }
+        });
+        
+        function calcularRentabilidade() {
+            // Preparar containers dos gráficos
+            ChartHelpers.prepareChartContainer('chartSimulacao');
+            ChartHelpers.prepareChartContainer('chartComparacoes');
+            
+            // Obter valores do formulário
+            const valorInicial = parseFloat(document.getElementById('valorInicial').value) || 0;
+            const aporteMensal = parseFloat(document.getElementById('aporteMensal').value) || 0;
+            const prazo = parseInt(document.getElementById('prazo').value) || 0;
+            const tipoRendimento = document.getElementById('tipoRendimento').value;
+            const taxaFixa = parseFloat(document.getElementById('taxaFixa').value) / 100 || 0;
+            const taxaCDI = parseFloat(document.getElementById('taxaCDI').value) / 100 || 0.1315;
+            const percentualCDIComImposto = parseFloat(document.getElementById('percentualCDIComImposto').value) / 100 || 1;
+            const percentualCDISemImposto = parseFloat(document.getElementById('percentualCDISemImposto').value) / 100 || 0.93;
+            const inflacao = parseFloat(document.getElementById('inflacao').value) / 100 || 0.045;
+            
+            // Validar dados
+            if (valorInicial < 0 || aporteMensal < 0 || prazo <= 0) {
+                alert("Preencha todos os campos obrigatórios com valores válidos para calcular a simulação.");
+                ChartHelpers.removeLoading('chartSimulacao');
+                ChartHelpers.removeLoading('chartComparacoes');
+                return;
+            }
+            
+            // Cálculo do percentual do CDI do CDB necessário para bater o LCI/LCA
+            const ir = 0.225; // Imposto de Renda de 22.5% (exemplo)
+            const percentualCDIComIRNecessario = percentualCDISemImposto / (1 - ir);
+            
+            // Calcular taxa mensal
+            let taxaMensal;
+            if (tipoRendimento === 'fixa') {
+                if (isNaN(taxaFixa) || taxaFixa <= 0) {
+                    alert("Preencha a taxa fixa mensal com um valor válido.");
+                    ChartHelpers.removeLoading('chartSimulacao');
+                    ChartHelpers.removeLoading('chartComparacoes');
+                    return;
+                }
+                taxaMensal = taxaFixa;
+            } else {
+                if (isNaN(taxaCDI) || isNaN(percentualCDIComImposto) || isNaN(percentualCDISemImposto)) {
+                    alert("Preencha todos os campos relacionados ao CDI.");
+                    ChartHelpers.removeLoading('chartSimulacao');
+                    ChartHelpers.removeLoading('chartComparacoes');
+                    return;
+                }
+                taxaMensal = (taxaCDI / 12) * percentualCDIComImposto;
+            }
+            
+            // Calcular evolução do investimento
+            let valorFinal = valorInicial;
+            let evolucaoMensal = [valorInicial];
+            let aportesMensais = [0]; // O primeiro é o valor inicial
+            let totalAportado = valorInicial;
+            
+            for (let i = 0; i < prazo; i++) {
+                valorFinal = valorFinal * (1 + taxaMensal) + aporteMensal;
+                evolucaoMensal.push(valorFinal);
+                totalAportado += aporteMensal;
+                aportesMensais.push(totalAportado);
+            }
+            
+            const ganhoTotal = valorFinal - valorInicial - (aporteMensal * prazo);
+            const inflacaoAcumulada = Math.pow(1 + inflacao, prazo / 12) - 1;
+            const valorFinalAjustado = valorFinal / (1 + inflacaoAcumulada);
+            
+            // Atualizar resultados
+            document.getElementById('resultValorInicial').textContent = valorInicial.toFixed(2);
+            document.getElementById('resultAporteMensal').textContent = aporteMensal.toFixed(2);
+            document.getElementById('resultPrazo').textContent = prazo;
+            document.getElementById('resultTaxaRendimento').textContent = (taxaMensal * 100).toFixed(2);
+            document.getElementById('resultValorFinal').textContent = valorFinal.toFixed(2);
+            document.getElementById('resultGanhoTotal').textContent = ganhoTotal.toFixed(2);
+            document.getElementById('resultInflacaoAcumulada').textContent = (inflacaoAcumulada * 100).toFixed(2);
+            document.getElementById('resultValorFinalAjustado').textContent = valorFinalAjustado.toFixed(2);
+            
+            // Mostrar container de resultados
+            document.getElementById('results').style.display = 'block';
+            
+            // Comparações
+            const taxaPoupanca = 0.005; // 0.5% ao mês
+            const taxaCDB = (taxaCDI / 12) * percentualCDIComImposto;
+            const taxaLCILCA = (taxaCDI / 12) * percentualCDISemImposto; // LCI/LCA sem IR
+            
+            let valorFinalPoupanca = valorInicial;
+            let valorFinalCDB = valorInicial;
+            let valorFinalLCILCA = valorInicial;
+            
+            for (let i = 0; i < prazo; i++) {
+                valorFinalPoupanca = valorFinalPoupanca * (1 + taxaPoupanca) + aporteMensal;
+                valorFinalCDB = valorFinalCDB * (1 + taxaCDB) + aporteMensal;
+                valorFinalLCILCA = valorFinalLCILCA * (1 + taxaLCILCA) + aporteMensal;
+            }
+            
+            // Aplicar imposto de renda regressivo no CDB
+            let aliquotaIR;
+            if (prazo <= 180) {
+                aliquotaIR = 0.225; // 22.5%
+            } else if (prazo <= 360) {
+                aliquotaIR = 0.20; // 20%
+            } else if (prazo <= 720) {
+                aliquotaIR = 0.175; // 17.5%
+            } else {
+                aliquotaIR = 0.15; // 15%
+            }
+            
+            const ganhoBrutoCDB = valorFinalCDB - valorInicial - (aporteMensal * prazo);
+            const impostoCDB = ganhoBrutoCDB * aliquotaIR;
+            const ganhoLiquidoCDB = ganhoBrutoCDB - impostoCDB;
+            const valorFinalLiquidoCDB = valorFinalCDB - impostoCDB;
+            
+            document.getElementById('comparacaoPoupancaValorFinal').textContent = ChartHelpers.formatarMoeda(valorFinalPoupanca);
+            document.getElementById('comparacaoPoupancaGanhoTotal').textContent = ChartHelpers.formatarMoeda(valorFinalPoupanca - valorInicial - (aporteMensal * prazo));
+            document.getElementById('comparacaoCDBValorFinal').textContent = ChartHelpers.formatarMoeda(valorFinalLiquidoCDB);
+            document.getElementById('comparacaoCDBGanhoTotal').textContent = ChartHelpers.formatarMoeda(ganhoLiquidoCDB);
+            document.getElementById('comparacaoLCILCAValorFinal').textContent = ChartHelpers.formatarMoeda(valorFinalLCILCA);
+            document.getElementById('comparacaoLCILCAGanhoTotal').textContent = ChartHelpers.formatarMoeda(valorFinalLCILCA - valorInicial - (aporteMensal * prazo));
+            
+            // Gráfico de Simulação - usando Chart.js
+            const ctxSimulacao = document.getElementById('chartSimulacao').getContext('2d');
+            
+            // Destruir gráfico anterior se existir
+            if (window.chartSimulacao) {
+                window.chartSimulacao.destroy();
+            }
+            
+            // Criar labels para o eixo X (meses)
+            const labels = Array.from({ length: prazo + 1 }, (_, i) => i === 0 ? 'Início' : `Mês ${i}`);
+            
+            // Configuração do gráfico
+            const configSimulacao = {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Valor Acumulado',
+                            data: evolucaoMensal,
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Total Investido',
+                            data: aportesMensais,
+                            borderColor: '#2ecc71',
+                            backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                            borderWidth: 2,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    ...ChartHelpers.darkThemeConfig(),
+                    plugins: {
+                        ...ChartHelpers.darkThemeConfig().plugins,
+                        tooltip: {
+                            ...ChartHelpers.darkThemeConfig().plugins.tooltip,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + ChartHelpers.formatarMoeda(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            // Criar gráfico
+            window.chartSimulacao = new Chart(ctxSimulacao, configSimulacao);
+            
+            // Gráfico de Comparações
+            const ctxComparacoes = document.getElementById('chartComparacoes').getContext('2d');
+            
+            // Destruir gráfico anterior se existir
+            if (window.chartComparacoes) {
+                window.chartComparacoes.destroy();
+            }
+            
+            // Configuração do gráfico
+            const configComparacoes = {
+                type: 'bar',
+                data: {
+                    labels: ['Poupança', 'CDB', 'LCI/LCA'],
+                    datasets: [{
+                        label: 'Valor Final',
+                        data: [valorFinalPoupanca, valorFinalLiquidoCDB, valorFinalLCILCA],
+                        backgroundColor: ['#2ecc71', '#3498db', '#e74c3c']
+                    }]
+                },
+                options: {
+                    ...ChartHelpers.darkThemeConfig(),
+                    plugins: {
+                        ...ChartHelpers.darkThemeConfig().plugins,
+                        tooltip: {
+                            ...ChartHelpers.darkThemeConfig().plugins.tooltip,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + ChartHelpers.formatarMoeda(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            // Criar gráfico
+            window.chartComparacoes = new Chart(ctxComparacoes, configComparacoes);
+            
+            // Remover indicadores de loading
+            ChartHelpers.removeLoading('chartSimulacao');
+            ChartHelpers.removeLoading('chartComparacoes');
+            
+            // Laudo Comparativo
+            const laudoComparativo = document.getElementById('laudoComparativo');
+            if (valorFinalPoupanca > valorFinalLiquidoCDB && valorFinalPoupanca > valorFinalLCILCA) {
+                laudoComparativo.innerHTML = "<strong class='text-success'>A poupança foi a opção mais vantajosa neste cenário.</strong>";
+            } else if (valorFinalLiquidoCDB > valorFinalPoupanca && valorFinalLiquidoCDB > valorFinalLCILCA) {
+                laudoComparativo.innerHTML = "<strong class='text-primary'>O CDB foi a opção mais vantajosa neste cenário.</strong>";
+            } else {
+                laudoComparativo.innerHTML = "<strong class='text-danger'>O LCI/LCA foi a opção mais vantajosa neste cenário.</strong>";
+            }
+            
+            // Cálculo do valor necessário para atingir a meta
+            const goalAmount = parseFloat(document.getElementById('goalAmount').value);
+            const goalYears = parseFloat(document.getElementById('goalYears').value);
+            
+            if (!isNaN(goalAmount) && !isNaN(goalYears) && goalAmount > 0 && goalYears > 0) {
+                const goalMonths = goalYears * 12;
+                const taxaMensalMeta = (taxaCDI / 12) * percentualCDISemImposto; // Usando LCI/LCA para cálculo da meta
+                const valorNecessario = (goalAmount * taxaMensalMeta) / (Math.pow(1 + taxaMensalMeta, goalMonths) - 1);
+                const valorNecessarioAjustado = valorNecessario * Math.pow(1 + inflacao, goalYears);
+                document.getElementById('laudoMeta').innerHTML = `<strong>Análise de Meta:</strong> Para atingir a meta de ${ChartHelpers.formatarMoeda(goalAmount)} em ${goalYears} anos, considerando a rentabilidade do LCI/LCA e a inflação, você precisaria investir aproximadamente ${ChartHelpers.formatarMoeda(valorNecessarioAjustado)} mensalmente.`;
+            } else {
+                document.getElementById('laudoMeta').textContent = "Preencha os campos de meta financeira e prazo para calcular o valor necessário.";
+            }
+            
+            // Exibir o percentual do CDI do CDB necessário para bater o LCI/LCA
+            document.getElementById('laudoPercentualCDB').innerHTML = `<strong>Equivalência CDB x LCI/LCA:</strong> Para o CDB ter o mesmo rendimento líquido do LCI/LCA, ele precisa render <span class="text-primary">${(percentualCDIComIRNecessario * 100).toFixed(2)}%</span> do CDI.`;
+            
+            // Scroll para ver os resultados
+            setTimeout(() => {
+                document.getElementById('results').scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
+        
+        // Função para calcular a alíquota de IR do PGBL com base no período
+        function calcularAliquotaIRPGBL(anos) {
+            if (anos <= 2) return 0.35;
+            if (anos <= 4) return 0.30;
+            if (anos <= 6) return 0.20;
+            if (anos <= 8) return 0.15;
+            return 0.10; // Acima de 8 anos
+        }
+        
+        // Função para calcular a alíquota de IR do CDB com base no período
+        function calcularAliquotaIRCDB(meses) {
+           if (meses <= 6) return 0.225; // 22,5%
+            if (meses <= 12) return 0.20; // 20%
+            if (meses <= 24) return 0.175; // 17,5%
+            return 0.15; // 15% (acima de 24 meses)
+        }
+        
+        function calcularPGBLCDB() {
+            // Preparar container do gráfico
+            ChartHelpers.prepareChartContainer('chartPgblCdb');
+            
+            // Obter valores dos inputs
+            const rendaTributavel = parseFloat(document.getElementById('rendaTributavel').value);
+            const aporteInicial = parseFloat(document.getElementById('aporteInicial').value) || 0;
+            const anos = parseInt(document.getElementById('anos').value);
+            const cdi = parseFloat(document.getElementById('cdi').value) / 100;
+            
+            // Validar entradas
+            if (isNaN(rendaTributavel) || rendaTributavel <= 0) {
+                alert("Por favor, insira uma renda anual tributável válida.");
+                ChartHelpers.removeLoading('chartPgblCdb');
+                return;
+            }
+            if (isNaN(anos) || anos <= 0) {
+                alert("Por favor, insira um período de investimento válido.");
+                ChartHelpers.removeLoading('chartPgblCdb');
+                return;
+            }
+            if (isNaN(cdi) || cdi <= 0) {
+                alert("Por favor, insira uma taxa do CDI válida.");
+                ChartHelpers.removeLoading('chartPgblCdb');
+                return;
+            }
+            
+            // Constantes
+            const aliquotaIR = 0.275; // 27,5%
+            const aporteAnual = rendaTributavel * 0.12;
+            
+            // Inicializar variáveis
+            let pgblSaldo = aporteInicial;
+            let pgblDesembolso = aporteInicial;
+            let cdbSaldo = aporteInicial;
+            let cdbDesembolso = aporteInicial;
+            
+            // Arrays para o gráfico
+            const labelsAnos = [];
+            const pgblValores = [aporteInicial];
+            const cdbValores = [aporteInicial];
+            
+            // Limpar tabela de detalhes
+            const tabelaDetalhes = document.getElementById('tabelaDetalhes').getElementsByTagName('tbody')[0];
+            tabelaDetalhes.innerHTML = "";
+            
+            // Calcular acumulação ao longo dos anos
+            for (let i = 1; i <= anos; i++) {
+                labelsAnos.push(`Ano ${i}`);
+                
+                // PGBL: No primeiro ano, não há restituição
+                const restituicao = i === 1 ? 0 : aporteAnual * aliquotaIR;
+                const aporteEfetivo = i === 1 ? aporteAnual : aporteAnual - restituicao;
+                pgblDesembolso += aporteEfetivo;
+                pgblSaldo = (pgblSaldo + aporteAnual) * (1 + cdi);
+                
+                // CDB: Aporte fixo anual (não há restituição)
+                cdbDesembolso += aporteAnual;
+                cdbSaldo = (cdbSaldo + aporteAnual) * (1 + cdi);
+                
+                // Adicionar valores para o gráfico
+                pgblValores.push(pgblSaldo);
+                cdbValores.push(cdbSaldo);
+                
+                // Adicionar linha na tabela de detalhes
+                const row = tabelaDetalhes.insertRow();
+                row.insertCell().innerText = i;
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteEfetivo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(restituicao);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(pgblSaldo);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(aporteAnual);
+                row.insertCell().innerText = ChartHelpers.formatarMoeda(cdbSaldo);
+            }
+            
+            // Adicionar linha de totalização
+            const rowTotal = tabelaDetalhes.insertRow();
+            rowTotal.classList.add('total');
+            rowTotal.insertCell().innerText = "Total";
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(pgblDesembolso);
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(pgblDesembolso - aporteInicial - aporteAnual * anos);
+            rowTotal.insertCell().innerText = ""; // Saldo PGBL não é somado
+            rowTotal.insertCell().innerText = ChartHelpers.formatarMoeda(cdbDesembolso);
+            rowTotal.insertCell().innerText = ""; // Saldo CDB não é somado
+            
+            // Calcular IR no resgate
+            const aliquotaPGBL = calcularAliquotaIRPGBL(anos);
+            const pgblIR = pgblSaldo * aliquotaPGBL;
+            const pgblLiquido = pgblSaldo - pgblIR;
+            
+            const meses = anos * 12; // Converter anos em meses
+            const aliquotaCDB = calcularAliquotaIRCDB(meses);
+            const cdbRendimentos = cdbSaldo - cdbDesembolso; // Rendimentos = Saldo - Aportes
+            const cdbIR = cdbRendimentos * aliquotaCDB; // IR sobre os rendimentos
+            const cdbLiquido = cdbSaldo - cdbIR; // Valor líquido após IR
+            
+            // Exibir resultados
+            document.getElementById('pgblAcumulado').innerText = ChartHelpers.formatarMoeda(pgblSaldo).replace('R$', '');
+            document.getElementById('pgblDesembolso').innerText = ChartHelpers.formatarMoeda(pgblDesembolso).replace('R$', '');
+            document.getElementById('pgblIR').innerText = ChartHelpers.formatarMoeda(pgblIR).replace('R$', '');
+            document.getElementById('pgblLiquido').innerText = ChartHelpers.formatarMoeda(pgblLiquido).replace('R$', '');
+            document.getElementById('cdbAcumulado').innerText = ChartHelpers.formatarMoeda(cdbSaldo).replace('R$', '');
+            document.getElementById('cdbDesembolso').innerText = ChartHelpers.formatarMoeda(cdbDesembolso).replace('R$', '');
+            document.getElementById('cdbIR').innerText = ChartHelpers.formatarMoeda(cdbIR).replace('R$', '');
+            document.getElementById('cdbLiquido').innerText = ChartHelpers.formatarMoeda(cdbLiquido).replace('R$', '');
+            
+            // Análise comparativa
+            const diferencaLiquida = pgblLiquido - cdbLiquido;
+            const totalRestituido = pgblDesembolso - aporteInicial - (aporteAnual * anos);
+            const resultadoFinalAjustado = diferencaLiquida - totalRestituido;
+            const rentabilidadePGBL = ((pgblLiquido - pgblDesembolso) / pgblDesembolso) * 100;
+            const rentabilidadeCDB = ((cdbLiquido - cdbDesembolso) / cdbDesembolso) * 100;
+            
+            document.getElementById('diferencaLiquida').innerText = ChartHelpers.formatarMoeda(diferencaLiquida).replace('R$', '');
+            document.getElementById('totalRestituido').innerText = ChartHelpers.formatarMoeda(totalRestituido).replace('R$', '');
+            document.getElementById('resultadoFinalAjustado').innerText = ChartHelpers.formatarMoeda(resultadoFinalAjustado).replace('R$', '');
+            document.getElementById('rentabilidadePGBL').innerText = rentabilidadePGBL.toFixed(2) + "%";
+            document.getElementById('rentabilidadeCDB').innerText = rentabilidadeCDB.toFixed(2) + "%";
+            
+            // Criar gráfico comparativo
+            const ctxPgblCdb = document.getElementById('chartPgblCdb').getContext('2d');
+            
+            // Destruir gráfico anterior se existir
+            if (window.chartPgblCdb) {
+                window.chartPgblCdb.destroy();
+            }
+            
+            // Labels para o eixo X
+            const labels = ['Inicial', ...labelsAnos];
+            
+            // Configuração do gráfico
+            const configPgblCdb = {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'PGBL (Bruto)',
+                            data: pgblValores,
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'CDB (Bruto)',
+                            data: cdbValores,
+                            borderColor: '#2ecc71',
+                            backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...ChartHelpers.darkThemeConfig(),
+                    plugins: {
+                        ...ChartHelpers.darkThemeConfig().plugins,
+                        tooltip: {
+                            ...ChartHelpers.darkThemeConfig().plugins.tooltip,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + ChartHelpers.formatarMoeda(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            // Criar gráfico
+            window.chartPgblCdb = new Chart(ctxPgblCdb, configPgblCdb);
+            
+            // Remover indicador de loading
+            ChartHelpers.removeLoading('chartPgblCdb');
+            
+            // Configurar alerta de recomendação
+            const recomendacao = document.getElementById('recomendacao');
+            const recomendacaoAlert = document.getElementById('recomendacaoAlert');
+            
+            if (diferencaLiquida > 0) {
+                recomendacao.textContent = `O PGBL é mais vantajoso neste cenário, apresentando uma diferença de ${ChartHelpers.formatarMoeda(diferencaLiquida)} a favor.`;
+                recomendacaoAlert.className = 'alert alert-primary mt-3';
+            } else {
+                recomendacao.textContent = `O CDB é mais vantajoso neste cenário, apresentando uma diferença de ${ChartHelpers.formatarMoeda(Math.abs(diferencaLiquida))} a favor.`;
+                recomendacaoAlert.className = 'alert alert-success mt-3';
+            }
+            
+            // Mostrar resultados
+            document.getElementById('resultados-pgbl-cdb').style.display = 'block';
+            
+            // Scroll para resultados
+            setTimeout(() => {
+                document.getElementById('resultados-pgbl-cdb').scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Definir valores iniciais para exemplo
+            document.getElementById('valorInicial').value = '1000';
+            document.getElementById('aporteMensal').value = '500';
+            document.getElementById('prazo').value = '36';
+            document.getElementById('taxaFixa').value = '0.8';
+            
+            document.getElementById('rendaTributavel').value = '120000';
+            document.getElementById('anos').value = '15';
+        });
+    </script>
+</body>
+</html>

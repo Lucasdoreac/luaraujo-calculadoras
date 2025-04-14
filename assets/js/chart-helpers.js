@@ -72,6 +72,15 @@ const ChartHelpers = {
     },
     
     /**
+     * Verifica se o tema atual é o tema claro
+     * @return {boolean} - Verdadeiro se o tema atual for claro
+     */
+    isLightTheme() {
+        return document.documentElement.hasAttribute('data-theme') && 
+               document.documentElement.getAttribute('data-theme') === 'light';
+    },
+    
+    /**
      * Configuração padrão para gráficos com tema escuro
      * @return {object} - Objeto de configuração para Chart.js
      */
@@ -85,7 +94,8 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12
+                            size: 12,
+                            weight: 'bold'
                         }
                     }
                 },
@@ -119,7 +129,8 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12
+                            size: 12,
+                            weight: 'bold'
                         },
                         padding: 10
                     }
@@ -133,7 +144,8 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12
+                            size: 12,
+                            weight: 'bold'
                         },
                         padding: 10
                     }
@@ -144,6 +156,131 @@ const ChartHelpers = {
                 easing: 'easeOutQuart'
             }
         };
+    },
+    
+    /**
+     * Configuração padrão para gráficos com tema claro
+     * @return {object} - Objeto de configuração para Chart.js
+     */
+    lightThemeConfig() {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#000000', // Texto preto para máximo contraste
+                        font: {
+                            family: "'Roboto Mono', monospace",
+                            size: 12,
+                            weight: 'bold' // Texto em negrito para melhor legibilidade
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)', // Fundo preto para máximo contraste
+                    titleColor: '#ffffff', // Texto branco
+                    bodyColor: '#ffffff', // Texto branco
+                    borderColor: '#000000', // Borda preta
+                    borderWidth: 1,
+                    padding: 10,
+                    displayColors: true,
+                    bodyFont: {
+                        family: "'Roboto Mono', monospace",
+                        size: 12
+                    },
+                    titleFont: {
+                        family: "'Roboto Mono', monospace",
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.2)', // Linhas de grade mais escuras
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#000000', // Texto preto
+                        font: {
+                            family: "'Roboto Mono', monospace",
+                            size: 12,
+                            weight: 'bold' // Negrito para melhor legibilidade
+                        },
+                        padding: 10
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.2)', // Linhas de grade mais escuras
+                        drawBorder: false
+                    },
+                    ticks: {
+                        color: '#000000', // Texto preto
+                        font: {
+                            family: "'Roboto Mono', monospace",
+                            size: 12,
+                            weight: 'bold' // Negrito para melhor legibilidade
+                        },
+                        padding: 10
+                    }
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'easeOutQuart'
+            }
+        };
+    },
+    
+    /**
+     * Retorna a configuração adequada com base no tema atual
+     * @return {object} - Objeto de configuração para Chart.js
+     */
+    getThemeConfig() {
+        return this.isLightTheme() ? this.lightThemeConfig() : this.darkThemeConfig();
+    },
+    
+    /**
+     * Cores para os gráficos adaptadas ao tema
+     * @param {boolean} isLightTheme - Indica se o tema atual é claro
+     * @return {object} - Objeto com conjuntos de cores
+     */
+    getChartColors(isLightTheme = null) {
+        if (isLightTheme === null) {
+            isLightTheme = this.isLightTheme();
+        }
+        
+        if (isLightTheme) {
+            return {
+                // Cores mais escuras para fundo branco/claro
+                primary: '#0957c3', // Azul escuro
+                secondary: '#083a7a', // Azul ainda mais escuro
+                success: '#157f3d', // Verde escuro
+                danger: '#c42c2c', // Vermelho escuro
+                warning: '#b06000', // Laranja escuro
+                info: '#0c6a7a', // Ciano escuro
+                background: 'rgba(9, 87, 195, 0.15)', // Azul com baixa opacidade
+                border: '#000000',
+                text: '#000000'
+            };
+        } else {
+            return {
+                // Cores mais claras para fundo escuro
+                primary: '#3498db', // Azul claro
+                secondary: '#5dade2', // Azul mais claro
+                success: '#2ecc71', // Verde claro
+                danger: '#e74c3c', // Vermelho claro
+                warning: '#f39c12', // Laranja claro
+                info: '#3498db', // Ciano claro
+                background: 'rgba(52, 152, 219, 0.2)', // Azul com baixa opacidade
+                border: '#ffffff',
+                text: '#ffffff'
+            };
+        }
     }
 };
 

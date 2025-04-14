@@ -1,6 +1,6 @@
 /**
  * Detector de tema para aplicação correta de estilos em gráficos
- * Garante que os estilos de contraste sejam aplicados de acordo com o tema ativo
+ * Garante que os estilos de contraste sejam aplicados APENAS ao tema claro
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Observar mudanças de tema
             this.observeThemeChanges();
             
-            // Verificar Chart.js e aplicar configurações
+            // Verificar Chart.js e aplicar configurações apenas no tema claro
             this.setupChartJs();
             
             console.log('Chart Theme Detector inicializado com sucesso');
@@ -37,31 +37,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         
+        // Verificar se o tema atual é claro
+        isLightTheme() {
+            return document.documentElement.hasAttribute('data-theme') && 
+                   document.documentElement.getAttribute('data-theme') === 'light';
+        },
+        
         // Aplicar classes específicas com base no tema atual
         applyThemeClasses() {
-            const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
-                                document.documentElement.getAttribute('data-theme') === 'light';
+            const isLightTheme = this.isLightTheme();
             
-            // Adicionar classe específica ao body para facilitar seleção
+            // Adicionar classe específica ao body somente se for tema claro
             if (isLightTheme) {
                 document.body.classList.add('light-theme-charts');
                 document.body.classList.remove('dark-theme-charts');
-            } else {
-                document.body.classList.add('dark-theme-charts');
-                document.body.classList.remove('light-theme-charts');
-            }
-            
-            // Aplicar classes a todos os containers de gráficos
-            const chartContainers = document.querySelectorAll('.chart-container');
-            chartContainers.forEach(container => {
-                if (isLightTheme) {
+                
+                // Aplicar classes a todos os containers de gráficos
+                const chartContainers = document.querySelectorAll('.chart-container');
+                chartContainers.forEach(container => {
                     container.classList.add('light-theme-chart');
                     container.classList.remove('dark-theme-chart');
-                } else {
-                    container.classList.add('dark-theme-chart');
+                });
+            } else {
+                // Para o tema escuro, apenas remover as classes de tema claro
+                document.body.classList.remove('light-theme-charts');
+                document.body.classList.add('dark-theme-charts');
+                
+                const chartContainers = document.querySelectorAll('.chart-container');
+                chartContainers.forEach(container => {
                     container.classList.remove('light-theme-chart');
-                }
-            });
+                    container.classList.add('dark-theme-chart');
+                });
+            }
         },
         
         // Observar mudanças no tema
@@ -73,7 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Aguardar a mudança de tema ser aplicada
                     setTimeout(() => {
                         this.applyThemeClasses();
-                        this.updateChartStyles();
+                        // Atualizar gráficos somente se mudar para tema claro
+                        if (this.isLightTheme()) {
+                            this.updateChartStyles();
+                        } else {
+                            // Se for tema escuro, restaurar configurações originais
+                            this.restoreOriginalCharts();
+                        }
                     }, 300);
                 });
             }
@@ -83,50 +96,52 @@ document.addEventListener('DOMContentLoaded', function() {
             const htmlObserver = new MutationObserver((mutations) => {
                 mutations.forEach(() => {
                     this.applyThemeClasses();
-                    this.updateChartStyles();
+                    // Atualizar gráficos somente se mudar para tema claro
+                    if (this.isLightTheme()) {
+                        this.updateChartStyles();
+                    } else {
+                        // Se for tema escuro, restaurar configurações originais
+                        this.restoreOriginalCharts();
+                    }
                 });
             });
             
             htmlObserver.observe(document.documentElement, observerConfig);
         },
         
-        // Configurar Chart.js se disponível
+        // Configurar Chart.js se disponível (apenas para tema claro)
         setupChartJs() {
             setTimeout(() => {
-                if (typeof Chart !== 'undefined') {
-                    const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
-                                    document.documentElement.getAttribute('data-theme') === 'light';
-                    
-                    // Definir funções de plugin global para Chart.js
+                if (typeof Chart !== 'undefined' && this.isLightTheme()) {
+                    // Definir funções de plugin global para Chart.js apenas para tema claro
                     if (!Chart.plugins || !Chart.plugins.getAll().find(p => p.id === 'themeDetectorPlugin')) {
                         const themeDetectorPlugin = {
                             id: 'themeDetectorPlugin',
                             beforeDraw: (chart) => {
+                                // Aplicar apenas se for tema claro
+                                if (!this.isLightTheme()) return;
+                                
                                 const ctx = chart.ctx;
-                                const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
-                                                document.documentElement.getAttribute('data-theme') === 'light';
                                 
                                 // Forçar opacidade alta para todos os elementos
                                 chart.data.datasets.forEach(dataset => {
-                                    if (isLightTheme) {
-                                        // Aumentar opacidade no tema claro
-                                        if (dataset.backgroundColor && typeof dataset.backgroundColor === 'string' && 
-                                            dataset.backgroundColor.includes('rgba')) {
-                                            // Encontrar e substituir valores rgba com baixa opacidade
-                                            dataset.backgroundColor = dataset.backgroundColor.replace(
+                                    // Aumentar opacidade no tema claro
+                                    if (dataset.backgroundColor && typeof dataset.backgroundColor === 'string' && 
+                                        dataset.backgroundColor.includes('rgba')) {
+                                        // Encontrar e substituir valores rgba com baixa opacidade
+                                        dataset.backgroundColor = dataset.backgroundColor.replace(
+                                            /rgba\((\d+,\s*\d+,\s*\d+),\s*[\d\.]+\)/g, 
+                                            'rgba($1, 0.8)'
+                                        );
+                                    }
+                                    
+                                    if (dataset.borderColor && typeof dataset.borderColor === 'string') {
+                                        // Garantir borda escura
+                                        if (dataset.borderColor.includes('rgba')) {
+                                            dataset.borderColor = dataset.borderColor.replace(
                                                 /rgba\((\d+,\s*\d+,\s*\d+),\s*[\d\.]+\)/g, 
-                                                'rgba($1, 0.8)'
+                                                'rgba($1, 1)'
                                             );
-                                        }
-                                        
-                                        if (dataset.borderColor && typeof dataset.borderColor === 'string') {
-                                            // Garantir borda escura
-                                            if (dataset.borderColor.includes('rgba')) {
-                                                dataset.borderColor = dataset.borderColor.replace(
-                                                    /rgba\((\d+,\s*\d+,\s*\d+),\s*[\d\.]+\)/g, 
-                                                    'rgba($1, 1)'
-                                                );
-                                            }
                                         }
                                     }
                                 });
@@ -146,8 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         },
         
-        // Atualizar estilos de todos os gráficos na página
+        // Atualizar estilos de todos os gráficos na página (apenas no tema claro)
         updateChartStyles() {
+            // Aplicar apenas se for tema claro
+            if (!this.isLightTheme()) return;
+            
             if (typeof Chart !== 'undefined' && Chart.instances) {
                 // Atualizar todos os gráficos existentes
                 Chart.instances.forEach(chart => {
@@ -157,31 +175,54 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
-                console.log('Estilos de gráficos atualizados para o tema atual');
+                console.log('Estilos de gráficos atualizados para o tema claro');
             }
             
             // Atualizar também qualquer SVG ou elementos não-Chart.js
             this.updateSvgElements();
         },
         
-        // Atualizar elementos SVG para garantir contraste adequado
+        // Restaurar configurações originais dos gráficos para tema escuro
+        restoreOriginalCharts() {
+            if (typeof Chart !== 'undefined' && Chart.instances) {
+                // Atualizar todos os gráficos existentes para remover modificações
+                Chart.instances.forEach(chart => {
+                    if (chart && chart.update) {
+                        // Forçar atualização completa
+                        chart.update('none');
+                    }
+                });
+                
+                console.log('Gráficos restaurados para o tema escuro original');
+            }
+            
+            // Remover quaisquer atributos de estilo inline adicionados a elementos SVG
+            document.querySelectorAll('svg text[data-theme-fixed="true"]').forEach(text => {
+                text.style.fill = '';
+                text.style.color = '';
+                text.setAttribute('fill', '');
+                text.removeAttribute('data-theme-fixed');
+            });
+            
+            document.querySelectorAll('svg line[data-theme-fixed="true"], svg path[data-theme-fixed="true"]').forEach(element => {
+                element.style.stroke = '';
+                element.setAttribute('stroke', '');
+                element.removeAttribute('data-theme-fixed');
+            });
+        },
+        
+        // Atualizar elementos SVG para garantir contraste adequado (apenas no tema claro)
         updateSvgElements() {
-            const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
-                            document.documentElement.getAttribute('data-theme') === 'light';
+            // Aplicar apenas se for tema claro
+            if (!this.isLightTheme()) return;
             
             // Encontrar todos os textos SVG na página
             document.querySelectorAll('svg text').forEach(text => {
                 // Evitar sobrescrever textos que já têm classes específicas
                 if (!text.hasAttribute('data-theme-fixed')) {
-                    if (isLightTheme) {
-                        text.setAttribute('fill', '#000000');
-                        text.style.fill = '#000000';
-                        text.style.color = '#000000';
-                    } else {
-                        text.setAttribute('fill', '#ffffff');
-                        text.style.fill = '#ffffff';
-                        text.style.color = '#ffffff';
-                    }
+                    text.setAttribute('fill', '#000000');
+                    text.style.fill = '#000000';
+                    text.style.color = '#000000';
                     
                     // Marcar como fixado
                     text.setAttribute('data-theme-fixed', 'true');
@@ -192,13 +233,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('svg line, svg path').forEach(element => {
                 // Evitar sobrescrever elementos que já têm classes específicas
                 if (!element.hasAttribute('data-theme-fixed')) {
-                    if (isLightTheme) {
-                        // No tema claro, linhas mais escuras para maior contraste
-                        if (element.getAttribute('stroke') && 
-                            element.getAttribute('stroke').includes('rgba') && 
-                            element.getAttribute('stroke').includes('0.1')) {
-                            element.setAttribute('stroke', 'rgba(0, 0, 0, 0.3)');
-                        }
+                    // No tema claro, linhas mais escuras para maior contraste
+                    if (element.getAttribute('stroke') && 
+                        element.getAttribute('stroke').includes('rgba') && 
+                        element.getAttribute('stroke').includes('0.1')) {
+                        element.setAttribute('stroke', 'rgba(0, 0, 0, 0.3)');
                     }
                     
                     // Marcar como fixado
@@ -208,8 +247,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Inicializar o detector
-    ChartThemeDetector.init();
+    // Inicializar o detector apenas se for tema claro
+    if (document.documentElement.hasAttribute('data-theme') && 
+        document.documentElement.getAttribute('data-theme') === 'light') {
+        ChartThemeDetector.init();
+    } else {
+        // Para tema escuro, apenas garantir que o sistema esteja pronto para alternar
+        // sem modificar nenhuma configuração
+        ChartThemeDetector.observeThemeChanges();
+    }
     
     // Exportar para uso global
     window.ChartThemeDetector = ChartThemeDetector;

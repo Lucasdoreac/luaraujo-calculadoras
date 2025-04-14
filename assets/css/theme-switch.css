@@ -31,32 +31,32 @@
     --theme-transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Variáveis para o tema claro */
+/* Variáveis para o tema claro (reformuladas para reduzir fadiga visual) */
 [data-theme="light"] {
     /* Cores de fundo */
-    --bg-primary: #f2f2f2; /* Mais escuro que o original para melhor contraste */
-    --bg-secondary: #ffffff;
-    --bg-tertiary: #d8d8d8; /* Mais escuro que o original para melhor contraste */
-    --bg-card: #ffffff;
-    --bg-input: #f5f5f5; /* Ligeiramente acinzentado para visibilidade da borda */
+    --bg-primary: #f4f4f0; /* Off-white com tom levemente quente para reduzir fadiga visual */
+    --bg-secondary: #f9f9f5; /* Quase branco, mas não puro */
+    --bg-tertiary: #e8e8e2; /* Tom neutro quente para áreas de destaque */
+    --bg-card: #f9f9f5;
+    --bg-input: #fafaf6; /* Sutilmente diferente */
     
     /* Cores de texto */
-    --text-primary: #121212; /* Mais escuro que o original para melhor contraste */
-    --text-secondary: #333333; /* Mais escuro que o original para melhor contraste */
-    --text-muted: #4a4a4a; /* Mais escuro que o original para melhor contraste */
+    --text-primary: #2d2d2a; /* Quase preto, mas não totalmente para reduzir contraste extremo */
+    --text-secondary: #504f4a; /* Cinza escuro com leve tonalidade quente */
+    --text-muted: #767670; /* Cinza médio para textos secundários */
     
     /* Cores de destaque e elementos */
-    --primary-color: #0957c3; /* Mais escuro que o original para melhor contraste */
-    --primary-color-rgb: 9, 87, 195; /* Versão RGB para uso com opacidade */
-    --primary-color-hover: #0745a0; /* Mais escuro que o original para melhor contraste */
-    --primary-shadow: rgba(9, 87, 195, 0.4);
-    --success-color: #157f3d; /* Mais escuro que o original para melhor contraste */
-    --danger-color: #c42c2c; /* Mais escuro que o original para melhor contraste */
-    --border-color: #8a8a8a; /* Mais escuro que o original para melhor contraste */
-    --shadow-color: rgba(0, 0, 0, 0.15);
+    --primary-color: #1f6ba6; /* Azul menos saturado, mais amigável aos olhos */
+    --primary-color-rgb: 31, 107, 166; /* Versão RGB para uso com opacidade */
+    --primary-color-hover: #18558a; /* Mais escuro mas ainda com menor saturação */
+    --primary-shadow: rgba(31, 107, 166, 0.25); /* Sombra mais sutil */
+    --success-color: #2a9758; /* Verde menos intenso */
+    --danger-color: #b33430; /* Vermelho menos saturado */
+    --border-color: #c5c4be; /* Borda suave que não cria contraste extremo */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Sombras muito sutis */
     
     /* Opacidades */
-    --hover-opacity: 0.20; /* Aumentado para melhor feedback visual */
+    --hover-opacity: 0.15; /* Feedback visual mais sutil */
 }
 
 /* Aplicação das variáveis */
@@ -69,13 +69,13 @@ body {
 .navbar-custom {
     background-color: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 10px var(--shadow-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
     transition: var(--theme-transition);
 }
 
 .navbar-brand {
     color: var(--text-primary) !important;
-    text-shadow: 0 1px 3px var(--shadow-color);
+    text-shadow: 0 1px 2px var(--shadow-color);
 }
 
 .navbar-brand:hover {
@@ -112,6 +112,7 @@ body {
     background: var(--bg-secondary);
     box-shadow: 0 4px 10px var(--shadow-color);
     transition: var(--theme-transition);
+    border-radius: 8px;
 }
 
 h1, h2, h3, h4 {
@@ -134,7 +135,7 @@ input, select, .form-control {
     background-color: var(--bg-input);
     color: var(--text-primary);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.15);
 }
 
 button {
@@ -171,6 +172,7 @@ button:hover {
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     transition: var(--theme-transition);
+    border-radius: 6px;
 }
 
 /* Ícones de ajuda com melhor contraste */
@@ -246,12 +248,12 @@ button:hover {
 }
 
 .comparison-table tr.total {
-    background-color: rgba(var(--primary-color-rgb), 0.2); /* Mais distinto */
+    background-color: rgba(var(--primary-color-rgb), 0.1); /* Mais sutil para menor contraste */
     font-weight: bold;
 }
 
 .comparison-table tr:hover {
-    background-color: rgba(var(--primary-color-rgb), 0.1); /* Hover mais distinto */
+    background-color: rgba(var(--primary-color-rgb), 0.08); /* Hover mais sutil para reduzir fadiga */
 }
 
 .results strong {
@@ -261,14 +263,14 @@ button:hover {
 /* Melhorias nos cards */
 .card {
     background-color: var(--bg-card);
-    border: 2px solid var(--border-color); /* Borda mais grossa */
+    border: 1px solid var(--border-color); /* Borda mais sutil para reduzir contraste */
     border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s, var(--theme-transition);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px var(--shadow-color);
+    transform: translateY(-3px); /* Movimento mais sutil */
+    box-shadow: 0 6px 15px var(--shadow-color);
     border-color: var(--primary-color); /* Destacar com a cor primária */
 }
 
@@ -281,7 +283,7 @@ button:hover {
 }
 
 .card-footer {
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-tertiary);
     border-top: 1px solid var(--border-color);
 }
 
@@ -295,7 +297,7 @@ button:hover {
 
 .footer-heading {
     color: var(--text-primary);
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .footer-links a {
@@ -355,23 +357,23 @@ button:hover {
 
 [data-theme="light"] .alert-primary {
     color: #0a3984;
-    background-color: #d6e6ff;
+    background-color: #e8f0ff;
 }
 
 [data-theme="light"] .alert-success {
     color: #0a573c;
-    background-color: #d1ffde;
+    background-color: #e4f7ee;
 }
 
 [data-theme="light"] .alert-danger {
     color: #8e2727;
-    background-color: #ffd4d4;
+    background-color: #f7e8e8;
 }
 
 /* Melhorar o contraste das áreas de foco */
 :focus {
     outline-color: var(--primary-color);
-    outline-width: 3px; /* Aumentado para melhor visibilidade */
+    outline-width: 2px; /* Menos agressivo visualmente */
     outline-offset: 2px;
 }
 
@@ -380,7 +382,7 @@ button:hover {
 .form-control:focus,
 .tab-button:focus,
 .help-icon:focus {
-    box-shadow: 0 0 0 3px var(--primary-shadow);
+    box-shadow: 0 0 0 2px var(--primary-shadow);
 }
 
 /* Correções específicas para o tema claro */
@@ -461,10 +463,72 @@ button:hover {
 }
 
 [data-theme="light"] .theme-toggle-btn i.fa-sun {
-    color: #FFC107 !important; /* Cor amarela para o sol */
+    color: #E49B0F !important; /* Amarelo mais suave para o sol */
 }
 
 /* Garantir que o ícone de tema seja sempre visível */
 .theme-toggle-btn i {
     font-size: 1.2rem;
+}
+
+/* Design ergonômico adicional para o tema claro */
+[data-theme="light"] .container {
+    box-shadow: 0 3px 8px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] input, 
+[data-theme="light"] select, 
+[data-theme="light"] .form-control {
+    border-color: var(--border-color);
+    background-color: var(--bg-input);
+}
+
+/* Adicionar efeito de profundidade suave para interfaces não-planas */
+[data-theme="light"] .card,
+[data-theme="light"] .educational-tips,
+[data-theme="light"] .results,
+[data-theme="light"] .tab-content {
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+/* Reduzir a intensidade das sombras */
+[data-theme="light"] .btn:hover {
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Bordas mais suaves */
+[data-theme="light"] .navbar-custom {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Ajustes finos para contrastes menos agressivos */
+[data-theme="light"] .icon-primary {
+    color: var(--primary-color);
+    opacity: 0.9; /* Sutilmente mais suave */
+}
+
+/* Adicionar textura sutil para quebrar a monotonia de cores planas */
+[data-theme="light"] body {
+    background-image: linear-gradient(to bottom, var(--bg-primary), var(--bg-primary));
+    background-attachment: fixed;
+}
+
+/* Aumentar espaçamento para melhor respiração visual */
+[data-theme="light"] .container {
+    padding: 25px;
+}
+
+/* Arredondamento de bordas para elementos de formulário */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea,
+[data-theme="light"] .form-control {
+    border-radius: 6px;
+}
+
+/* Botões menos saturados */
+[data-theme="light"] .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }

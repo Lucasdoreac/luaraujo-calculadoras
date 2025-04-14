@@ -37,6 +37,10 @@ function loadComponents() {
                         </li>
                     </ul>
                     <div class="d-flex align-items-center">
+                        <!-- Botão para alternar tema -->
+                        <button class="theme-toggle-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+                            <i class="fas fa-sun"></i>
+                        </button>
                         <a href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" class="social-link me-3" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
@@ -114,7 +118,7 @@ function adjustRelativePaths() {
     
     if (isSubdirectory) {
         // Ajustar links no navbar
-        document.querySelectorAll('#navbar-container .nav-link, #navbar-container .navbar-brand, #navbar-container .social-link, #navbar-container .btn').forEach(link => {
+        document.querySelectorAll('#navbar-container .nav-link, #navbar-container .navbar-brand, #navbar-container .social-link, #navbar-container .btn:not(.theme-toggle-btn)').forEach(link => {
             if (link.getAttribute('href') && !link.getAttribute('href').startsWith('http') && !link.getAttribute('href').startsWith('#')) {
                 // Adicionar ../ para subir um nível
                 if (!link.getAttribute('href').startsWith('../')) {

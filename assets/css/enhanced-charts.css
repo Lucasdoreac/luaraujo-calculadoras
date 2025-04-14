@@ -1,146 +1,206 @@
-/* Melhorias para visualização de gráficos e tabelas */
-.chart-container {
-    height: 400px !important;
-    min-height: 400px;
-    position: relative;
-    margin: 20px 0;
-    width: 100%;
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px var(--shadow-color);
-    border: 2px solid var(--border-color); /* Borda usando variável e mais grossa */
-}
+/**
+ * Melhorias específicas para gráficos e visualizações de dados
+ * Foco em garantir alta legibilidade em ambos os temas
+ */
 
-/* Garantir que os gráficos sejam renderizados corretamente */
-.chart-container canvas {
-    max-width: 100%;
-}
-
-/* Melhorar a visualização de tabelas */
-.comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid var(--border-color); /* Borda usando variável e mais grossa */
-}
-
-.comparison-table th, 
-.comparison-table td {
-    padding: 12px 15px;
-    border: 2px solid var(--border-color); /* Borda usando variável e mais grossa */
-    text-align: left;
-    color: var(--text-primary);
-}
-
-/* Apenas os cabeçalhos de tabela devem ter fundo colorido e texto branco */
-.comparison-table th {
-    background: var(--primary-color); /* Usar cor primária */
-    color: white !important; /* Garantir texto branco para contraste com fundo colorido */
-    font-weight: bold;
-}
-
-/* Células normais das tabelas devem usar a cor de texto do tema atual */
-.comparison-table td {
-    color: var(--text-primary);
-}
-
-.comparison-table tr:nth-child(even) {
-    background: rgba(var(--primary-color-rgb), 0.05); /* Usar cor primária com baixa opacidade */
-}
-
-.comparison-table tr.total {
-    background-color: rgba(var(--primary-color-rgb), 0.2); /* Mais distinto */
-    font-weight: bold;
-}
-
-.comparison-table tr:hover {
-    background-color: rgba(var(--primary-color-rgb), 0.1); /* Hover mais distinto */
-}
-
-.table-responsive {
-    overflow-x: auto;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px var(--shadow-color);
-}
-
-/* Animações para melhorar a experiência do usuário */
-@keyframes chartFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.chart-container {
-    animation: chartFadeIn 0.5s ease forwards;
-}
-
-/* Indicador de carregamento para gráficos */
-.chart-loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(var(--primary-color-rgb), 0.05); /* Usar cor primária com baixa opacidade */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-
-.chart-loading .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(var(--primary-color-rgb), 0.3);
-    border-top-color: var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Adaptações para tema claro - mantidas, mas ajustadas para usar variáveis */
+/* ============= Melhorias para gráficos no tema claro ============= */
 [data-theme="light"] .chart-container {
-    /* Todas as propriedades principais já são controladas por variáveis CSS */
-    border-color: var(--border-color);
+    border: 1px solid #b0b0b0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    border-radius: 6px;
+    padding: 15px;
 }
 
-[data-theme="light"] .comparison-table {
-    /* Já controladas por variáveis CSS */
+/* Título e legendas dos gráficos no tema claro */
+[data-theme="light"] .chart-container h4,
+[data-theme="light"] .chart-container .chart-title,
+[data-theme="light"] .chart-container .chart-legend {
+    color: #1a202c !important;
+    font-weight: 600;
 }
 
-/* Garantir que células de tabela no tema claro usem a cor adequada */
-[data-theme="light"] .comparison-table td {
-    color: var(--text-primary); /* Usar cor de texto do tema claro */
+/* Textos das legendas e eixos nos gráficos (tema claro) */
+[data-theme="light"] .chart-container .axis text,
+[data-theme="light"] .chart-container .legend text,
+[data-theme="light"] .chart-container text,
+[data-theme="light"] .chart-container .tick text {
+    fill: #2d3748 !important;
+    color: #2d3748 !important;
+    font-weight: 500;
 }
 
-/* Manter o texto branco apenas nos cabeçalhos de tabela no tema claro */
-[data-theme="light"] .comparison-table th {
-    background-color: var(--primary-color);
-    color: white !important; /* Garantir texto branco para contraste com fundo colorido */
+/* Linhas de grade nos gráficos (tema claro) */
+[data-theme="light"] .chart-container .grid line,
+[data-theme="light"] .chart-container .tick line,
+[data-theme="light"] .chart-container line {
+    stroke: #718096 !important;
+    stroke-width: 0.5px !important;
+    stroke-opacity: 0.5 !important;
 }
 
-[data-theme="light"] .comparison-table tr:nth-child(even) {
-    /* Usando cor primária com opacidade via variável RGB */
-    background-color: rgba(var(--primary-color-rgb), 0.05);
+/* Eixos nos gráficos (tema claro) */
+[data-theme="light"] .chart-container .axis line,
+[data-theme="light"] .chart-container .axis path {
+    stroke: #4a5568 !important;
+    stroke-width: 1px !important;
 }
 
-[data-theme="light"] .comparison-table tr.total {
-    background-color: rgba(var(--primary-color-rgb), 0.2);
+/* Barras e elementos dos gráficos (tema claro) */
+[data-theme="light"] .chart-container rect.bar,
+[data-theme="light"] .chart-container .bar rect {
+    fill: #3182ce !important;
+    stroke: #2c5282;
+    stroke-width: 1px;
 }
 
-[data-theme="light"] .comparison-table tr:hover {
-    background-color: rgba(var(--primary-color-rgb), 0.1);
+/* Texto dentro dos gráficos (tema claro) */
+[data-theme="light"] .chart-container .label,
+[data-theme="light"] .chart-container .value-label {
+    fill: #2d3748 !important;
+    color: #2d3748 !important;
+    font-weight: 600;
 }
 
-[data-theme="light"] .chart-loading {
-    background: rgba(var(--primary-color-rgb), 0.05);
+/* ============= Melhorias para gráficos no tema escuro ============= */
+.chart-container {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-tertiary);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+/* Título e legendas dos gráficos no tema escuro */
+.chart-container h4,
+.chart-container .chart-title,
+.chart-container .chart-legend {
+    color: var(--text-primary) !important;
+    margin-bottom: 15px;
+}
+
+/* Textos das legendas e eixos nos gráficos (tema escuro) */
+.chart-container .axis text,
+.chart-container .legend text,
+.chart-container text,
+.chart-container .tick text {
+    fill: var(--text-secondary) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Linhas de grade nos gráficos (tema escuro) */
+.chart-container .grid line,
+.chart-container .tick line,
+.chart-container line {
+    stroke: #5a5a5a !important;
+    stroke-width: 0.5px !important;
+    stroke-opacity: 0.7 !important;
+}
+
+/* Eixos nos gráficos (tema escuro) */
+.chart-container .axis line,
+.chart-container .axis path {
+    stroke: var(--border-color) !important;
+    stroke-width: 1px !important;
+}
+
+/* Barras e elementos dos gráficos (tema escuro) */
+.chart-container rect.bar,
+.chart-container .bar rect {
+    fill: var(--primary-color) !important;
+}
+
+/* Texto dentro dos gráficos (tema escuro) */
+.chart-container .label,
+.chart-container .value-label {
+    fill: var(--text-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============= Correções específicas para texto nos gráficos ============= */
+/* Corrigir problema de legendas em azul claro sobre fundo branco */
+[data-theme="light"] .chart-container .legend-item,
+[data-theme="light"] .chart-container .legend-label,
+[data-theme="light"] .chart-container .x-axis-label,
+[data-theme="light"] .chart-container .y-axis-label {
+    color: #1a202c !important;
+    fill: #1a202c !important;
+    font-weight: 500;
+}
+
+/* Garantir que valores e labels nos eixos sejam visíveis */
+[data-theme="light"] .chart-container .axis-value,
+[data-theme="light"] .chart-container .tick text,
+[data-theme="light"] .chart-container .axis-label {
+    color: #2d3748 !important; 
+    fill: #2d3748 !important;
+    font-weight: 500;
+}
+
+/* Melhorar contraste das bordas nos gráficos */
+[data-theme="light"] .chart-container .chart-area {
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+}
+
+/* Correções para SVG e elementos Canvas */
+[data-theme="light"] .chart-container svg text,
+[data-theme="light"] .chart-container canvas + div {
+    color: #2d3748 !important;
+    fill: #2d3748 !important;
+}
+
+/* Correção de problema específico para legendas de projeção */
+[data-theme="light"] .chart-container text[data-legend],
+[data-theme="light"] .chart-legend text,
+[data-theme="light"] text.legend-text {
+    fill: #1a202c !important;
+    color: #1a202c !important;
+    font-weight: 600 !important;
+    stroke: none !important;
+}
+
+/* Correção para os textos específicos mostrados nas imagens */
+[data-theme="light"] text[data-label*="Projeção"],
+[data-theme="light"] .chart-container .projecao-label {
+    fill: #1a202c !important;
+    color: #1a202c !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+/* Melhoria de contraste para textos informativos sob os gráficos */
+[data-theme="light"] .analise-retorno,
+[data-theme="light"] .analise-retorno h4,
+[data-theme="light"] .analise-retorno p,
+[data-theme="light"] .valor-total-investido,
+[data-theme="light"] .retorno-total,
+[data-theme="light"] .percentual-retorno {
+    color: #1a202c !important;
+    font-weight: 500;
+}
+
+/* Melhoria para textos de análise de dados */
+[data-theme="light"] [id^="valor"],
+[data-theme="light"] [id^="taxa"],
+[data-theme="light"] [id^="retorno"],
+[data-theme="light"] [id^="total"],
+[data-theme="light"] [id^="percentual"] {
+    color: #1a202c !important;
+    font-weight: 600;
+}
+
+/* Destacar valores importantes */
+[data-theme="light"] .destaque-valor {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* Garantir contraste adequado para valores percentuais */
+[data-theme="light"] .percentual {
+    background-color: rgba(49, 130, 206, 0.1);
+    color: #2c5282 !important;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 3px;
 }

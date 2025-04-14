@@ -39,7 +39,7 @@ function loadComponents() {
                     <div class="d-flex align-items-center">
                         <!-- Botão para alternar tema -->
                         <button class="theme-toggle-btn" aria-label="Alternar tema claro/escuro" title="Alternar tema">
-                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon text-primary"></i>
                         </button>
                         <a href="https://www.linkedin.com/in/luciana-g-araujo-cea-cnpi-p-pqo-06a858b8/" class="social-link me-3" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -55,7 +55,7 @@ function loadComponents() {
 
     // Carregar Footer
     document.getElementById('footer-container').innerHTML = `
-        <footer class="footer-custom text-white py-5">
+        <footer class="footer-custom py-5">
             <div class="container footer-container">
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6">

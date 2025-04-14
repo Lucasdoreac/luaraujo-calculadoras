@@ -22,10 +22,13 @@ Este repositório contém as calculadoras financeiras educativas do site luarauj
 ├── assets/
 │   ├── css/
 │   │   ├── styles.css            # Estilos gerais do site
-│   │   └── enhanced-charts.css   # Estilos específicos para gráficos
+│   │   ├── theme-switch.css      # Gerenciamento de temas claro/escuro
+│   │   ├── enhanced-charts.css   # Estilos específicos para gráficos
+│   │   └── integrated-styles.css # Estilos complementares
 │   ├── js/
 │   │   ├── components.js         # Componentes reutilizáveis (navbar, footer)
 │   │   ├── chart-helpers.js      # Funções auxiliares para gráficos
+│   │   ├── theme-switch.js       # Gerenciamento de temas claro/escuro
 │   │   └── pgbl-cdb-fix.js       # Correções para o simulador PGBL vs CDB
 │   └── img/                      # Imagens do site
 ├── calculadoras/
@@ -34,6 +37,7 @@ Este repositório contém as calculadoras financeiras educativas do site luarauj
 │   └── calc-3.html               # Simulador de Investimentos
 ├── index.html                    # Página inicial
 ├── contato.html                  # Página de contato
+├── CONTRASTE.md                  # Documentação sobre melhorias de contraste
 └── README.md                     # Este arquivo
 ```
 
@@ -43,6 +47,7 @@ Este repositório contém as calculadoras financeiras educativas do site luarauj
 - Bootstrap 5 para o layout responsivo
 - Chart.js para visualização de dados
 - Font Awesome para ícones
+- Sistema de temas claro/escuro
 
 ## Requisitos para Desenvolvimento
 
@@ -67,6 +72,32 @@ Uma solução alternativa foi implementada através do arquivo `pgbl-cdb-fix.js`
 - Garante a exibição da seção de resultados
 - Melhora o tratamento de erros de renderização de gráficos
 
+### Melhorias de Contraste e Acessibilidade
+
+Foram implementadas melhorias significativas no contraste visual para ambos os temas (claro e escuro):
+
+1. **Tema Escuro**:
+   - Cores de texto secundárias mais claras para melhor visibilidade
+   - Bordas mais distintas para demarcar elementos
+   - Melhoria na identificação de elementos interativos
+
+2. **Tema Claro**:
+   - Cores de fundo ajustadas para evitar ofuscamento
+   - Cores de texto mais escuras para garantir legibilidade
+   - Elementos interativos com cores mais pronunciadas
+
+Para detalhes completos, consulte o arquivo [CONTRASTE.md](./CONTRASTE.md).
+
+## Acessibilidade
+
+Este projeto implementa as seguintes características de acessibilidade:
+
+- Suporte a temas claro e escuro
+- Contraste adequado para todos os elementos (WCAG 2.1 AA)
+- Navegação por teclado com indicadores visuais de foco
+- Estrutura semântica adequada
+- Textos alternativos para elementos visuais
+
 ## Uso em Produção
 
 Ao implantar o site em produção, é recomendável:
@@ -74,6 +105,8 @@ Ao implantar o site em produção, é recomendável:
 1. Concatenar e minificar arquivos CSS e JavaScript para melhor performance
 2. Otimizar imagens para carregamento mais rápido  
 3. Configurar cache adequado para os recursos estáticos
+4. Testar em diferentes navegadores e dispositivos
+5. Validar a acessibilidade com ferramentas como WAVE ou Lighthouse
 
 ## Contribuição
 

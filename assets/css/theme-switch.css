@@ -11,8 +11,8 @@
     
     /* Cores de texto */
     --text-primary: #ffffff;
-    --text-secondary: #bbbbbb;
-    --text-muted: #bbbbbb;
+    --text-secondary: #d4d4d4; /* Mais claro que o original para melhor contraste */
+    --text-muted: #d4d4d4; /* Mais claro que o original para melhor contraste */
     
     /* Cores de destaque e elementos */
     --primary-color: #3498db;
@@ -20,7 +20,7 @@
     --primary-shadow: rgba(52, 152, 219, 0.5);
     --success-color: #2ecc71;
     --danger-color: #e74c3c;
-    --border-color: #333333;
+    --border-color: #454545; /* Mais claro para melhor contraste */
     --shadow-color: rgba(0, 0, 0, 0.5);
     
     /* Opacidades */
@@ -33,28 +33,28 @@
 /* Variáveis para o tema claro */
 [data-theme="light"] {
     /* Cores de fundo */
-    --bg-primary: #f8f9fa;
+    --bg-primary: #f2f2f2; /* Mais escuro que o original para melhor contraste */
     --bg-secondary: #ffffff;
-    --bg-tertiary: #e9ecef;
+    --bg-tertiary: #e2e2e2; /* Mais escuro que o original para melhor contraste */
     --bg-card: #ffffff;
-    --bg-input: #ffffff;
+    --bg-input: #f5f5f5; /* Ligeiramente acinzentado para visibilidade da borda */
     
     /* Cores de texto */
-    --text-primary: #212529;
-    --text-secondary: #495057;
-    --text-muted: #6c757d;
+    --text-primary: #121212; /* Mais escuro que o original para melhor contraste */
+    --text-secondary: #333333; /* Mais escuro que o original para melhor contraste */
+    --text-muted: #4a4a4a; /* Mais escuro que o original para melhor contraste */
     
     /* Cores de destaque e elementos */
-    --primary-color: #0d6efd;
-    --primary-color-hover: #0b5ed7;
-    --primary-shadow: rgba(13, 110, 253, 0.4);
-    --success-color: #198754;
-    --danger-color: #dc3545;
-    --border-color: #dee2e6;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --primary-color: #0957c3; /* Mais escuro que o original para melhor contraste */
+    --primary-color-hover: #0745a0; /* Mais escuro que o original para melhor contraste */
+    --primary-shadow: rgba(9, 87, 195, 0.4);
+    --success-color: #157f3d; /* Mais escuro que o original para melhor contraste */
+    --danger-color: #c42c2c; /* Mais escuro que o original para melhor contraste */
+    --border-color: #b0b0b0; /* Mais escuro que o original para melhor contraste */
+    --shadow-color: rgba(0, 0, 0, 0.15);
     
     /* Opacidades */
-    --hover-opacity: 0.1;
+    --hover-opacity: 0.12;
 }
 
 /* Aplicação das variáveis */
@@ -73,6 +73,7 @@ body {
 
 .navbar-brand {
     color: var(--text-primary) !important;
+    text-shadow: 0 1px 3px var(--shadow-color);
 }
 
 .navbar-brand:hover {
@@ -90,6 +91,7 @@ body {
 .navbar-nav .nav-link.active {
     background-color: rgba(var(--primary-color), calc(var(--hover-opacity) * 2));
     color: var(--primary-color) !important;
+    font-weight: 600;
 }
 
 .navbar-nav .nav-link i {
@@ -116,6 +118,7 @@ h1, h2, h3, h4 {
 
 label {
     color: var(--text-secondary);
+    font-weight: 600; /* Aumentando o peso da fonte para melhor legibilidade */
 }
 
 input, select, .form-control {
@@ -135,6 +138,7 @@ input, select, .form-control {
 button {
     background-color: var(--primary-color);
     transition: var(--theme-transition);
+    color: white !important; /* Garantindo que o texto dos botões seja sempre branco */
 }
 
 button:hover {
@@ -149,7 +153,7 @@ button:hover {
 
 .btn-outline-primary:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: white !important;
     box-shadow: 0 0 10px var(--primary-shadow);
 }
 
@@ -179,7 +183,7 @@ button:hover {
 
 .tab-button.active {
     background: var(--primary-color);
-    color: white;
+    color: white !important;
 }
 
 .comparison-table th,
@@ -190,6 +194,7 @@ button:hover {
 
 .comparison-table th {
     background: var(--border-color);
+    color: var(--text-primary);
 }
 
 .comparison-table tr:nth-child(even) {
@@ -248,7 +253,7 @@ button:hover {
 
 .footer-social-icon:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: white !important;
 }
 
 /* Ícone de tema */
@@ -280,4 +285,31 @@ button:hover {
 /* Adicionar animação suave para a transição entre temas */
 .theme-transition * {
     transition: var(--theme-transition);
+}
+
+/* Garantir que os textos nos alertas tenham bom contraste */
+.alert {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .alert-primary {
+    color: #0a3984;
+    background-color: #d6e6ff;
+}
+
+[data-theme="light"] .alert-success {
+    color: #0a573c;
+    background-color: #d1ffde;
+}
+
+[data-theme="light"] .alert-danger {
+    color: #8e2727;
+    background-color: #ffd4d4;
+}
+
+/* Melhorar o contraste das áreas de foco */
+:focus {
+    outline-color: var(--primary-color);
+    outline-width: 2px;
+    outline-offset: 2px;
 }

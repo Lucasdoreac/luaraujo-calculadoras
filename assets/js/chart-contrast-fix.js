@@ -13,6 +13,37 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    // Configurações originais para tema escuro - preservadas para não afetar a visualização
+    const originalDarkThemeDefaults = {
+        color: '#e0e0e0',
+        borderColor: '#5a5a5a',
+        tooltipBg: 'rgba(52, 152, 219, 0.9)',
+        tooltipTitleColor: '#ffffff',
+        tooltipBodyColor: '#ffffff',
+        legendColor: '#e0e0e0',
+        titleColor: '#e0e0e0',
+        gridColor: 'rgba(90, 90, 90, 0.5)',
+        gridWidth: 0.5,
+        ticksColor: '#e0e0e0'
+    };
+    
+    // Salvar as configurações originais de Chart.js antes de modificar
+    let originalDefaults = {};
+    if (Chart.defaults) {
+        originalDefaults = {
+            color: Chart.defaults.color,
+            borderColor: Chart.defaults.borderColor,
+            tooltipBg: Chart.defaults.plugins?.tooltip?.backgroundColor,
+            tooltipTitleColor: Chart.defaults.plugins?.tooltip?.titleColor,
+            tooltipBodyColor: Chart.defaults.plugins?.tooltip?.bodyColor,
+            legendColor: Chart.defaults.plugins?.legend?.labels?.color,
+            titleColor: Chart.defaults.plugins?.title?.color,
+            gridColor: Chart.defaults.scale?.grid?.color,
+            gridWidth: Chart.defaults.scale?.grid?.lineWidth,
+            ticksColor: Chart.defaults.scale?.ticks?.color
+        };
+    }
+    
     // Função para aplicar as configurações de acordo com o tema
     function applyThemeSettings() {
         // Detectar o tema atual
@@ -49,40 +80,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 size: 12
             }; // Fonte mais negrito
         } else {
-            // Configurações de contraste para tema escuro (já funcionam bem)
-            Chart.defaults.color = '#e0e0e0'; // Texto claro para tema escuro
-            Chart.defaults.borderColor = '#5a5a5a'; // Bordas mais visíveis
-            Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(52, 152, 219, 0.9)';
-            Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
-            Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
-            Chart.defaults.plugins.legend.labels.color = '#e0e0e0';
-            Chart.defaults.plugins.legend.labels.font = { 
-                weight: 'bold', 
-                size: 13 
-            };
-            Chart.defaults.plugins.title.color = '#e0e0e0';
-            Chart.defaults.plugins.title.font = { 
-                weight: 'bold', 
-                size: 16 
-            };
+            // RESTAURAR configurações originais para tema escuro para preservar o visual original
+            Chart.defaults.color = originalDarkThemeDefaults.color;
+            Chart.defaults.borderColor = originalDarkThemeDefaults.borderColor;
+            Chart.defaults.plugins.tooltip.backgroundColor = originalDarkThemeDefaults.tooltipBg;
+            Chart.defaults.plugins.tooltip.titleColor = originalDarkThemeDefaults.tooltipTitleColor;
+            Chart.defaults.plugins.tooltip.bodyColor = originalDarkThemeDefaults.tooltipBodyColor;
+            Chart.defaults.plugins.legend.labels.color = originalDarkThemeDefaults.legendColor;
+            // Preservar tamanho e peso da fonte original
+            if (Chart.defaults.plugins.legend.labels.font) {
+                Chart.defaults.plugins.legend.labels.font.weight = undefined;
+                Chart.defaults.plugins.legend.labels.font.size = undefined;
+            }
             
-            // Melhorar a visibilidade das linhas de grade
-            Chart.defaults.scale.grid.color = 'rgba(90, 90, 90, 0.5)';
-            Chart.defaults.scale.grid.lineWidth = 0.5;
+            Chart.defaults.plugins.title.color = originalDarkThemeDefaults.titleColor;
+            if (Chart.defaults.plugins.title.font) {
+                Chart.defaults.plugins.title.font.weight = undefined;
+                Chart.defaults.plugins.title.font.size = undefined;
+            }
             
-            // Melhorar a visibilidade dos eixos
-            Chart.defaults.scale.ticks.color = '#e0e0e0';
-            Chart.defaults.scale.ticks.font = {
-                weight: 'bold',
-                size: 12
-            };
+            // Restaurar a visibilidade original das linhas de grade
+            Chart.defaults.scale.grid.color = originalDarkThemeDefaults.gridColor;
+            Chart.defaults.scale.grid.lineWidth = originalDarkThemeDefaults.gridWidth;
+            
+            // Restaurar a visibilidade original dos eixos
+            Chart.defaults.scale.ticks.color = originalDarkThemeDefaults.ticksColor;
+            if (Chart.defaults.scale.ticks.font) {
+                Chart.defaults.scale.ticks.font.weight = undefined;
+                Chart.defaults.scale.ticks.font.size = undefined;
+            }
         }
     }
     
     // Aplicar configurações iniciais
     applyThemeSettings();
     
-    // Estender as funções padrão do Chart.js para melhorar o contraste das legendas
+    // Estender as funções padrão do Chart.js para melhorar o contraste das legendas - apenas para tema claro
     const originalLegendItemRender = Chart.Legend.prototype.legendItems;
     if (originalLegendItemRender) {
         Chart.Legend.prototype.legendItems = function() {
@@ -90,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
                         document.documentElement.getAttribute('data-theme') === 'light';
             
-            // Aumentar o contraste das legendas
+            // Aumentar o contraste das legendas APENAS no tema claro
             if (isLightTheme) {
                 items.forEach(item => {
                     // Garantir opacidade alta para maior contraste
@@ -125,10 +158,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Configurações específicas para elementos SVG e textos de projeção
+    // Configurações específicas para elementos SVG e textos de projeção - apenas para tema claro
     const fixChartElements = () => {
         const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
                         document.documentElement.getAttribute('data-theme') === 'light';
+        
+        // Aplicar apenas se o tema for claro
+        if (!isLightTheme) return;
                         
         // Encontrar todos os textos SVG relacionados a projeções
         const svgTexts = document.querySelectorAll('text');
@@ -146,13 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 textContent.includes('Retorno') ||
                 textContent.includes('retorno')) {
                 
-                if (isLightTheme) {
-                    text.setAttribute('fill', '#000000');
-                    text.setAttribute('stroke', 'none');
-                    text.style.fontWeight = 'bold';
-                    // Adicionar classe para facilitar seleção futura
-                    text.classList.add('projecao-text');
-                }
+                text.setAttribute('fill', '#000000');
+                text.setAttribute('stroke', 'none');
+                text.style.fontWeight = 'bold';
+                // Adicionar classe para facilitar seleção futura
+                text.classList.add('projecao-text');
             }
         });
         
@@ -165,48 +199,60 @@ document.addEventListener('DOMContentLoaded', function() {
             );
             
             legendElements.forEach(legend => {
-                if (isLightTheme) {
-                    legend.style.color = '#000000';
-                    legend.style.fontWeight = 'bold';
-                    
-                    // Corrigir spans dentro das legendas
-                    const spans = legend.querySelectorAll('span');
-                    spans.forEach(span => {
-                        span.style.color = '#000000';
-                        span.style.fontWeight = 'bold';
-                    });
-                }
+                legend.style.color = '#000000';
+                legend.style.fontWeight = 'bold';
+                
+                // Corrigir spans dentro das legendas
+                const spans = legend.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.color = '#000000';
+                    span.style.fontWeight = 'bold';
+                });
             });
             
             // Corrigir labels específicos que possam existir
             const labels = container.querySelectorAll('.chart-label, .axis-label, .value-label');
             labels.forEach(label => {
-                if (isLightTheme) {
-                    label.style.color = '#000000';
-                    label.style.fill = '#000000';
-                    label.style.fontWeight = 'bold';
-                }
+                label.style.color = '#000000';
+                label.style.fill = '#000000';
+                label.style.fontWeight = 'bold';
             });
         });
     };
     
-    // Aplicar as correções de elementos quando a página estiver pronta
-    setTimeout(fixChartElements, 1000);
-    // Reforçar correções após 2 segundos para elementos carregados dinamicamente
-    setTimeout(fixChartElements, 2000);
+    // Aplicar as correções de elementos quando a página estiver pronta e o tema for claro
+    setTimeout(() => {
+        const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
+                        document.documentElement.getAttribute('data-theme') === 'light';
+        if (isLightTheme) {
+            fixChartElements();
+        }
+    }, 1000);
     
     // Também aplicar quando novos gráficos forem criados
     const originalAcquireContext = Chart.helpers.acquireContext;
     if (originalAcquireContext) {
         Chart.helpers.acquireContext = function() {
             const result = originalAcquireContext.apply(this, arguments);
-            setTimeout(fixChartElements, 500);
+            
+            // Verificar tema antes de aplicar
+            const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
+                            document.documentElement.getAttribute('data-theme') === 'light';
+            if (isLightTheme) {
+                setTimeout(fixChartElements, 500);
+            }
+            
             return result;
         };
     }
     
     // Adicionar um observador de mutações para detectar quando novos elementos são adicionados ao DOM
     const observer = new MutationObserver((mutations) => {
+        // Verificar tema antes de processar mutações
+        const isLightTheme = document.documentElement.hasAttribute('data-theme') && 
+                        document.documentElement.getAttribute('data-theme') === 'light';
+        if (!isLightTheme) return;
+        
         let shouldFix = false;
         
         mutations.forEach(mutation => {

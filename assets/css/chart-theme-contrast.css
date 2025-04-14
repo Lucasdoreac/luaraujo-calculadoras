@@ -12,6 +12,29 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
+/* CORREÇÃO URGENTE: Análise de Retorno e Análise Comparativa */
+[data-theme="light"] .analise-retorno,
+[data-theme="light"] .analise-comparativa,
+[data-theme="light"] [class*="analise"],
+[data-theme="light"] [id*="analise"],
+[data-theme="light"] .card-header:contains("Análise"),
+[data-theme="light"] h3:contains("Análise"),
+[data-theme="light"] h4:contains("Análise"),
+[data-theme="light"] h5:contains("Análise") {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Textos dentro das seções de análise */
+[data-theme="light"] .analise-retorno *,
+[data-theme="light"] .analise-comparativa *,
+[data-theme="light"] [class*="analise"] *,
+[data-theme="light"] [id*="analise"] * {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
 /* Elementos específicos Chart.js - Legendas */
 [data-theme="light"] .chartjs-legend li span,
 [data-theme="light"] .chart-legend li span,
@@ -128,6 +151,47 @@
     border-radius: 3px !important;
 }
 
+/* CORREÇÃO ESPECÍFICA para calc-2 */
+[data-theme="light"] #calc-2 .chart-container path,
+[data-theme="light"] #calc-2 .chart-container line,
+[data-theme="light"] #calc-2 .chart-container rect,
+[data-theme="light"] #calc-2 .chart-container circle {
+    stroke-width: 2.5px !important;
+}
+
+[data-theme="light"] #calc-2 .chart-container text {
+    fill: #000000 !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+}
+
+/* Garantir que as legendas no calc-2 sejam visíveis */
+[data-theme="light"] #calc-2 .chart-legend rect,
+[data-theme="light"] #calc-2 .chart-legend-item rect {
+    stroke: #000000 !important;
+    stroke-width: 1px !important;
+}
+
+/* Reforçar visibilidade de linhas e pontos nos gráficos */
+[data-theme="light"] .chart-container .c3-line,
+[data-theme="light"] .chart-container .c3-chart-line path,
+[data-theme="light"] .chart-container .recharts-line-curve,
+[data-theme="light"] .chart-container .recharts-line,
+[data-theme="light"] .chart-container .apex-line,
+[data-theme="light"] .chart-container .highcharts-graph {
+    stroke-width: 3px !important;
+}
+
+[data-theme="light"] .chart-container .c3-circle,
+[data-theme="light"] .chart-container .c3-chart-line circle,
+[data-theme="light"] .chart-container .recharts-dot,
+[data-theme="light"] .chart-container .apex-point,
+[data-theme="light"] .chart-container .highcharts-point {
+    stroke: #000000 !important;
+    stroke-width: 1.5px !important;
+    r: 4 !important; /* Raio maior para os pontos */
+}
+
 /* Garantir transição suave apenas para o tema claro */
 [data-theme="light"] .chart-container,
 [data-theme="light"] .chart-container *,
@@ -136,4 +200,38 @@
 [data-theme="light"] .chartjs-legend li span,
 [data-theme="light"] .chart-legend li span {
     transition: color 0.3s, fill 0.3s, stroke 0.3s, background-color 0.3s !important;
+}
+
+/* CORREÇÕES ESPECÍFICAS para elementos blue-background */
+[data-theme="light"] .blue-background,
+[data-theme="light"] .bg-primary,
+[data-theme="light"] .header-blue,
+[data-theme="light"] .card-header.bg-primary,
+[data-theme="light"] [class*="analise"] .card-header {
+    background-color: #0957c3 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Para garantir que qualquer valor numérico seja visível */
+[data-theme="light"] [id*="valor"],
+[data-theme="light"] [id*="total"],
+[data-theme="light"] [id*="retorno"],
+[data-theme="light"] [id*="diferenca"],
+[data-theme="light"] [id*="percentual"],
+[data-theme="light"] [class*="valor"],
+[data-theme="light"] [class*="total"],
+[data-theme="light"] [class*="retorno"],
+[data-theme="light"] [class*="diferenca"],
+[data-theme="light"] [class*="percentual"] {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+/* Garantir que textos em azul sobre fundo branco sejam legíveis */
+[data-theme="light"] .text-primary,
+[data-theme="light"] .text-info,
+[data-theme="light"] .text-info-dark {
+    color: #0745a0 !important; /* Azul mais escuro */
+    font-weight: bold !important;
 }

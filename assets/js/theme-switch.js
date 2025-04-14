@@ -89,15 +89,31 @@ const ThemeManager = {
             }
         });
         
-        // Tratar elementos específicos para garantir contraste
+        // MELHORIAS: Tratar elementos específicos para garantir contraste
         if (theme === 'light') {
-            // Corrigir texto em elementos específicos
-            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p').forEach(el => {
-                if (el) el.style.color = 'var(--text-primary)';
+            // Remover classes que definem texto branco em todos os elementos
+            document.querySelectorAll('.text-white, .text-light').forEach(el => {
+                if (el !== document.body && !el.closest('.alert') && !el.classList.contains('badge')) {
+                    el.classList.add('theme-light-text');
+                    // Não remove as classes originais para evitar problemas com volta ao tema escuro
+                }
             });
             
-            // Garantir que cards tenham o texto correto
-            document.querySelectorAll('.card-title, .card-text').forEach(el => {
+            // Remover classes de fundo escuro que podem causar problemas
+            document.querySelectorAll('.card.bg-dark').forEach(el => {
+                el.classList.add('theme-light-bg');
+                // Não remove o bg-dark original para poder restaurar depois
+            });
+            
+            // Corrigir cores em cabeçalhos e texto de cards
+            document.querySelectorAll('.card-title, .card-text, .card-body p, .card-body span').forEach(el => {
+                if (el && !el.closest('.alert') && !el.classList.contains('badge')) {
+                    el.style.color = 'var(--text-primary)';
+                }
+            });
+            
+            // Corrigir texto em elementos específicos
+            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p').forEach(el => {
                 if (el) el.style.color = 'var(--text-primary)';
             });
             
@@ -105,9 +121,30 @@ const ThemeManager = {
             document.querySelectorAll('.footer-custom').forEach(el => {
                 if (el) el.classList.remove('text-white');
             });
+            
+            // Corrigir spans com resultados em calculadoras
+            document.querySelectorAll('[id^="result"], [id^="valor"], [id^="pgbl"], [id^="cdb"], [id^="analise"], [id^="taxa"], [id^="total"], [id^="ganho"], [id^="diferenca"], [id^="rentabilidade"], [id^="comparacao"], [id^="laudo"]').forEach(el => {
+                if (el) el.style.color = 'var(--text-primary)';
+            });
+            
+            // Corrigir spans dentro de tabelas
+            document.querySelectorAll('.valorFuturo, .taxaMensal, .meses').forEach(el => {
+                if (el) el.style.color = 'var(--text-primary)';
+            });
         } else {
+            // Restaurar classes originais ao voltar para tema escuro
+            document.querySelectorAll('.theme-light-text').forEach(el => {
+                el.classList.remove('theme-light-text');
+                // As classes originais já estão presentes, não precisamos adicioná-las de volta
+            });
+            
+            document.querySelectorAll('.theme-light-bg').forEach(el => {
+                el.classList.remove('theme-light-bg');
+                // A classe bg-dark original ainda está presente
+            });
+            
             // Remover estilos inline adicionados no tema claro
-            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p, .card-title, .card-text').forEach(el => {
+            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p, .card-title, .card-text, .card-body p, .card-body span, [id^="result"], [id^="valor"], [id^="pgbl"], [id^="cdb"], [id^="analise"], [id^="taxa"], [id^="total"], [id^="ganho"], [id^="diferenca"], [id^="rentabilidade"], [id^="comparacao"], [id^="laudo"], .valorFuturo, .taxaMensal, .meses').forEach(el => {
                 if (el) el.style.color = '';
             });
             

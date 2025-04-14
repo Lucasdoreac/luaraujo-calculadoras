@@ -81,7 +81,8 @@ const ChartHelpers = {
     },
     
     /**
-     * Configuração padrão para gráficos com tema escuro
+     * Configuração padrão para gráficos com tema escuro - Preservada sem modificações
+     * para manter a aparência original do tema escuro
      * @return {object} - Objeto de configuração para Chart.js
      */
     darkThemeConfig() {
@@ -94,8 +95,7 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12,
-                            weight: 'bold'
+                            size: 12
                         }
                     }
                 },
@@ -129,8 +129,7 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12,
-                            weight: 'bold'
+                            size: 12
                         },
                         padding: 10
                     }
@@ -144,8 +143,7 @@ const ChartHelpers = {
                         color: '#ffffff',
                         font: {
                             family: "'Roboto Mono', monospace",
-                            size: 12,
-                            weight: 'bold'
+                            size: 12
                         },
                         padding: 10
                     }
@@ -269,7 +267,7 @@ const ChartHelpers = {
             };
         } else {
             return {
-                // Cores mais claras para fundo escuro
+                // Cores ORIGINAIS do tema escuro - não modificadas
                 primary: '#3498db', // Azul claro
                 secondary: '#5dade2', // Azul mais claro
                 success: '#2ecc71', // Verde claro

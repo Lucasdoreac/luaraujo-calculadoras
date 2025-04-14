@@ -1,0 +1,252 @@
+/**
+ * Melhorias adicionais de contraste focadas no tema claro
+ * Resolve problemas específicos de visibilidade e fornece melhor diferenciação visual
+ */
+
+/* Correção para o botão de menu mobile (hamburger) no tema claro */
+[data-theme="light"] .navbar-toggler {
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+    background-color: rgba(49, 130, 206, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .navbar-toggler-icon {
+    filter: brightness(0.3); /* Escurece o ícone no tema claro */
+}
+
+/* Melhorar a visibilidade dos resultados no tema claro */
+[data-theme="light"] #resultados .card-header h3,
+[data-theme="light"] #resultados .card-title,
+[data-theme="light"] #resultados-pgbl-cdb .card-header h3,
+[data-theme="light"] #resultados-pgbl-cdb .card-title {
+    color: white !important; /* Garantir que títulos em cabeçalhos coloridos permaneçam brancos */
+}
+
+[data-theme="light"] #resultados .card-body,
+[data-theme="light"] #resultados .card-body p,
+[data-theme="light"] #resultados .card-body span,
+[data-theme="light"] #resultados-pgbl-cdb .card-body,
+[data-theme="light"] #resultados-pgbl-cdb .card-body p,
+[data-theme="light"] #resultados-pgbl-cdb .card-body span {
+    color: var(--text-primary) !important;
+}
+
+/* Correções específicas para PGBL vs CDB */
+[data-theme="light"] #pgblAcumulado,
+[data-theme="light"] #pgblDesembolso,
+[data-theme="light"] #pgblIR,
+[data-theme="light"] #pgblLiquido,
+[data-theme="light"] #pgblTaxaAdm,
+[data-theme="light"] #cdbAcumulado,
+[data-theme="light"] #cdbDesembolso,
+[data-theme="light"] #cdbIR,
+[data-theme="light"] #cdbLiquido,
+[data-theme="light"] #diferencaLiquida,
+[data-theme="light"] #totalRestituido,
+[data-theme="light"] #rentabilidadePGBL,
+[data-theme="light"] #rentabilidadeCDB,
+[data-theme="light"] #recomendacao {
+    color: var(--text-primary) !important;
+}
+
+/* Melhorar tabelas no tema claro */
+[data-theme="light"] .comparison-table {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .comparison-table th {
+    background-color: #edf2f7;
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+[data-theme="light"] .comparison-table td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .comparison-table tr:hover {
+    background-color: rgba(49, 130, 206, 0.05);
+}
+
+/* Aprimoramento visual de elementos no tema claro */
+[data-theme="light"] .card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+[data-theme="light"] .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-color: rgba(49, 130, 206, 0.2);
+}
+
+/* Melhorar botões no tema claro */
+[data-theme="light"] .btn {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Melhoria nos contornos para foco em todos os elementos interativos */
+[data-theme="light"] button:focus,
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] a:focus,
+[data-theme="light"] .tab-button:focus,
+[data-theme="light"] .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.4);
+    border-color: var(--primary-color);
+}
+
+/* Melhorar inputs no tema claro */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea,
+[data-theme="light"] .form-control {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Garantir visibilidade dos containers de resultados */
+[data-theme="light"] .results {
+    background-color: var(--bg-tertiary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Corrigir visualização de gráficos */
+[data-theme="light"] .chart-container {
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Correção para alertas no tema claro */
+[data-theme="light"] .alert {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-left-width: 4px;
+}
+
+/* Correção para texto em recomendações de alertas */
+[data-theme="light"] .alert-primary,
+[data-theme="light"] .alert-success,
+[data-theme="light"] .alert-danger,
+[data-theme="light"] .alert-warning {
+    color: inherit !important;
+}
+
+/* Melhorar visualização de tabs no tema claro */
+[data-theme="light"] .tab-button {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: #f1f5f9;
+    color: var(--text-secondary) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .tab-button:hover {
+    background-color: rgba(49, 130, 206, 0.1);
+    color: var(--primary-color) !important;
+}
+
+[data-theme="light"] .tab-button.active {
+    background-color: white;
+    border-bottom-color: white;
+    color: var(--primary-color) !important;
+    font-weight: 600;
+    border-top: 2px solid var(--primary-color);
+    box-shadow: 0 2px 0 white;
+}
+
+/* Melhorar contraste nos ícones de ajuda */
+[data-theme="light"] .help-icon {
+    color: white !important;
+    background-color: #718096;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .help-icon:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Garantir que as explicações de conceitos tenham bom contraste */
+[data-theme="light"] .concept-explanation {
+    background-color: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Corrigir cores nas tabelas de detalhes para PGBL vs CDB */
+[data-theme="light"] #tabelaDetalhes {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+[data-theme="light"] #tabelaDetalhes th {
+    color: var(--text-primary) !important;
+    background-color: #edf2f7;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] #tabelaDetalhes td {
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] #tabelaDetalhes tr.total {
+    background-color: rgba(49, 130, 206, 0.1);
+    font-weight: 600;
+}
+
+/* Melhorar header de card no tema claro */
+[data-theme="light"] .card-header:not(.bg-primary):not(.bg-success):not(.bg-danger) {
+    background-color: #f1f5f9;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Melhorar footer de card no tema claro */
+[data-theme="light"] .card-footer {
+    background-color: #f8fafc;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Correção específica para textos em cabeçalhos de cards com cores */
+[data-theme="light"] .card-header.bg-primary h3,
+[data-theme="light"] .card-header.bg-success h3,
+[data-theme="light"] .card-header.bg-danger h3,
+[data-theme="light"] .card-header.bg-primary .card-title,
+[data-theme="light"] .card-header.bg-success .card-title,
+[data-theme="light"] .card-header.bg-danger .card-title {
+    color: white !important;
+}
+
+/* Correções para elementos específicos nos resultados */
+[data-theme="light"] .card.bg-dark {
+    background-color: white !important;
+}
+
+[data-theme="light"] .card.bg-dark .card-body {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .card.bg-dark .card-body p,
+[data-theme="light"] .card.bg-dark .card-body span {
+    color: var(--text-primary) !important;
+}

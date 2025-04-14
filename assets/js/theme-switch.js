@@ -79,11 +79,43 @@ const ThemeManager = {
             if (theme === 'dark') {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
+                icon.classList.add('text-warning'); // Cor amarela para o sol
+                icon.classList.remove('text-primary');
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
+                icon.classList.add('text-primary'); // Cor azul para a lua
+                icon.classList.remove('text-warning');
             }
         });
+        
+        // Tratar elementos específicos para garantir contraste
+        if (theme === 'light') {
+            // Corrigir texto em elementos específicos
+            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p').forEach(el => {
+                if (el) el.style.color = 'var(--text-primary)';
+            });
+            
+            // Garantir que cards tenham o texto correto
+            document.querySelectorAll('.card-title, .card-text').forEach(el => {
+                if (el) el.style.color = 'var(--text-primary)';
+            });
+            
+            // Corrigir a cor do texto no footer
+            document.querySelectorAll('.footer-custom').forEach(el => {
+                if (el) el.classList.remove('text-white');
+            });
+        } else {
+            // Remover estilos inline adicionados no tema claro
+            document.querySelectorAll('.hero-section h1, .hero-section p, .section-title, .feature-item h3, .feature-item p, .card-title, .card-text').forEach(el => {
+                if (el) el.style.color = '';
+            });
+            
+            // Restaurar cor do texto no footer
+            document.querySelectorAll('.footer-custom').forEach(el => {
+                if (el) el.classList.add('text-white');
+            });
+        }
         
         // Adicionar classe de transição para suavizar a mudança
         document.body.classList.add('theme-transition');

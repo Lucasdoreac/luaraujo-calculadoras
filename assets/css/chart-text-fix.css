@@ -8,21 +8,22 @@
 [data-theme="light"] .chart-title text,
 [data-theme="light"] .legend-text,
 [data-theme="light"] .chart-text {
-    color: #1a202c !important;
-    fill: #1a202c !important; /* Importante para SVG */
+    color: #000000 !important; /* Texto mais escuro para maior contraste */
+    fill: #000000 !important; /* Importante para SVG */
     font-weight: 600 !important;
     stroke: none !important;
     opacity: 1 !important;
 }
 
 /* Corrigir especificamente os textos "Projeção: faça os aportes..." */
-[data-theme="light"] text:contains("Projeção"),
 [data-theme="light"] .projecao-label,
-[data-theme="light"] .titulo-projecao {
-    color: #1a202c !important;
-    fill: #1a202c !important;
-    font-weight: 600 !important;
+[data-theme="light"] .titulo-projecao,
+[data-theme="light"] text.projecao-text { /* Em vez de usar :contains */
+    color: #000000 !important;
+    fill: #000000 !important;
+    font-weight: 700 !important; /* Aumentar peso para melhor visibilidade */
     font-size: 14px !important;
+    stroke-width: 0 !important;
 }
 
 /* Linhas de grade mais visíveis no tema claro */
@@ -30,17 +31,17 @@
 [data-theme="light"] .chart-container path.domain,
 [data-theme="light"] .chart-container .grid path,
 [data-theme="light"] .chart-container g.grid line {
-    stroke: #718096 !important;
-    stroke-width: 0.5px !important;
+    stroke: #444444 !important; /* Cinza mais escuro para maior contraste */
+    stroke-width: 0.8px !important; /* Linha mais grossa */
     stroke-opacity: 0.6 !important;
 }
 
 /* Melhorar contraste para os valores nos eixos */
 [data-theme="light"] .chart-container .tick text,
 [data-theme="light"] .chart-container .axis text {
-    fill: #1a202c !important;
-    color: #1a202c !important;
-    font-weight: 500 !important;
+    fill: #000000 !important;
+    color: #000000 !important;
+    font-weight: 600 !important; /* Mais negrito para melhor visibilidade */
     font-size: 12px !important;
 }
 
@@ -50,14 +51,14 @@
 [data-theme="light"] [id^="valorTotalInvestido"],
 [data-theme="light"] [id^="retornoTotal"],
 [data-theme="light"] [id^="percentualRetorno"] {
-    color: #1a202c !important;
-    font-weight: 600 !important;
+    color: #000000 !important;
+    font-weight: 700 !important; /* Mais negrito */
 }
 
 /* Estilo para destacar as barras nos gráficos */
 [data-theme="light"] .chart-container rect.bar {
-    fill: #3182ce !important;
-    stroke: #2c5282 !important;
+    fill: #0957c3 !important; /* Azul mais escuro */
+    stroke: #083a7a !important; /* Borda mais escura */
     stroke-width: 1px !important;
 }
 
@@ -68,15 +69,17 @@
 
 /* Adicionar contorno aos textos para maior legibilidade */
 [data-theme="light"] .chart-container .overlay-text {
-    text-shadow: 0 0 2px white, 0 0 2px white, 0 0 2px white, 0 0 2px white;
+    text-shadow: 0 0 3px white, 0 0 3px white, 0 0 3px white, 0 0 3px white;
+    color: #000000 !important;
+    fill: #000000 !important;
 }
 
 /* Corrigir problema de contraste em textos destacados */
 [data-theme="light"] .valor-destaque,
 [data-theme="light"] .percentual-destaque {
-    color: #2c5282 !important;
+    color: #083a7a !important; /* Azul mais escuro para maior contraste */
     font-weight: 700 !important;
-    background-color: rgba(49, 130, 206, 0.1);
+    background-color: rgba(9, 87, 195, 0.15); /* Fundo azul mais contrastante */
     padding: 2px 6px;
     border-radius: 4px;
 }
@@ -86,6 +89,39 @@
 [data-theme="light"] .chart-container [class*="legend"],
 [data-theme="light"] .chart-container [class*="text"],
 [data-theme="light"] .chart-container [class*="label"] {
-    color: #1a202c !important;
-    fill: #1a202c !important;
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* Melhorar contraste dos elementos das legendas */
+[data-theme="light"] .chart-legend li span,
+[data-theme="light"] .chartjs-legend li span {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+/* Garantir que elementos Chart.js tenham bom contraste */
+[data-theme="light"] canvas {
+    /* Aplicado via JS, aqui garantimos que não haja override */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Textos dentro de caixas de tooltip */
+[data-theme="light"] .chartjs-tooltip {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid #083a7a !important;
+    color: #000000 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Linhas nos gráficos de linha */
+[data-theme="light"] .chart-container path.line {
+    stroke-width: 3px !important; /* Linha mais grossa para melhor visualização */
+}
+
+/* Pontos nos gráficos de linha */
+[data-theme="light"] .chart-container circle.point {
+    stroke: #000000 !important;
+    stroke-width: 1px !important;
+    r: 5 !important; /* Raio maior para pontos mais visíveis */
 }

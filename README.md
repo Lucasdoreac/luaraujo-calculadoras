@@ -108,6 +108,39 @@ Ao implantar o site em produção, é recomendável:
 4. Testar em diferentes navegadores e dispositivos
 5. Validar a acessibilidade com ferramentas como WAVE ou Lighthouse
 
+## Estado de Continuidade do Projeto
+
+### Último Estado Atualizado: 22/04/2025
+
+#### Arquivos Críticos
+- `calculadoras/calc-2.html` - Requer atenção especial devido aos bugs históricos
+- `assets/js/pgbl-cdb-fix.js` - Arquivo de correção crucial para funcionamento
+- `assets/js/chart-helpers.js` - Fundamental para renderização de gráficos
+- `assets/js/theme-switch.js` - Gerencia os temas claro/escuro
+
+#### Dependências
+- Bootstrap 5.3.0
+- Chart.js 3.9.1
+- Font Awesome 6.0.0
+
+#### Pontos de Atenção
+1. A calculadora PGBL vs CDB ainda depende do arquivo fix para funcionar corretamente
+2. Gráficos são sensíveis a mudanças no Chart.js - testar após qualquer atualização
+3. Temas claro/escuro precisam ser validados após alterações no CSS
+
+#### Próximos Passos Sugeridos
+1. Refatorar `calc-2.html` para incorporar correções do fix permanentemente
+2. Implementar testes automatizados para as calculadoras
+3. Otimizar performance do carregamento de gráficos
+4. Adicionar suporte a PWA para funcionar offline
+
+#### Para Retomar o Desenvolvimento
+1. Clone o repositório
+2. Verifique se todas as dependências estão funcionando
+3. Teste cada calculadora individualmente
+4. Consulte CONTRASTE.md para manter padrões de acessibilidade
+5. Execute testes visuais em diferentes dispositivos e navegadores
+
 ## Contribuição
 
 Para contribuir com o projeto:

@@ -1,0 +1,59 @@
+{
+  "projectInfo": {
+    "name": "luaraujo-calculadoras",
+    "repository": "https://github.com/Lucasdoreac/luaraujo-calculadoras",
+    "lastUpdated": "2025-04-22T12:14:32Z"
+  },
+  "development": {
+    "currentFile": "",
+    "currentComponent": "",
+    "inProgress": {
+      "type": "feature",
+      "description": "Implementação do estado de continuidade do projeto",
+      "remainingTasks": [
+        "Refatorar calc-2.html para incorporar correções permanentemente",
+        "Implementar testes automatizados para as calculadoras",
+        "Otimizar performance do carregamento de gráficos",
+        "Adicionar suporte a PWA para funcionar offline"
+      ]
+    }
+  },
+  "components": {
+    "completed": [
+      "Calculadora Educacional (calc-1.html)",
+      "Calculadora PGBL vs CDB (calc-2.html com fix)",
+      "Calculadora de Investimentos (calc-3.html)",
+      "Sistema de temas claro/escuro",
+      "Melhorias de contraste e acessibilidade"
+    ],
+    "inProgress": [],
+    "pending": [
+      "Testes automatizados",
+      "Suporte offline (PWA)",
+      "Otimização de performance"
+    ]
+  },
+  "context": {
+    "lastThought": "Projeto está funcional mas requer melhorias na arquitetura e manutenibilidade",
+    "nextSteps": [
+      "Refatorar código para remover dependência do pgbl-cdb-fix.js",
+      "Criar suite de testes para validar cálculos financeiros",
+      "Implementar cache e otimizações de performance",
+      "Adicionar funcionalidades offline"
+    ],
+    "dependencies": [
+      "Bootstrap 5.3.0",
+      "Chart.js 3.9.1",
+      "Font Awesome 6.0.0"
+    ]
+  },
+  "mcpTools": {
+    "lastUsed": {
+      "repl": null,
+      "artifacts": [],
+      "searchResults": []
+    },
+    "cacheFiles": [],
+    "tempStorage": []
+  }
+}

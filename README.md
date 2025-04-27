@@ -110,36 +110,75 @@ Ao implantar o site em produção, é recomendável:
 
 ## Estado de Continuidade do Projeto
 
-### Último Estado Atualizado: 22/04/2025
+### Último Estado Atualizado: 27/04/2025
+
+#### Migração para Servidor Compartilhado Hostinger
+
+O projeto está atualmente em fase de migração de PHP para JavaScript (Node.js) com otimização para servidor compartilhado da Hostinger. Principais considerações:
+
+1. **Limites de Recursos**:
+   - Otimização para operar dentro das restrições de memória e CPU
+   - Configuração de PM2 para gerenciamento de processos Node.js
+   - Implementação de estratégias de cache para reduzir carga
+
+2. **Configuração do Ambiente**:
+   - Uso de .htaccess para proxy de requisições para o processo Node.js
+   - Pool de conexões MySQL com limites adequados para ambiente compartilhado
+   - Sistema de login com consumo mínimo de recursos
 
 #### Arquivos Críticos
 - `calculadoras/calc-2.html` - Requer atenção especial devido aos bugs históricos
 - `assets/js/pgbl-cdb-fix.js` - Arquivo de correção crucial para funcionamento
-- `assets/js/chart-helpers.js` - Fundamental para renderização de gráficos
-- `assets/js/theme-switch.js` - Gerencia os temas claro/escuro
+- `assets/css/*` - Múltiplos arquivos CSS redundantes que precisam ser consolidados
 
 #### Dependências
 - Bootstrap 5.3.0
 - Chart.js 3.9.1
 - Font Awesome 6.0.0
+- Node.js 20.x (para backend)
+- Express.js 4.x
+- MySQL 8.0
+- JWT para autenticação
+- PDFKit para geração de relatórios
+- PM2 para gerenciamento de processos Node.js
 
 #### Pontos de Atenção
 1. A calculadora PGBL vs CDB ainda depende do arquivo fix para funcionar corretamente
-2. Gráficos são sensíveis a mudanças no Chart.js - testar após qualquer atualização
-3. Temas claro/escuro precisam ser validados após alterações no CSS
+2. Existem 7 arquivos CSS redundantes que precisam ser consolidados
+3. Configurações específicas são necessárias para operação em servidor compartilhado
+4. Otimização de assets é crítica para performance adequada
 
 #### Próximos Passos Sugeridos
-1. Refatorar `calc-2.html` para incorporar correções do fix permanentemente
-2. Implementar testes automatizados para as calculadoras
-3. Otimizar performance do carregamento de gráficos
-4. Adicionar suporte a PWA para funcionar offline
+1. Refatorar `calc-2.html` para incorporar correções do pgbl-cdb-fix.js permanentemente
+2. Consolidar os 7 arquivos CSS redundantes em um único stylesheet otimizado
+3. Configurar ambiente Node.js otimizado para servidor compartilhado da Hostinger
+4. Implementar sistema de login com consumo mínimo de recursos
+5. Otimizar pool de conexões MySQL para ambiente compartilhado
 
 #### Para Retomar o Desenvolvimento
 1. Clone o repositório
-2. Verifique se todas as dependências estão funcionando
-3. Teste cada calculadora individualmente
-4. Consulte CONTRASTE.md para manter padrões de acessibilidade
-5. Execute testes visuais em diferentes dispositivos e navegadores
+2. Verifique a branch `migracao-hostinger` para obter a versão mais recente do código
+3. Consulte o arquivo `HOSTINGER.md` para instruções específicas de configuração
+4. Execute `npm install` para instalar as dependências do backend
+5. Configure o `.env` conforme o template fornecido em `.env.example`
+6. Inicie o servidor com `npm run dev` para ambiente de desenvolvimento
+
+## Novas Funcionalidades Planejadas
+
+1. **Sistema de Login Compartilhado**:
+   - Autenticação JWT com sessões persistentes
+   - Login único para todas as calculadoras
+   - Painel administrativo simplificado
+
+2. **Armazenamento de Histórico**:
+   - Banco de dados MySQL para histórico de cálculos
+   - Vinculação de cálculos a usuários
+   - Exportação de histórico
+
+3. **Geração de Relatórios PDF**:
+   - Relatórios personalizados por tipo de calculadora
+   - Formatação profissional com logo e dados do usuário
+   - Opções de compartilhamento e download
 
 ## Contribuição
 
